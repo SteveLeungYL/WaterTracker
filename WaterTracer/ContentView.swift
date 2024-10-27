@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body = WaveAnimation()
+    var body: some View {
+        ZStack{
+            LinearGradient(gradient: Gradient(colors: [.cyan, .mint]), startPoint: .top, endPoint: .bottom)
+                .clipped()
+                .ignoresSafeArea(.all) // As background.
+            WaveAnimation()
+        }
+    }
 }
 
 #Preview {
