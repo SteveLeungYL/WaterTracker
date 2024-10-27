@@ -15,8 +15,22 @@ struct WaveAnimation: View {
     
     var body: some View {
         ZStack {
+            
+            Wave(offSet: Angle(degrees: waveOffset.degrees + 270), percent: percent)
+                .fill(Color.blue)
+                .opacity(0.3)
+                .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: UUID())
+                .ignoresSafeArea(.all)
+
+            Wave(offSet: Angle(degrees: waveOffset.degrees + 90), percent: percent)
+                .fill(Color.blue)
+                .opacity(0.4)
+                .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: UUID())
+                .ignoresSafeArea(.all)
+
             Wave(offSet: Angle(degrees: waveOffset.degrees), percent: percent)
                 .fill(Color.blue)
+                .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: UUID())
                 .ignoresSafeArea(.all)
             
             Text("\(Int(percent))%")
@@ -83,7 +97,7 @@ struct InvisibleSlider: View {
                 }
             
             Rectangle()
-                .opacity(0.001)
+                .opacity(0.00001) // The super small value will effectively hide the slider. 
                 .frame(width: geo.size.width, height: geo.size.height)
                 .gesture(dragGesture)
         }
