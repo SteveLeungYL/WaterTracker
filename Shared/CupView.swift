@@ -106,13 +106,13 @@ struct CupView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                         
-                        // FIXME: Update the correct text here. 
+                        // FIXME: Update the correct text here.
                         Text("\(Int(percent))%")
                             .font(.system(size: 300))
                             .minimumScaleFactor(0.00001)
                             .foregroundStyle(.black)
                             .fontWeight(.bold)
-                            .frame(width: cupWidth * 0.5, alignment: .center)
+                            .frame(height: cupWidth * 0.30, alignment: .center)
                     }
                     Spacer()
                 }
