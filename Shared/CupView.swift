@@ -106,13 +106,13 @@ struct CupView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                         
-                        // FIXME: staic font size not working porperly.
-                        // Should use dynamic font size.
+                        // FIXME: Update the correct text here. 
                         Text("\(Int(percent))%")
-                            .font(.system(.title))
+                            .font(.system(size: 300))
+                            .minimumScaleFactor(0.00001)
                             .foregroundStyle(.black)
                             .fontWeight(.bold)
-                            .frame(width: cupWidth, alignment: .center)
+                            .frame(width: cupWidth * 0.5, alignment: .center)
                     }
                     Spacer()
                 }
