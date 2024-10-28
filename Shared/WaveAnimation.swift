@@ -10,8 +10,12 @@ import SwiftUI
 
 struct WaveAnimation: View {
     
-    @State private var percent = 20.0
+    @Binding var percent: Double
     @State private var waveOffset = Angle(degrees: 0)
+    
+    init(_ percent: Binding<Double>) {
+        self._percent = percent
+    }
     
     var body: some View {
         ZStack {
@@ -32,10 +36,6 @@ struct WaveAnimation: View {
                 .fill(Color.blue)
                 .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: UUID())
                 .ignoresSafeArea(.all)
-            
-            Text("\(Int(percent))%")
-                .font(.system(size: 70))
-                .fontWeight(.bold)
             
             InvisibleSlider(percent: $percent)
         }
@@ -105,5 +105,6 @@ struct InvisibleSlider: View {
 }
 
 #Preview {
-    WaveAnimation()
+    @Previewable @State var percent: Double = 20
+    WaveAnimation($percent)
 }
