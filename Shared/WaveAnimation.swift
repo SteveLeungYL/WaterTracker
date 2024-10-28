@@ -23,26 +23,28 @@ struct WaveAnimation: View {
             Wave(offSet: Angle(degrees: waveOffset.degrees + 270), percent: percent)
                 .fill(Color.blue)
                 .opacity(0.3)
-                .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: UUID())
-                .ignoresSafeArea(.all)
+                .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
+                .geometryGroup()
+                .animation(.linear(duration: 0.3), value: percent)
 
             Wave(offSet: Angle(degrees: waveOffset.degrees + 90), percent: percent)
                 .fill(Color.blue)
                 .opacity(0.4)
-                .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: UUID())
-                .ignoresSafeArea(.all)
+                .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
+                .geometryGroup()
+                .animation(.linear(duration: 0.3), value: percent)
 
             Wave(offSet: Angle(degrees: waveOffset.degrees), percent: percent)
                 .fill(Color.blue)
-                .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: UUID())
-                .ignoresSafeArea(.all)
-            
-            InvisibleSlider(percent: $percent)
+                .onAppear {
+                    waveOffset = waveOffset + Angle(degrees: 360)
+                }
+                .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: waveOffset)
+                .geometryGroup()
+                .animation(.linear(duration: 0.3), value: percent)
         }
-        .onAppear {
-            withAnimation(.linear(duration: 1.5).repeatForever(autoreverses: false)) {
-                self.waveOffset = Angle(degrees: 360)
-            }
+        .onChange(of: percent) { _, newValue in
+            waveOffset = waveOffset + Angle(degrees: 360)
         }
     }
 }
@@ -52,11 +54,18 @@ struct Wave: Shape {
     var offSet: Angle
     var percent: Double
     
-    var animatableData: Double {
-        get { offSet.degrees }
-        set { offSet = Angle(degrees: newValue) }
+    public mutating func set_offSet(_ offSet: Angle) {
+        self.offSet = offSet
     }
     
+    var animatableData: AnimatablePair<Double, Double> {
+        get { .init(offSet.degrees, percent) }
+        set {
+            offSet = Angle(degrees: newValue.first)
+            percent = newValue.second
+        }
+    }
+
     func path(in rect: CGRect) -> Path {
         var p = Path()
         
@@ -84,25 +93,6 @@ struct Wave: Shape {
     }
 }
 
-struct InvisibleSlider: View {
-    
-    @Binding var percent: Double
-    
-    var body: some View {
-        GeometryReader { geo in
-            let dragGesture = DragGesture(minimumDistance: 0)
-                .onChanged { value in
-                    let percent = 1.0 - Double(value.location.y / geo.size.height)
-                    self.percent = max(0, min(100, percent * 100))
-                }
-            
-            Rectangle()
-                .opacity(0.00001) // The super small value will effectively hide the slider. 
-                .frame(width: geo.size.width, height: geo.size.height)
-                .gesture(dragGesture)
-        }
-    }
-}
 
 #Preview {
     @Previewable @State var percent: Double = 20
