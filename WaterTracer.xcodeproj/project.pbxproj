@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2965A2622CCF254500E75A0F /* CupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2965A2612CCF254500E75A0F /* CupView.swift */; };
+		2965A2632CCF254500E75A0F /* CupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2965A2612CCF254500E75A0F /* CupView.swift */; };
 		297759382CCD881D00D54F00 /* WaterTracer Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 297759372CCD881D00D54F00 /* WaterTracer Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 		29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
@@ -65,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2965A2612CCF254500E75A0F /* CupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupView.swift; sourceTree = "<group>"; };
 		297759112CCD881C00D54F00 /* WaterTracer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterTracer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297759212CCD881D00D54F00 /* WaterTracerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterTracerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2977592B2CCD881D00D54F00 /* WaterTracerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterTracerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +78,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2965A2422CCF204B00E75A0F /* Supplimentary Materials */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Supplimentary Materials";
+			sourceTree = "<group>";
+		};
 		297759132CCD881C00D54F00 /* WaterTracer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = WaterTracer;
@@ -164,6 +172,7 @@
 				2977594C2CCD881E00D54F00 /* WaterTracer Watch AppTests */,
 				297759562CCD881E00D54F00 /* WaterTracer Watch AppUITests */,
 				297759122CCD881C00D54F00 /* Products */,
+				2965A2422CCF204B00E75A0F /* Supplimentary Materials */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,6 +192,7 @@
 		29D8FE7F2CCECD8200504B17 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2965A2612CCF254500E75A0F /* CupView.swift */,
 				29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */,
 			);
 			path = Shared;
@@ -206,6 +216,7 @@
 				2977593A2CCD881D00D54F00 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				2965A2422CCF204B00E75A0F /* Supplimentary Materials */,
 				297759132CCD881C00D54F00 /* WaterTracer */,
 			);
 			name = WaterTracer;
@@ -437,6 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2965A2632CCF254500E75A0F /* CupView.swift in Sources */,
 				29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,6 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2965A2622CCF254500E75A0F /* CupView.swift in Sources */,
 				29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,7 +661,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -679,7 +692,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -701,7 +714,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -734,7 +747,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

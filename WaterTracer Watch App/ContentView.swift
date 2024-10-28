@@ -13,7 +13,7 @@ struct ContentView: View {
             LinearGradient(gradient: Gradient(colors: [.cyan, .mint]), startPoint: .top, endPoint: .bottom)
                 .clipped()
                 .ignoresSafeArea(.all) // As background.
-            WaveAnimation()
+            CupView()
         }
     }
 }
