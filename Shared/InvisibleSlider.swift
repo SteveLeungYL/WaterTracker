@@ -18,10 +18,7 @@ struct InvisibleSlider: View {
             let dragGesture = DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     let percent = 1.0 - Double(value.location.y / geo.size.height)
-                    self.percent = max(0, min(100, percent * 100))
-                    // FIXME: This is still not perfect.
-                    // The waveanimation will stop when we adjust the slider.
-                    //                    waveOffset += Angle(degrees: max(0, min(100, percent * 100)) / 4)
+                    self.percent = max(5, min(100, percent * 100))
                 }
             #endif
             
@@ -37,7 +34,7 @@ struct InvisibleSlider: View {
                 .opacity(0.000001)
                 .focusable()
                 .digitalCrownRotation(detent: $percent,
-                                      from: 0.0,
+                                      from: 5.0,
                                       through: 100.0,
                                       by: 5.0,
                                       isContinuous: false
