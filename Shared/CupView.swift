@@ -103,4 +103,5 @@ struct CupView: View {
 
 #Preview {
     CupView()
+        .background(Color.white.edgesIgnoringSafeArea(.all))
 }
