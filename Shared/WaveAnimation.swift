@@ -18,35 +18,41 @@ struct WaveAnimation: View {
         self._waveOffset = waveOffset
     }
     
-    
-    
     var body: some View {
-        ZStack {
-            
-            Wave(offSet: Angle(degrees: waveOffset.degrees + 270), percent: percent)
-                .fill(Color.blue)
-                .opacity(0.3)
-                .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
-                .geometryGroup()
-                .animation(.linear(duration: 0.3), value: percent)
-            
-            Wave(offSet: Angle(degrees: waveOffset.degrees + 90), percent: percent)
-                .fill(Color.blue)
-                .opacity(0.4)
-                .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
-                .geometryGroup()
-                .animation(.linear(duration: 0.3), value: percent)
-            
-            Wave(offSet: Angle(degrees: waveOffset.degrees), percent: percent)
-                .fill(Color.blue)
-                .onAppear {
-                    waveOffset = waveOffset + Angle(degrees: 360)
-                }
-                .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: waveOffset)
-                .geometryGroup()
-                .animation(.linear(duration: 0.3), value: percent)
+        ZStack{
+            WaveWithHeight(percent: $percent, waveOffset: $waveOffset)
         }
-        
+    }
+}
+
+struct WaveWithHeight: View {
+    @Binding var percent: Double
+    @Binding var waveOffset: Angle
+    
+    var body : some View {
+        GeometryReader { geometry in
+            ZStack {
+                Wave(offSet: Angle(degrees: waveOffset.degrees + 270), percent: 100)
+                    .fill(Color.blue)
+                    .opacity(0.3)
+                    .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
+                
+                Wave(offSet: Angle(degrees: waveOffset.degrees + 90), percent: 100)
+                    .fill(Color.blue)
+                    .opacity(0.4)
+                    .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
+                
+                Wave(offSet: Angle(degrees: waveOffset.degrees), percent: 100)
+                    .fill(Color.blue)
+                    .onAppear {
+                        waveOffset = waveOffset + Angle(degrees: 360)
+                    }
+                    .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: waveOffset)
+            }
+            .animation(.linear(duration: 0.3), value: percent)
+            .offset(x:0, y: geometry.size.height * (1.0 - percent / 100.0))
+            .frame(width: geometry.size.width, height: geometry.size.height)
+        }
     }
 }
 
@@ -59,11 +65,10 @@ struct Wave: Shape {
         self.offSet = offSet
     }
     
-    var animatableData: AnimatablePair<Double, Double> {
-        get { .init(offSet.degrees, percent) }
+    var animatableData: Double {
+        get { offSet.degrees }
         set {
-            offSet = Angle(degrees: newValue.first)
-            percent = newValue.second
+            offSet = Angle(degrees: newValue)
         }
     }
     
@@ -98,5 +103,9 @@ struct Wave: Shape {
 #Preview {
     @Previewable @State var percent: Double = 20
     @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
-    WaveAnimation($percent, $waveOffset)
+    ZStack {
+        WaveAnimation($percent, $waveOffset)
+        InvisibleSlider(percent: $percent, waveOffset: $waveOffset)
+        Text("\(percent)%")
+    }
 }
