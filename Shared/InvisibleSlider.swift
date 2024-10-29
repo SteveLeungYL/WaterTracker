@@ -20,7 +20,7 @@ struct InvisibleSlider: View {
                     self.percent = max(0, min(100, percent * 100))
                     // FIXME: This is still not perfect.
                     // The waveanimation will stop when we adjust the slider.
-//                    waveOffset += Angle(degrees: max(0, min(100, percent * 100)) / 4)
+                    //                    waveOffset += Angle(degrees: max(0, min(100, percent * 100)) / 4)
                 }
                 .onEnded { value in
                     waveOffset = waveOffset + Angle(degrees: 360)
@@ -30,9 +30,23 @@ struct InvisibleSlider: View {
                 .opacity(0.00001) // The super small value will effectively hide the slider.
                 .frame(width: geo.size.width, height: geo.size.height)
                 .gesture(dragGesture)
+            
+#if os(watchOS)
+            Text("For Digital Crown")
+                .focusable()
+                .digitalCrownRotation(detent: $percent,
+                                      from: 0.0,
+                                      through: 100.0,
+                                      by: 5.0,
+                                      isContinuous: false
+                            ) { crownEvent in
+                            } onIdle: {
+                                waveOffset = waveOffset + Angle(degrees: 360)
+                            }
+#endif
         }
     }
-
+    
 }
 
 #Preview {
