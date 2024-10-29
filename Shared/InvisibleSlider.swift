@@ -14,6 +14,7 @@ struct InvisibleSlider: View {
     
     var body: some View {
         GeometryReader { geo in
+            #if !os(watchOS)
             let dragGesture = DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     let percent = 1.0 - Double(value.location.y / geo.size.height)
@@ -25,24 +26,29 @@ struct InvisibleSlider: View {
                 .onEnded { value in
                     waveOffset = waveOffset + Angle(degrees: 360)
                 }
+            #endif
             
             Rectangle()
                 .opacity(0.00001) // The super small value will effectively hide the slider.
                 .frame(width: geo.size.width, height: geo.size.height)
+            #if !os(watchOS)
                 .gesture(dragGesture)
+            #endif
             
 #if os(watchOS)
             Text("For Digital Crown")
+                .opacity(0.000001)
                 .focusable()
                 .digitalCrownRotation(detent: $percent,
                                       from: 0.0,
                                       through: 100.0,
                                       by: 5.0,
                                       isContinuous: false
-                            ) { crownEvent in
-                            } onIdle: {
-                                waveOffset = waveOffset + Angle(degrees: 360)
-                            }
+                ) { crownEvent in
+                } onIdle: {
+                    waveOffset = waveOffset + Angle(degrees: 360)
+                }
+                .scrollIndicators(.hidden)
 #endif
         }
     }
