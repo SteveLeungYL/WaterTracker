@@ -76,7 +76,11 @@ struct CupView: View {
                     } label: {
                         Image(systemName: "mouth.fill")
                             .foregroundStyle(.red)
+                            .font(.title3)
                     }
+                    #if !os(watchOS)
+                    .padding()
+                    #endif
                     .background(.regularMaterial)
                     .clipShape(.circle)
                     
@@ -87,13 +91,19 @@ struct CupView: View {
                         // Do something here.
                     } label: {
                         Text("Ring")
+                            .font(.title3)
                     }
+                    #if !os(watchOS)
+                    .padding()
+                    #endif
                     .background(.regularMaterial)
                     .clipShape(.circle)
-
                     
                 }
                 .padding(.horizontal)
+                #if !os(watchOS)
+                .padding(.vertical) // give the small watch screen a break!
+                #endif
 
             } // From the VStack. This should expand to the whole screen excluding the safe area
             
