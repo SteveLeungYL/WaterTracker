@@ -117,6 +117,7 @@ struct CupView: View {
                             .foregroundStyle(.black)
                             .fontWeight(.bold)
                             .frame(height: cupWidth * 0.30, alignment: .center)
+                            .allowsHitTesting(false)
                         
                     }
                     Spacer()
