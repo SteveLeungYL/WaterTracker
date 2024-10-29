@@ -42,8 +42,6 @@ struct InvisibleSlider: View {
                                       by: 5.0,
                                       isContinuous: false
                 ) { crownEvent in
-                } onIdle: {
-                    waveOffset = waveOffset + Angle(degrees: 360)
                 }
                 .scrollIndicators(.hidden)
 #endif
