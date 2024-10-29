@@ -11,11 +11,14 @@ import SwiftUI
 struct WaveAnimation: View {
     
     @Binding var percent: Double
-    @State private var waveOffset = Angle(degrees: 0)
+    @Binding var waveOffset: Angle
     
-    init(_ percent: Binding<Double>) {
+    init(_ percent: Binding<Double>, _ waveOffset: Binding<Angle>) {
         self._percent = percent
+        self._waveOffset = waveOffset
     }
+    
+    
     
     var body: some View {
         ZStack {
@@ -26,14 +29,14 @@ struct WaveAnimation: View {
                 .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
                 .geometryGroup()
                 .animation(.linear(duration: 0.3), value: percent)
-
+            
             Wave(offSet: Angle(degrees: waveOffset.degrees + 90), percent: percent)
                 .fill(Color.blue)
                 .opacity(0.4)
                 .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
                 .geometryGroup()
                 .animation(.linear(duration: 0.3), value: percent)
-
+            
             Wave(offSet: Angle(degrees: waveOffset.degrees), percent: percent)
                 .fill(Color.blue)
                 .onAppear {
@@ -43,9 +46,7 @@ struct WaveAnimation: View {
                 .geometryGroup()
                 .animation(.linear(duration: 0.3), value: percent)
         }
-        .onChange(of: percent) { _, newValue in
-            waveOffset = waveOffset + Angle(degrees: 360)
-        }
+        
     }
 }
 
@@ -65,7 +66,7 @@ struct Wave: Shape {
             percent = newValue.second
         }
     }
-
+    
     func path(in rect: CGRect) -> Path {
         var p = Path()
         
@@ -96,5 +97,6 @@ struct Wave: Shape {
 
 #Preview {
     @Previewable @State var percent: Double = 20
-    WaveAnimation($percent)
+    @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
+    WaveAnimation($percent, $waveOffset)
 }

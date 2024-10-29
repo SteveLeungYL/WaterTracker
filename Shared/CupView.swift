@@ -73,6 +73,7 @@ struct Cup: Shape {
 
 struct CupView: View {
     @State private var percent: Double = 20
+    @State private var waveOffset = Angle(degrees: 0)
     
     var body : some View {
         
@@ -90,7 +91,7 @@ struct CupView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                             .overlay(
-                                WaveAnimation($percent)
+                                WaveAnimation($percent, $waveOffset)
                                     .frame(width: cupWidth, alignment: .center)
                                     .aspectRatio( contentMode: .fill)
                                     .mask(
@@ -105,6 +106,9 @@ struct CupView: View {
                             .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
+                            .overlay(
+                                InvisibleSlider(percent: $percent, waveOffset: $waveOffset)
+                            )
                         
                         // FIXME: Update the correct text here.
                         Text("\(Int(percent))%")
@@ -114,7 +118,6 @@ struct CupView: View {
                             .fontWeight(.bold)
                             .frame(height: cupWidth * 0.30, alignment: .center)
                         
-                        InvisibleSlider(percent: $percent)
                     }
                     Spacer()
                 }

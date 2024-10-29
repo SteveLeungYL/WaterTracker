@@ -10,26 +10,33 @@ import SwiftUI
 struct InvisibleSlider: View {
     
     @Binding var percent: Double
-    var percent_choices: [Double] = stride(from: 0.0, through: 100, by: 5).map(\.self)
+    @Binding var waveOffset: Angle
     
     var body: some View {
         GeometryReader { geo in
-            VStack{
-                Picker("Invisible Picker", selection: $percent) {
-                    ForEach(percent_choices, id: \.self) {cur_value in
-                        Text(String(format: "%f", cur_value))
-                    }
+            let dragGesture = DragGesture(minimumDistance: 0)
+                .onChanged { value in
+                    let percent = 1.0 - Double(value.location.y / geo.size.height)
+                    self.percent = max(0, min(100, percent * 100))
+                    // FIXME: This is still not perfect.
+                    // The waveanimation will stop when we adjust the slider.
+//                    waveOffset += Angle(degrees: max(0, min(100, percent * 100)) / 4)
                 }
-                .pickerStyle(.wheel)
-                .clipped()
-                .frame(height: geo.size.height)
-            }.frame(height: geo.size.height)
+                .onEnded { value in
+                    waveOffset = waveOffset + Angle(degrees: 360)
+                }
+            
+            Rectangle()
+                .opacity(0.00001) // The super small value will effectively hide the slider.
+                .frame(width: geo.size.width, height: geo.size.height)
+                .gesture(dragGesture)
         }
-        
     }
+
 }
 
 #Preview {
     @Previewable @State var percent: Double = 20
-    InvisibleSlider(percent: $percent)
+    @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
+    InvisibleSlider(percent: $percent, waveOffset: $waveOffset)
 }
