@@ -23,9 +23,6 @@ struct InvisibleSlider: View {
                     // The waveanimation will stop when we adjust the slider.
                     //                    waveOffset += Angle(degrees: max(0, min(100, percent * 100)) / 4)
                 }
-                .onEnded { value in
-                    waveOffset = waveOffset + Angle(degrees: 360)
-                }
             #endif
             
             Rectangle()
