@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct WaterTracerApp: App {
+    @StateObject var healthKitManager = HealthKitManager.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
