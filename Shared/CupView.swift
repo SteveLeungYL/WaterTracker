@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CupView: View {
+    
+    static let healthKitManager: HealthKitManager = HealthKitManager.shared
+
     @State private var percent: Double = 20
     @State private var waveOffset = Angle(degrees: 0)
     
@@ -39,7 +42,12 @@ struct CupView: View {
                         
                         
                         Cup()
+                        #if !os(watchOS)
                             .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
+                        #else
+                            .stroke(Color.black, style: StrokeStyle(lineWidth: 5))
+                        #endif
+
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                             .overlay(
@@ -58,8 +66,37 @@ struct CupView: View {
                     }
                     Spacer()
                 }
+                
                 Spacer()
-            }
+                
+                HStack{
+                    Button{
+                        // TODO::
+                        // Do something here.
+                    } label: {
+                        Image(systemName: "mouth.fill")
+                            .foregroundStyle(.red)
+                    }
+                    .background(.regularMaterial)
+                    .clipShape(.circle)
+                    
+                    Spacer()
+                    
+                    Button{
+                        // TODO::
+                        // Do something here.
+                    } label: {
+                        Text("Ring")
+                    }
+                    .background(.regularMaterial)
+                    .clipShape(.circle)
+
+                    
+                }
+                .padding(.horizontal)
+
+            } // From the VStack. This should expand to the whole screen excluding the safe area
+            
         }
     }
 }
