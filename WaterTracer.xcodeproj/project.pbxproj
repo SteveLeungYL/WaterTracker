@@ -14,6 +14,8 @@
 		29A489542CD02922005AA4A1 /* InvisibleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489522CD02922005AA4A1 /* InvisibleSlider.swift */; };
 		29A489592CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */; };
 		29A4895A2CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */; };
+		29A4897D2CD16841005AA4A1 /* CupShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4897C2CD16841005AA4A1 /* CupShape.swift */; };
+		29A4897E2CD16841005AA4A1 /* CupShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4897C2CD16841005AA4A1 /* CupShape.swift */; };
 		29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 		29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +82,7 @@
 		297759532CCD881E00D54F00 /* WaterTracer Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WaterTracer Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29A489522CD02922005AA4A1 /* InvisibleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvisibleSlider.swift; sourceTree = "<group>"; };
 		29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		29A4897C2CD16841005AA4A1 /* CupShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupShape.swift; sourceTree = "<group>"; };
 		29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,9 +211,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		29A4897F2CD168C0005AA4A1 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				29A4897C2CD16841005AA4A1 /* CupShape.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		29D8FE7F2CCECD8200504B17 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				29A4897F2CD168C0005AA4A1 /* Shapes */,
 				29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */,
 				29A489522CD02922005AA4A1 /* InvisibleSlider.swift */,
 				2965A2612CCF254500E75A0F /* CupView.swift */,
@@ -472,6 +484,7 @@
 				29A489542CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A4895A2CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
 				2965A2632CCF254500E75A0F /* CupView.swift in Sources */,
+				29A4897E2CD16841005AA4A1 /* CupShape.swift in Sources */,
 				29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,6 +510,7 @@
 				29A489532CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A489592CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
 				2965A2622CCF254500E75A0F /* CupView.swift in Sources */,
+				29A4897D2CD16841005AA4A1 /* CupShape.swift in Sources */,
 				29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
