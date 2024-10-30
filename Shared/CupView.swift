@@ -14,6 +14,9 @@ struct CupView: View {
     @State private var percent: Double = 20
     @State private var waveOffset = Angle(degrees: 0)
     
+    @State private var isShowAlert: Bool = false
+    @State private var alertError: HealthKitError? = nil
+    
     var body : some View {
         
         GeometryReader { geometry in
@@ -71,7 +74,13 @@ struct CupView: View {
                 
                 HStack{
                     Button{
-                        healthKitManager.saveDrinkWater(drink_num: percent)
+                        if let alertError = healthKitManager.saveDrinkWater(drink_num: percent) {
+                            self.alertError = alertError
+                            self.isShowAlert = true
+                        } else {
+                            self.alertError = HealthKitError.healthKitNotAvailable
+                            self.isShowAlert = true
+                        }
                     } label: {
                         Image(systemName: "mouth.fill")
                             .foregroundStyle(.red)
@@ -82,6 +91,11 @@ struct CupView: View {
                     #endif
                     .background(.regularMaterial)
                     .clipShape(.circle)
+                    .alert(isPresented: $isShowAlert, error: alertError) { _ in
+                        Button("OK", role:.cancel) {}
+                        } message: { error in
+                          Text(error.recoverySuggestion ?? "Try again later.")
+                        }
                     
                     Spacer()
                     
