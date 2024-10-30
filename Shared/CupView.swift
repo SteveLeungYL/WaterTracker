@@ -32,7 +32,7 @@ struct CupView: View {
         self.config = getWaterTracerConfiguration(modelContext: modelContext)
         self.unitStr = getUnitStr(config: self.config)
         if config.waterUnit == .ml {
-            self.textStr = "\(Int(self.drinkNum))\(self.unitStr)"
+            self.textStr = String(format: "%3d\(self.unitStr)", Int(self.drinkNum))
         } else {
             self.textStr = String(format: "%.2f\(self.unitStr)", self.drinkNum)
         }
@@ -44,6 +44,7 @@ struct CupView: View {
             VStack{
                 Spacer()
                 HStack{
+                    
                     Spacer()
                     ZStack{
                         
@@ -78,15 +79,6 @@ struct CupView: View {
                                 InvisibleSlider(drinkNum: $drinkNum, waveOffset: $waveOffset)
                             )
                         
-                        // FIXME: Update the correct text here.
-                        Text(self.textStr)
-                            .font(.system(size: 300))
-                            .minimumScaleFactor(0.00001)
-                            .foregroundStyle(.black)
-                            .fontWeight(.bold)
-                            .frame(height: cupWidth * 0.30, alignment: .center)
-                            .allowsHitTesting(false)
-                        
                     }
                     Spacer()
                 }
@@ -102,7 +94,7 @@ struct CupView: View {
                     } label: {
                         Image(systemName: "mouth.fill")
                             .foregroundStyle(.red)
-                            .font(.title3)
+                            .font(.body)
                     }
                     #if !os(watchOS)
                     .padding()
@@ -114,6 +106,15 @@ struct CupView: View {
                         } message: { error in
                           Text(error.recoverySuggestion ?? "Try again later.")
                         }
+                    Spacer()
+                    
+                    Text(self.textStr)
+                        .font(.system(size: 300))
+                        .minimumScaleFactor(0.00001)
+                        .foregroundStyle(.black)
+                        .fontWeight(.bold)
+                        .frame(height: geometry.size.width * 0.30, alignment: .center)
+                        .allowsHitTesting(false)
                     
                     Spacer()
                     
@@ -122,7 +123,7 @@ struct CupView: View {
                         // Do something here.
                     } label: {
                         Text("Ring")
-                            .font(.title3)
+                            .font(.body)
                     }
                     #if !os(watchOS)
                     .padding()
