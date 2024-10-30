@@ -95,7 +95,7 @@ struct CupView: View {
                 
                 HStack{
                     Button{
-                        if let alertError = healthKitManager.saveDrinkWater(drink_num: drinkNum) {
+                        if let alertError = healthKitManager.saveDrinkWater(drink_num: drinkNum, config: config) {
                             self.alertError = alertError
                             self.isShowAlert = true
                         }
