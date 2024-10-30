@@ -19,7 +19,7 @@ class HealthKitManager: ObservableObject {
         HKObjectType.quantityType(forIdentifier: .dietaryWater)!])
     
     func checkHealthKitAvailability() -> HealthKitError? {
-        guard HKHealthStore.isHealthDataAvailable() == true else {
+        if HKHealthStore.isHealthDataAvailable() == false {
             return .healthKitNotAvailable
         }
         return nil
@@ -45,7 +45,7 @@ class HealthKitManager: ObservableObject {
         return err
     }
     
-    func saveDrinkWater(drink_num: Double) -> HealthKitError? {
+    func saveDrinkWater(drink_num: Double, config: WaterTracerConfiguration) -> HealthKitError? {
         if let errMsg = checkHealthKitAvailability() {
             return errMsg
         }
@@ -55,9 +55,32 @@ class HealthKitManager: ObservableObject {
             return errMsg
         }
         
-        // TODO:: Save to HealthKit.
         
-        return nil
+        let waterNumType = HKSampleType.quantityType(forIdentifier: .dietaryWater)!
+        
+        var waterUnit = HKUnit.fluidOunceUS()
+        var saving_drink_num_with_correct_unit = drink_num
+        if config.waterUnit == .ml {
+            waterUnit = HKUnit.liter()
+            saving_drink_num_with_correct_unit /= 1000.0
+        }
+        let waterQuantity = HKQuantity(unit: waterUnit, doubleValue: saving_drink_num_with_correct_unit)
+        
+        let waterSample = HKQuantitySample(type: waterNumType, quantity: waterQuantity, start: Date(), end: Date())
+        
+        var err: HealthKitError? = nil
+        
+        healthStore.save(waterSample) {
+            success, error in
+            if success {
+                print("DEBUG: Data successfully saved!")
+                print("Saving drink water: \(drink_num) with unit: \(config.waterUnit.unitStr). ")
+            } else {
+                err = .healthKitNotAuthorized
+            }
+        }
+        
+        return err
     }
     
     init() {
@@ -70,18 +93,23 @@ class HealthKitManager: ObservableObject {
 
 enum HealthKitError: LocalizedError {
     case healthKitNotAvailable
+    case healthKitNotAuthorized
     
     var errorDescription: String? {
         switch self {
         case .healthKitNotAvailable:
-          return "Can't access HealthKit. "
+            return "Can't access HealthKit. "
+        case .healthKitNotAuthorized:
+            return "HealthKit not authrorized. "
         }
-      }
-
-      var recoverySuggestion: String? {
+    }
+        
+    var recoverySuggestion: String? {
         switch self {
         case .healthKitNotAvailable:
-          return "\(AppName) relies sorely on HealthKit from Apple to save data and synchronize between devices. Without HealthKit, the water reminder still works, but no water tracking would be saved. \nTo enable full \(AppName) features, please enable the HealthKit access in Settings. "
+            return "\(AppName) relies sorely on HealthKit from Apple to save data and synchronize between devices. Without HealthKit, the water reminder still works, but no water tracking would be saved. \nTo enable full \(AppName) features, please use a device that support HealthKit. "
+        case .healthKitNotAuthorized:
+            return "\(AppName) relies sorely on HealthKit from Apple to save data and synchronize between devices. Without HealthKit, the water reminder still works, but no water tracking would be saved. \nTo enable full \(AppName) features, please enable the HealthKit access in Settings. "
         }
-      }
+    }
 }
