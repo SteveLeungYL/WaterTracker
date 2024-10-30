@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct WaterTracerApp: App {
@@ -13,6 +14,6 @@ struct WaterTracerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-        }
+        }.modelContainer(sharedWaterTracerModelContainer)
     }
 }
