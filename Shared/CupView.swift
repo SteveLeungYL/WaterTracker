@@ -11,12 +11,38 @@ struct CupView: View {
     
     @StateObject var healthKitManager: HealthKitManager = HealthKitManager.shared
 
-    @State private var percent: Double = 20
+    @State private var drinkNum: Double = 250.0 // default 100 ml
     @State private var waveOffset = Angle(degrees: 0)
     
     @State private var isShowAlert: Bool = false
     @State private var alertError: HealthKitError? = nil
     
+    @Environment(\.modelContext) var modelContext
+    @State private var config: WaterTracerConfiguration = .init()
+    @State private var textStr: String = "100 ml"
+    @State private var unitStr: String = "ml"
+    
+//    init() {
+//        setDefaultDrinkNum()
+//        updateTextStr()
+//    }
+    
+    func setDefaultDrinkNum() {
+        self.config = getWaterTracerConfiguration(modelContext: modelContext)
+        let cupCapacity = getCupCapacity(config: config)
+        self.drinkNum = Double(Int(cupCapacity * 3 / 4))
+    }
+    
+    func updateTextStr() {
+        self.config = getWaterTracerConfiguration(modelContext: modelContext)
+        self.unitStr = getUnitStr(config: self.config)
+        if config.waterUnit == .ml {
+            self.textStr = "\(Int(self.drinkNum))\(self.unitStr)"
+        } else {
+            self.textStr = String(format: "%.2f\(self.unitStr)", self.drinkNum)
+        }
+    }
+
     var body : some View {
         
         GeometryReader { geometry in
@@ -33,7 +59,7 @@ struct CupView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                             .overlay(
-                                WaveAnimation($percent, $waveOffset)
+                                WaveAnimation($drinkNum, $waveOffset)
                                     .frame(width: cupWidth, alignment: .center)
                                     .aspectRatio( contentMode: .fill)
                                     .mask(
@@ -54,11 +80,11 @@ struct CupView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                             .overlay(
-                                InvisibleSlider(percent: $percent, waveOffset: $waveOffset)
+                                InvisibleSlider(drinkNum: $drinkNum, waveOffset: $waveOffset)
                             )
                         
                         // FIXME: Update the correct text here.
-                        Text("\(Int(percent))%")
+                        Text(self.textStr)
                             .font(.system(size: 300))
                             .minimumScaleFactor(0.00001)
                             .foregroundStyle(.black)
@@ -74,7 +100,7 @@ struct CupView: View {
                 
                 HStack{
                     Button{
-                        if let alertError = healthKitManager.saveDrinkWater(drink_num: percent) {
+                        if let alertError = healthKitManager.saveDrinkWater(drink_num: drinkNum) {
                             self.alertError = alertError
                             self.isShowAlert = true
                         } else {
@@ -119,7 +145,13 @@ struct CupView: View {
                 #endif
 
             } // From the VStack. This should expand to the whole screen excluding the safe area
-            
+            .onAppear() {
+                setDefaultDrinkNum()
+                updateTextStr()
+            }
+            .onChange(of: self.drinkNum) {
+                updateTextStr()
+            }
         }
     }
 }
