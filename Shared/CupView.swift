@@ -22,11 +22,6 @@ struct CupView: View {
     @State private var textStr: String = "100 ml"
     @State private var unitStr: String = "ml"
     
-//    init() {
-//        setDefaultDrinkNum()
-//        updateTextStr()
-//    }
-    
     func setDefaultDrinkNum() {
         self.config = getWaterTracerConfiguration(modelContext: modelContext)
         let cupCapacity = getCupCapacity(config: config)
