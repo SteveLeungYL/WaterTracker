@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CupView: View {
     
-    static let healthKitManager: HealthKitManager = HealthKitManager.shared
+    @StateObject var healthKitManager: HealthKitManager = HealthKitManager.shared
 
     @State private var percent: Double = 20
     @State private var waveOffset = Angle(degrees: 0)
@@ -71,8 +71,7 @@ struct CupView: View {
                 
                 HStack{
                     Button{
-                        // TODO::
-                        // Do something here.
+                        healthKitManager.saveDrinkWater(drink_num: percent)
                     } label: {
                         Image(systemName: "mouth.fill")
                             .foregroundStyle(.red)

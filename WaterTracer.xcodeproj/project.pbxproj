@@ -16,6 +16,8 @@
 		29A4895A2CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */; };
 		29A4897D2CD16841005AA4A1 /* CupShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4897C2CD16841005AA4A1 /* CupShape.swift */; };
 		29A4897E2CD16841005AA4A1 /* CupShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4897C2CD16841005AA4A1 /* CupShape.swift */; };
+		29A489A52CD1C048005AA4A1 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489A42CD1C042005AA4A1 /* Configurations.swift */; };
+		29A489A62CD1C048005AA4A1 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489A42CD1C042005AA4A1 /* Configurations.swift */; };
 		29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 		29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +85,7 @@
 		29A489522CD02922005AA4A1 /* InvisibleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvisibleSlider.swift; sourceTree = "<group>"; };
 		29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		29A4897C2CD16841005AA4A1 /* CupShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupShape.swift; sourceTree = "<group>"; };
+		29A489A42CD1C042005AA4A1 /* Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
 		29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,6 +225,7 @@
 		29D8FE7F2CCECD8200504B17 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				29A489A42CD1C042005AA4A1 /* Configurations.swift */,
 				29A4897F2CD168C0005AA4A1 /* Shapes */,
 				29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */,
 				29A489522CD02922005AA4A1 /* InvisibleSlider.swift */,
@@ -481,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A489A52CD1C048005AA4A1 /* Configurations.swift in Sources */,
 				29A489542CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A4895A2CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
 				2965A2632CCF254500E75A0F /* CupView.swift in Sources */,
@@ -507,6 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A489A62CD1C048005AA4A1 /* Configurations.swift in Sources */,
 				29A489532CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A489592CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
 				2965A2622CCF254500E75A0F /* CupView.swift in Sources */,
@@ -681,13 +687,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WaterTracer Watch App/WaterTracer Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterTracer Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 47X549R648;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WaterTracer-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WaterTracer;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = SteveLeung.WaterTracer;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -711,13 +722,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WaterTracer Watch App/WaterTracer Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterTracer Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 47X549R648;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WaterTracer-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WaterTracer;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = SteveLeung.WaterTracer;
 				LD_RUNPATH_SEARCH_PATHS = (
