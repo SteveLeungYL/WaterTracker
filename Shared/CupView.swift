@@ -103,9 +103,6 @@ struct CupView: View {
                         if let alertError = healthKitManager.saveDrinkWater(drink_num: drinkNum) {
                             self.alertError = alertError
                             self.isShowAlert = true
-                        } else {
-                            self.alertError = HealthKitError.healthKitNotAvailable
-                            self.isShowAlert = true
                         }
                     } label: {
                         Image(systemName: "mouth.fill")
