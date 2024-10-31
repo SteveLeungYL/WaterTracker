@@ -58,17 +58,17 @@ struct WaveWithHeight: View {
                     .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: waveOffset)
             }
             .animation(.linear(duration: 0.3), value: self.healthKitManager.drinkNum)
-            .offset(x:0, y: geometry.size.height * (1.0 - self.healthKitManager.drinkNum / self.cupCapacity))
+            .offset(x:0, y: geometry.size.height * (1.0 - self.healthKitManager.drinkNum / self.config.cupCapacity))
             .frame(width: geometry.size.width, height: geometry.size.height)
-        }.onAppear() {
-            withAnimation(.linear(duration: 0.2)) {
-                if self.isCup {
-                    self.cupCapacity = config.cupCapacity
-                    self.drinkNum = healthKitManager.drinkNum
-                } else {
-                    self.cupCapacity = config.getDailyGoal()
-                    self.drinkNum = config.getDailyGoal()
-                }
+        }
+        .onAppear() {
+            if self.isCup {
+                self.cupCapacity = config.cupCapacity
+                self.drinkNum = healthKitManager.drinkNum
+                print("Executed. ")
+//            } else {
+//                self.cupCapacity = config.getDailyGoal()
+//                self.drinkNum = config.getDailyGoal()
             }
         }
     }

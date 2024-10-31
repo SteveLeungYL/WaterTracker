@@ -10,6 +10,8 @@ import SwiftUI
 struct RingView: View {
     
     @Environment(HealthKitManager.self) private var healthKitManager
+    @Environment(WaterTracerConfigManager.self) private var config
+    
     @State private var waveOffset = Angle(degrees: 0)
     
     @State private var isShowAlert: Bool = false
@@ -28,16 +30,16 @@ struct RingView: View {
                                 .fill(Color.white)
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: bodyWidth, alignment: .center)
-                                .overlay(
-                                    WaveAnimation($waveOffset, false)
-                                        .frame(width: bodyWidth, alignment: .center)
-                                        .aspectRatio( contentMode: .fill)
-                                        .mask(
-                                            BodyShape()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: bodyWidth, alignment: .center)
-                                        )
-                                )
+//                                .overlay(
+//                                    WaveAnimation($waveOffset, false)
+//                                        .frame(width: bodyWidth, alignment: .center)
+//                                        .aspectRatio( contentMode: .fill)
+//                                        .mask(
+//                                            BodyShape()
+//                                                .aspectRatio(contentMode: .fit)
+//                                                .frame(width: bodyWidth, alignment: .center)
+//                                        )
+//                                )
                             
                             
                             BodyShape()
@@ -55,7 +57,10 @@ struct RingView: View {
                 }
             } // scrollView
         .onAppear {
-            healthKitManager.updateDrinkWaterToday()
+            if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
+                self.alertError = err
+                self.isShowAlert = true
+            }
         }
         .alert(isPresented: $isShowAlert, error: alertError) { _ in
             Button("OK", role:.cancel) {}
