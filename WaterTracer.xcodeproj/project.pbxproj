@@ -30,6 +30,8 @@
 		29A489D92CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
 		29D17B152CD43B3B0049B75C /* WeightDiffBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* WeightDiffBarChart.swift */; };
 		29D17B162CD43B3B0049B75C /* WeightDiffBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* WeightDiffBarChart.swift */; };
+		29D17B182CD446970049B75C /* UnitPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B172CD446930049B75C /* UnitPicker.swift */; };
+		29D17B192CD446970049B75C /* UnitPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B172CD446930049B75C /* UnitPicker.swift */; };
 		29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 		29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +106,7 @@
 		29A489D42CD3047C005AA4A1 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		29A489D72CD309CC005AA4A1 /* BodyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyShape.swift; sourceTree = "<group>"; };
 		29D17B142CD43B3B0049B75C /* WeightDiffBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDiffBarChart.swift; sourceTree = "<group>"; };
+		29D17B172CD446930049B75C /* UnitPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPicker.swift; sourceTree = "<group>"; };
 		29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -269,6 +272,7 @@
 		29D8FE7F2CCECD8200504B17 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				29D17B172CD446930049B75C /* UnitPicker.swift */,
 				29D17B122CD43B330049B75C /* Charts */,
 				29A489D42CD3047C005AA4A1 /* RingView.swift */,
 				29A489D02CD2F97B005AA4A1 /* Notifications */,
@@ -545,6 +549,7 @@
 				29A489AA2CD2B9D5005AA4A1 /* Units.swift in Sources */,
 				29A489D92CD309CC005AA4A1 /* BodyShape.swift in Sources */,
 				29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */,
+				29D17B192CD446970049B75C /* UnitPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +583,7 @@
 				29A489A92CD2B9D5005AA4A1 /* Units.swift in Sources */,
 				29A489D82CD309CC005AA4A1 /* BodyShape.swift in Sources */,
 				29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */,
+				29D17B182CD446970049B75C /* UnitPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

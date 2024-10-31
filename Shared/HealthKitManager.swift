@@ -139,8 +139,11 @@ class HealthKitManager {
                 waterUnit = HKUnit.liter()
             }
             let totalDrinkWaterTodayLiter = sum?.doubleValue(for: waterUnit)
-            let totalDrinkWaterTodayML = totalDrinkWaterTodayLiter! * 1000.0
-
+            var totalDrinkWaterTodayML = totalDrinkWaterTodayLiter!
+            
+            if waterUnitInput == .ml {
+                totalDrinkWaterTodayML *= 1000
+            }
             
             print("Getting today drink water num: \(totalDrinkWaterTodayML)")
             
@@ -198,8 +201,13 @@ class HealthKitManager {
         do {
             let drinkWeekData = try await todayDrinkWaterQuery.result(for: healthStore)
             
+            var unitMultiplyer:Double = 1.0
+            if waterUnitInput == .ml {
+                unitMultiplyer = 1000.0
+            }
+            
             self.drinkWeekData = drinkWeekData.statistics().map {
-                .init(date: $0.startDate, value: ($0.sumQuantity()?.doubleValue(for: waterUnit) ?? 0.0) * 1000.0)
+                .init(date: $0.startDate, value: ($0.sumQuantity()?.doubleValue(for: waterUnit) ?? 0.0) * unitMultiplyer)
             }
             
         } catch {
