@@ -11,7 +11,7 @@ struct CupView: View {
     
     @Environment(HealthKitManager.self) private var healthKitManager
 
-    @State private var waveOffset = Angle(degrees: 0)
+    @State private var waveOffset: Angle = .zero
     
     @State private var isShowAlert: Bool = false
     @State private var alertError: HealthKitError? = nil
@@ -147,7 +147,7 @@ struct CupView: View {
                     config.updateWaterTracerConfig(modelContext: self.modelContext)
                     setDefaultDrinkNum()
                     updateTextStr()
-                    // HERE, make sure the animation plays correctly by reset the original value. 
+                    // HERE, make sure the animation plays correctly by reset the original value.
                     self.waveOffset = .zero
                 }
                 .onChange(of: self.healthKitManager.drinkNum) {
