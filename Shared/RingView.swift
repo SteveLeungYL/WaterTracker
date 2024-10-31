@@ -21,6 +21,8 @@ struct RingView: View {
     @State private var textStr: String = "100 ml"
     @State private var unitStr: String = "ml"
     
+    @State var updateToggle: Bool = false
+    
     func updateTextStr() {
         self.unitStr = config.getUnitStr()
         if config.waterUnit == .ml {
@@ -93,6 +95,10 @@ struct RingView: View {
                                 }
                             }
                         
+                        Spacer()
+                        
+                        UnitPickerView(updateToggle: $updateToggle)
+                        
                     }
                 } // scrollView
                 .onAppear {
@@ -105,6 +111,12 @@ struct RingView: View {
                 }
                 .onChange(of: healthKitManager.todayTotalDrinkNum) {
                     // For reloading purpose
+                    updateTextStr()
+                }
+                .onChange(of: self.updateToggle) {
+                    Task{
+                        await self.healthKitManager.updateDrinkWaterCollection(waterUnitInput: self.config.waterUnit)
+                    }
                     updateTextStr()
                 }
                 .alert(isPresented: $isShowAlert, error: alertError) { _ in

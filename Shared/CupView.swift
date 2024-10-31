@@ -22,13 +22,8 @@ struct CupView: View {
     @State private var textStr: String = "100 ml"
     @State private var unitStr: String = "ml"
     
-    @State private var isSetDefaultDrinkNum: Bool = false
-    
     func setDefaultDrinkNum() {
-        if (!isSetDefaultDrinkNum) {
             self.healthKitManager.drinkNum = Double(Int(config.getCupCapacity() * 3 / 4))
-            self.isSetDefaultDrinkNum = true
-        }
     }
     
     func updateTextStr() {

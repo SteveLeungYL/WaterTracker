@@ -13,7 +13,7 @@ class WaterTracerConfiguration {
     var waterUnit: WaterUnits = WaterUnits.ml
     var cupCapacity: Double? = nil
     var dailyGoal: Double? = nil
-
+    
     init(waterUnit: WaterUnits, cupCapacity: Double, dailyGoals: Double) {
         self.waterUnit = waterUnit
         self.cupCapacity = cupCapacity
@@ -73,19 +73,19 @@ class WaterTracerConfigManager {
     func getCupCapacity() -> Double {
         return self.config.cupCapacity ?? config.waterUnit.cupDefaultCapacity
     }
-
+    
     func getCupMinimumNum() -> Double {
         return self.config.waterUnit.cupMinimumNum
     }
-
+    
     func getUnitStep() -> Double {
         return self.config.waterUnit.unitStep
     }
-
+    
     func getUnitStr() -> String {
         return self.config.waterUnit.unitStr
     }
-
+    
     func getDailyGoal() -> Double {
         if let dailyGoal = self.config.dailyGoal {
             return dailyGoal
@@ -109,107 +109,67 @@ class WaterTracerConfigManager {
             print("Warnaing: Fail to get model. Use default. ")
         }
     }
-
+    
     func getWaterTracerConfiguration(modelContext: ModelContext) -> WaterTracerConfiguration {
         self.updateWaterTracerConfig(modelContext: modelContext)
         return self.config
     }
+    
+    func deleteAllWaterTracerConfigs(modelContext: ModelContext) {
+        
+        
+        do {
+            let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>(predicate: nil)
+            let all_save = try modelContext.fetch(fecthDescriptor)
+            
+            if let _ = all_save.first {
+                // Configuration has been saved before.
+                print("Try to delete the existing config")
+                try modelContext.delete(model: WaterTracerConfiguration.self)
+            } else {
+                print("No previous config exist, won't delete. ")
+            }
+        } catch {
+            print("Failed to delete all? \(error.localizedDescription)")
+        }
+    }
+    
+    func setWaterUnit(_ waterUnit: WaterUnits, modelContext: ModelContext) {
+        let waterTracerConfiguration = self.getWaterTracerConfiguration(modelContext: modelContext)
+        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
+        
+        waterTracerConfiguration.waterUnit = waterUnit
+        waterTracerConfiguration.cupCapacity = nil
+        modelContext.insert(waterTracerConfiguration)
+        do {
+            try modelContext.save()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func setCupCapacity(_ newCupCapacity: Double, modelContext: ModelContext) {
+        let waterTracerConfiguration = getWaterTracerConfiguration(modelContext: modelContext)
+        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
+        
+        waterTracerConfiguration.cupCapacity = newCupCapacity
+        modelContext.insert(waterTracerConfiguration)
+        do {
+            try modelContext.save()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func setWaterTracerConfiguration(_ newConfig: WaterTracerConfiguration, modelContext: ModelContext) {
+        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
+        
+        modelContext.insert(newConfig)
+        do {
+            try modelContext.save()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
 }
 
-//class WaterTracerConfigurationManager {
-//
-//    var ModelContext: ModelContext? = nil
-//
-//    static func getWaterTracerConfiguration() -> WaterTracerConfiguration {
-//        @Environment(\.modelContext) var modelContext
-//
-//        do {
-//            let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>(predicate: nil)
-//            let all_save = try modelContext.fetch(fecthDescriptor)
-//
-//            if let data = all_save.first {
-//                return data
-//            } else {
-//                // No custom value, use default.
-//                return WaterTracerConfiguration()
-//            }
-//        } catch {
-//            print("Warnaing: Fail to get model. Use default. ")
-//            return WaterTracerConfiguration()
-//        }
-//    }
-//
-//    static func getCupCapacity() -> Double {
-//        let waterTracerConfiguration = getWaterTracerConfiguration()
-//        return waterTracerConfiguration.cupCapacity ?? waterTracerConfiguration.waterUnit.cupDefaultCapacity
-//    }
-//
-//    static func getCupMinimumNum() -> Double {
-//        let waterTracerConfiguration = getWaterTracerConfiguration()
-//        return waterTracerConfiguration.waterUnit.cupMinimumNum
-//    }
-//
-//    static func getUnitStr() -> String {
-//        let waterTracerConfiguration = getWaterTracerConfiguration()
-//        if waterTracerConfiguration.waterUnit == WaterUnits.ml {
-//            return "ml"
-//        } else {
-//            return "oz"
-//        }
-//    }
-//
-//    static func deleteAllWaterTracerConfigs() {
-//        @Environment(\.modelContext) var modelContext
-//        do {
-//            try modelContext.delete(model: WaterTracerConfiguration.self)
-//        } catch {
-//            print("Failed to delete all? \(error.localizedDescription)")
-//        }
-//    }
-//
-//    static func setWaterUnit(_ waterUnit: WaterUnits) {
-//        @Environment(\.modelContext) var modelContext
-//
-//        let waterTracerConfiguration = getWaterTracerConfiguration()
-//        self.deleteAllWaterTracerConfigs()
-//
-//        waterTracerConfiguration.waterUnit = waterUnit
-//        waterTracerConfiguration.cupCapacity = nil
-//        modelContext.insert(waterTracerConfiguration)
-//        do {
-//            try modelContext.save()
-//        } catch {
-//            fatalError(error.localizedDescription)
-//        }
-//    }
-//
-//    static func setCupCapacity(_ newCupCapacity: Double) {
-//        @Environment(\.modelContext) var modelContext
-//
-//        let waterTracerConfiguration = getWaterTracerConfiguration()
-//        self.deleteAllWaterTracerConfigs()
-//
-//        waterTracerConfiguration.cupCapacity = newCupCapacity
-//        modelContext.insert(waterTracerConfiguration)
-//        do {
-//            try modelContext.save()
-//        } catch {
-//            fatalError(error.localizedDescription)
-//        }
-//    }
-//
-//    static func setWaterTracerConfiguration(_ newConfig: WaterTracerConfiguration) {
-//        @Environment(\.modelContext) var modelContext
-//
-//        let waterTracerConfiguration = getWaterTracerConfiguration()
-//        self.deleteAllWaterTracerConfigs()
-//
-//        modelContext.insert(newConfig)
-//        do {
-//            try modelContext.save()
-//        } catch {
-//            fatalError(error.localizedDescription)
-//        }
-//    }
-//
-//}
