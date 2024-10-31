@@ -55,7 +55,7 @@ struct CupView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                             .overlay(
-                                WaveAnimation($drinkNum, $waveOffset)
+                                WaveAnimation($drinkNum, $waveOffset, true)
                                     .frame(width: cupWidth, alignment: .center)
                                     .aspectRatio( contentMode: .fill)
                                     .mask(
