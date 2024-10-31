@@ -12,15 +12,17 @@ struct WaveAnimation: View {
     
     @Binding var drinkNum: Double
     @Binding var waveOffset: Angle
+    var isCup: Bool
     
-    init(_ drinkNum: Binding<Double>, _ waveOffset: Binding<Angle>) {
+    init(_ drinkNum: Binding<Double>, _ waveOffset: Binding<Angle>, _ isCup: Bool) {
         self._drinkNum = drinkNum
         self._waveOffset = waveOffset
+        self.isCup = isCup
     }
     
     var body: some View {
         ZStack{
-            WaveWithHeight(drinkNum: $drinkNum, waveOffset: $waveOffset)
+            WaveWithHeight(drinkNum: $drinkNum, waveOffset: $waveOffset, isCup: isCup)
         }
     }
 }
@@ -28,6 +30,7 @@ struct WaveAnimation: View {
 struct WaveWithHeight: View {
     @Binding var drinkNum: Double
     @Binding var waveOffset: Angle
+    var isCup: Bool
     
     @Environment(\.modelContext) var modelContext
     @State var cupCapacity: Double = 1000.0
@@ -58,7 +61,11 @@ struct WaveWithHeight: View {
         }.onAppear() {
             let config = getWaterTracerConfiguration(modelContext: modelContext)
             withAnimation(.linear(duration: 0.2)) {
-                self.cupCapacity = getCupCapacity(config:config)
+                if self.isCup {
+                    self.cupCapacity = getCupCapacity(config:config)
+                } else {
+                    self.cupCapacity = getDailyGoal(config:config)
+                }
             }
         }
     }
@@ -112,7 +119,7 @@ struct Wave: Shape {
     @Previewable @State var drinkNum: Double = 100.0
     @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
     ZStack {
-        WaveAnimation($drinkNum, $waveOffset)
+        WaveAnimation($drinkNum, $waveOffset, true)
         InvisibleSlider(drinkNum: $drinkNum, waveOffset: $waveOffset)
         Text("\(drinkNum)ml")
     }

@@ -24,6 +24,10 @@
 		29A489AD2CD2BD3C005AA4A1 /* WaterTracerConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489AB2CD2BD38005AA4A1 /* WaterTracerConfigurations.swift */; };
 		29A489D22CD2F988005AA4A1 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */; };
 		29A489D32CD2F988005AA4A1 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */; };
+		29A489D52CD3047E005AA4A1 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D42CD3047C005AA4A1 /* RingView.swift */; };
+		29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D42CD3047C005AA4A1 /* RingView.swift */; };
+		29A489D82CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
+		29A489D92CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
 		29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 		29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
 /* End PBXBuildFile section */
@@ -95,6 +99,8 @@
 		29A489A82CD2B9D2005AA4A1 /* Units.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
 		29A489AB2CD2BD38005AA4A1 /* WaterTracerConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterTracerConfigurations.swift; sourceTree = "<group>"; };
 		29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		29A489D42CD3047C005AA4A1 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
+		29A489D72CD309CC005AA4A1 /* BodyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyShape.swift; sourceTree = "<group>"; };
 		29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -226,6 +232,7 @@
 		29A4897F2CD168C0005AA4A1 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
+				29A489D72CD309CC005AA4A1 /* BodyShape.swift */,
 				29A4897C2CD16841005AA4A1 /* CupShape.swift */,
 			);
 			path = Shapes;
@@ -251,6 +258,7 @@
 		29D8FE7F2CCECD8200504B17 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				29A489D42CD3047C005AA4A1 /* RingView.swift */,
 				29A489D02CD2F97B005AA4A1 /* Notifications */,
 				29A489A72CD2B9C1005AA4A1 /* DataModels */,
 				29A489A42CD1C042005AA4A1 /* Configurations.swift */,
@@ -513,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A489D52CD3047E005AA4A1 /* RingView.swift in Sources */,
 				29A489A52CD1C048005AA4A1 /* Configurations.swift in Sources */,
 				29A489542CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A4895A2CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
@@ -521,6 +530,7 @@
 				29A4897E2CD16841005AA4A1 /* CupShape.swift in Sources */,
 				29A489AD2CD2BD3C005AA4A1 /* WaterTracerConfigurations.swift in Sources */,
 				29A489AA2CD2B9D5005AA4A1 /* Units.swift in Sources */,
+				29A489D92CD309CC005AA4A1 /* BodyShape.swift in Sources */,
 				29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,6 +553,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */,
 				29A489A62CD1C048005AA4A1 /* Configurations.swift in Sources */,
 				29A489532CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A489592CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
@@ -551,6 +562,7 @@
 				29A4897D2CD16841005AA4A1 /* CupShape.swift in Sources */,
 				29A489AC2CD2BD3C005AA4A1 /* WaterTracerConfigurations.swift in Sources */,
 				29A489A92CD2B9D5005AA4A1 /* Units.swift in Sources */,
+				29A489D82CD309CC005AA4A1 /* BodyShape.swift in Sources */,
 				29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
