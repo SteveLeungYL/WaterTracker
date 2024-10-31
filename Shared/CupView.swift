@@ -36,7 +36,7 @@ struct CupView: View {
         if config.waterUnit == .ml {
             self.textStr = String(format: "%3d\(self.unitStr)", Int(self.healthKitManager.drinkNum))
         } else {
-            self.textStr = String(format: "%.2f\(self.unitStr)", self.healthKitManager.drinkNum)
+            self.textStr = String(format: "%.1f\(self.unitStr)", self.healthKitManager.drinkNum)
         }
     }
 
@@ -123,6 +123,7 @@ struct CupView: View {
                             .fontWeight(.bold)
                             .frame(height: geometry.size.width * 0.30, alignment: .center)
                             .allowsHitTesting(false)
+                            .multilineTextAlignment(.center)
                         
                         Spacer()
                         
