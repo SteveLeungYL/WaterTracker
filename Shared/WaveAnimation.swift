@@ -20,12 +20,16 @@ struct WaveAnimation: View {
     
     var body: some View {
         ZStack{
-            WaveWithHeight(waveOffset: $waveOffset, isCup: isCup)
+            if isCup {
+                WaveWithCupHeight(waveOffset: $waveOffset, isCup: isCup)
+            } else {
+                WaveWithBodyHeight(waveOffset: $waveOffset, isCup: isCup)
+            }
         }
     }
 }
 
-struct WaveWithHeight: View {
+struct WaveWithCupHeight: View {
     @Environment(HealthKitManager.self) private var healthKitManager
     @Environment(WaterTracerConfigManager.self) private var config
     @Binding var waveOffset: Angle
@@ -61,16 +65,48 @@ struct WaveWithHeight: View {
             .offset(x:0, y: geometry.size.height * (1.0 - self.healthKitManager.drinkNum / self.config.cupCapacity))
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
-        .onAppear() {
-            if self.isCup {
-                self.cupCapacity = config.cupCapacity
-                self.drinkNum = healthKitManager.drinkNum
-                print("Executed. ")
-//            } else {
-//                self.cupCapacity = config.getDailyGoal()
-//                self.drinkNum = config.getDailyGoal()
+        
+    }
+}
+
+
+struct WaveWithBodyHeight: View {
+    @Environment(HealthKitManager.self) private var healthKitManager
+    @Environment(WaterTracerConfigManager.self) private var config
+    @Binding var waveOffset: Angle
+
+    @State var drinkNum: Double = 0.0
+
+    var isCup: Bool // TODO:: FIXME:: Better implementation?
+
+    // Use for animation and default value scaling.
+    @State var cupCapacity: Double = 1000.0
+
+    var body : some View {
+        GeometryReader { geometry in
+            ZStack {
+                Wave(offSet: Angle(degrees: waveOffset.degrees + 270))
+                    .fill(Color.blue)
+                    .opacity(0.3)
+                    .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
+
+                Wave(offSet: Angle(degrees: waveOffset.degrees + 90))
+                    .fill(Color.blue)
+                    .opacity(0.4)
+                    .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
+
+                Wave(offSet: Angle(degrees: waveOffset.degrees))
+                    .fill(Color.blue)
+                    .onAppear {
+                        waveOffset = waveOffset + Angle(degrees: 360)
+                    }
+                    .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: waveOffset)
             }
+            .animation(.linear(duration: 0.3), value: self.healthKitManager.todayTotalDrinkNum)
+            .offset(x:0, y: geometry.size.height * (1.0 - min(1.0, self.healthKitManager.todayTotalDrinkNum / self.config.getDailyGoal())))
+            .frame(width: geometry.size.width, height: geometry.size.height)
         }
+
     }
 }
 

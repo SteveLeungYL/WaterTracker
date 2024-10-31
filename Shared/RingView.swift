@@ -30,16 +30,16 @@ struct RingView: View {
                                 .fill(Color.white)
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: bodyWidth, alignment: .center)
-//                                .overlay(
-//                                    WaveAnimation($waveOffset, false)
-//                                        .frame(width: bodyWidth, alignment: .center)
-//                                        .aspectRatio( contentMode: .fill)
-//                                        .mask(
-//                                            BodyShape()
-//                                                .aspectRatio(contentMode: .fit)
-//                                                .frame(width: bodyWidth, alignment: .center)
-//                                        )
-//                                )
+                                .overlay(
+                                    WaveAnimation($waveOffset, false)
+                                        .frame(width: bodyWidth, alignment: .center)
+                                        .aspectRatio( contentMode: .fill)
+                                        .mask(
+                                            BodyShape()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: bodyWidth, alignment: .center)
+                                        )
+                                )
                             
                             
                             BodyShape()
