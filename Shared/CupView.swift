@@ -132,7 +132,7 @@ struct CupView: View {
                             Spacer()
                             
                             NavigationLink(destination: RingView() ) {
-                                Text("Ring")
+                                Image(systemName: "ellipsis.circle")
                                     .font(.body)
                             }
 #if !os(watchOS)
