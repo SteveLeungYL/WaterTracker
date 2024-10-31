@@ -48,7 +48,7 @@ class HealthKitManager {
         return err
     }
     
-    func saveDrinkWater(drink_num: Double, config: WaterTracerConfiguration) async -> HealthKitError? {
+    func saveDrinkWater(drink_num: Double, waterUnitInput: WaterUnits) async -> HealthKitError? {
         if let errMsg = checkHealthKitAvailability() {
             return errMsg
         }
@@ -63,7 +63,7 @@ class HealthKitManager {
         
         var waterUnit = HKUnit.fluidOunceUS()
         var saving_drink_num_with_correct_unit = drink_num
-        if config.waterUnit == .ml {
+        if waterUnitInput == .ml {
             waterUnit = HKUnit.liter()
             saving_drink_num_with_correct_unit /= 1000.0
         }
@@ -81,7 +81,82 @@ class HealthKitManager {
         return ret_err
     }
     
-
+//    func readDrinkWaterHelper(results: [HKQuantitySample]) {
+//        for result in results {
+//            print(result.quantity)
+//        }
+//    }
+    
+//    func readDrinkWaterToday() -> HealthKitError? {
+//        if let errMsg = checkHealthKitAvailability() {
+//            return errMsg
+//        }
+//        // Request permission again if the user change the permission outside the app.
+//        // OK if the permission is already granted. No repeated pop-up screen.
+//        if let errMsg = requestAuthorization() {
+//            return errMsg
+//        }
+//        
+//        let waterNumType = HKSampleType.quantityType(forIdentifier: .dietaryWater)!
+//        
+//        let calendar = NSCalendar.current
+//        let now = Date()
+//        let components = calendar.dateComponents([.year, .month, .day], from: now)
+//        
+//        guard let lastMidnightDate = calendar.date(from: components) else {
+//            fatalError("*** Unable to create the start date ***")
+//        }
+//         
+//        guard let todayMidnightDate = calendar.date(byAdding: .day, value: 1, to: lastMidnightDate) else {
+//            fatalError("*** Unable to create the end date ***")
+//        }
+//        
+//        //1. Use HKQuery to load the most recent samples.
+//        let todayPredicate = HKQuery.predicateForSamples(withStart: lastMidnightDate,
+//                                                              end: todayMidnightDate,
+//                                                              options: [])
+//        
+//        let todayDrinkWaterQuery = HKStatisticsQuery(quantityType: waterNumType, quantitySamplePredicate: todayPredicate, options: .cumulativeSum) { (query, statisticsOrNil, errorOrNil) in
+//            
+//            guard let statistics = statisticsOrNil else {
+//                print("Failure to get statistics? Didn't authroize HealthKit?")
+//                
+//                return
+//            }
+//            
+//            let sum = statistics.sumQuantity()
+//            let totalCaloriesConsumed = sum?.doubleValue(for: HKUnit.largeCalorie())
+//            
+//            // Update your app here.
+//            
+//            // The results come back on an anonymous background queue.
+//            // Dispatch to the main queue before modifying the UI.
+//            
+//            DispatchQueue.main.async {
+//                // Update the UI here.
+//            }
+//        }
+//        
+////        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate,
+////                                              ascending: false)
+////        
+////        let limit = 100
+//        
+////        let sampleQuery = HKSampleQuery(sampleType: waterNumType,
+////                                        predicate: mostRecentPredicate,
+////                                        limit: limit,
+////                                        sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+//            
+//            //2. Always dispatch to the main thread when complete.
+////            DispatchQueue.main.async {
+////                self.readDrinkWaterHelper(results: samples as? [HKQuantitySample] ?? [])
+////            }
+////        }
+//        
+//        healthStore.execute(sampleQuery)
+//        
+//        return nil
+//    }
     
     init() {
         // TODO:: This should not be here.

@@ -57,7 +57,9 @@ struct RingView: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
+    @Previewable @State var configManager = WaterTracerConfigManager()
     RingView()
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .environment(healthKitManager)
+        .environment(configManager)
 }

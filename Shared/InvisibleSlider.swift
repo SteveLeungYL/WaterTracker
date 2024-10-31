@@ -10,13 +10,10 @@ import SwiftUI
 struct InvisibleSlider: View {
     
     @Environment(HealthKitManager.self) private var healthKitManager
-    
+    @Environment(WaterTracerConfigManager.self) private var config
+
     @Binding var waveOffset: Angle
     
-    @Environment(\.modelContext) var modelContext
-    @State var cupMinimumNum: Double = 10.0
-    @State var cupCapacity: Double = 250.0
-    @State var adjustStep: Double = 10.0
     @State var scroll: Double = 0.0
 
     var body: some View {
@@ -25,7 +22,7 @@ struct InvisibleSlider: View {
             let dragGesture = DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     let percent = 1.0 - Double(value.location.y / geo.size.height)
-                    self.healthKitManager.drinkNum = max(self.cupMinimumNum, min(cupCapacity, percent * cupCapacity))
+                    self.healthKitManager.drinkNum = max(config.cupMinimumNum, min(config.cupCapacity, percent * config.cupCapacity))
                 }
             #endif
             
@@ -50,17 +47,13 @@ struct InvisibleSlider: View {
                 .scrollIndicators(.hidden)
 #endif
         }.onAppear() {
-            let config = getWaterTracerConfiguration(modelContext: modelContext)
-            self.cupMinimumNum = getCupMinimumNum(config:config)
-            self.cupCapacity = getCupCapacity(config:config)
-            self.adjustStep = getUnitStep(config:config)
-            self.scroll = Double(self.healthKitManager.drinkNum - cupMinimumNum) / adjustStep
+            self.scroll = Double(self.healthKitManager.drinkNum - config.cupMinimumNum) / config.adjustStep
         }
 #if os(watchOS)
         .onChange(of: scroll) {
-            self.healthKitManager.drinkNum = max(cupMinimumNum, min(cupCapacity, Double(scroll) * adjustStep))
-            if (scroll > ((cupCapacity - cupMinimumNum) / adjustStep) + 1) {
-                scroll = ((cupCapacity - cupMinimumNum) / adjustStep) + 1
+            self.healthKitManager.drinkNum = max(config.cupMinimumNum, min(config.cupCapacity, Double(scroll) * config.adjustStep))
+            if (scroll > ((config.cupCapacity - config.cupMinimumNum) / config.adjustStep) + 1) {
+                scroll = ((config.cupCapacity - config.cupMinimumNum) / config.adjustStep) + 1
             }
         }
 #endif
@@ -70,10 +63,12 @@ struct InvisibleSlider: View {
 #Preview {
     @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
     @Previewable @State var healthKitManager = HealthKitManager()
+    @Previewable @State var configManager = WaterTracerConfigManager()
     ZStack{
         InvisibleSlider(waveOffset: $waveOffset)
-            .environment(healthKitManager)
         Text(String(format:"%.1f", healthKitManager.drinkNum))
             .font(.largeTitle)
     }
+    .environment(healthKitManager)
+    .environment(configManager)
 }

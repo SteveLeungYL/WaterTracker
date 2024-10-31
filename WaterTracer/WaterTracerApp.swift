@@ -11,13 +11,15 @@ import SwiftData
 @main
 struct WaterTracerApp: App {
     
-    @State private var healthKitManager = HealthKitManager()
-    
+    @State var healthKitManager = HealthKitManager()
+    @State var configManager = WaterTracerConfigManager()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
         .modelContainer(sharedWaterTracerModelContainer)
         .environment(healthKitManager)
+        .environment(configManager)
     }
 }

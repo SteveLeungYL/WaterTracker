@@ -39,45 +39,80 @@ var sharedWaterTracerModelContainer: ModelContainer = {
     }
 }()
 
-func getCupCapacity(config: WaterTracerConfiguration) -> Double {
-    return config.cupCapacity ?? config.waterUnit.cupDefaultCapacity
-}
-
-func getCupMinimumNum(config: WaterTracerConfiguration) -> Double {
-    return config.waterUnit.cupMinimumNum
-}
-
-func getUnitStep(config: WaterTracerConfiguration) -> Double {
-    return config.waterUnit.unitStep
-}
-
-func getUnitStr(config: WaterTracerConfiguration) -> String {
-    return config.waterUnit.unitStr
-}
-
-func getDailyGoal(config: WaterTracerConfiguration) -> Double {
-    if let dailyGoal = config.dailyGoal {
-        return dailyGoal
-    } else {
-        return config.waterUnit.defaultDailyGoal
-    }
-}
-
-func getWaterTracerConfiguration(modelContext: ModelContext) -> WaterTracerConfiguration {
+@Observable
+class WaterTracerConfigManager {
     
-    do {
-        let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>(predicate: nil)
-        let all_save = try modelContext.fetch(fecthDescriptor)
-        
-        if let data = all_save.first {
-            return data
-        } else {
-            // No custom value, use default.
-            return WaterTracerConfiguration()
+    var cupMinimumNum: Double {
+        get{
+            return self.getCupMinimumNum()
         }
-    } catch {
-        print("Warnaing: Fail to get model. Use default. ")
-        return WaterTracerConfiguration()
+    }
+    var cupCapacity: Double {
+        get{
+            return self.getCupCapacity()
+        }
+    }
+    var adjustStep: Double {
+        get{
+            return self.getUnitStep()
+        }
+    }
+    
+    var waterUnit: WaterUnits {
+        get {
+            return self.config.waterUnit
+        }
+    }
+    
+    var config = WaterTracerConfiguration()
+    
+    func getUnit() -> WaterUnits {
+        return self.config.waterUnit
+    }
+    
+    func getCupCapacity() -> Double {
+        return self.config.cupCapacity ?? config.waterUnit.cupDefaultCapacity
+    }
+
+    func getCupMinimumNum() -> Double {
+        return self.config.waterUnit.cupMinimumNum
+    }
+
+    func getUnitStep() -> Double {
+        return self.config.waterUnit.unitStep
+    }
+
+    func getUnitStr() -> String {
+        return self.config.waterUnit.unitStr
+    }
+
+    func getDailyGoal() -> Double {
+        if let dailyGoal = self.config.dailyGoal {
+            return dailyGoal
+        } else {
+            return self.config.waterUnit.defaultDailyGoal
+        }
+    }
+    
+    func updateWaterTracerConfig(modelContext: ModelContext) {
+        do {
+            let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>(predicate: nil)
+            let all_save = try modelContext.fetch(fecthDescriptor)
+            
+            if let data = all_save.first {
+                self.config = data
+            } else {
+                // No custom value, use default.
+                self.config = WaterTracerConfiguration()
+            }
+        } catch {
+            print("Warnaing: Fail to get model. Use default. ")
+        }
+    }
+
+    func getWaterTracerConfiguration(modelContext: ModelContext) -> WaterTracerConfiguration {
+        self.updateWaterTracerConfig(modelContext: modelContext)
+        return self.config
     }
 }
 
