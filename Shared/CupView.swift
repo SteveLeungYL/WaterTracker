@@ -91,6 +91,7 @@ struct CupView: View {
                             self.alertError = alertError
                             self.isShowAlert = true
                         }
+                        NotificationHandler.registerLocalNotification()
                     } label: {
                         Image(systemName: "mouth.fill")
                             .foregroundStyle(.red)
