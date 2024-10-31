@@ -9,7 +9,8 @@ import SwiftUI
 
 struct InvisibleSlider: View {
     
-    @Binding var drinkNum: Double
+    @Environment(HealthKitManager.self) private var healthKitManager
+    
     @Binding var waveOffset: Angle
     
     @Environment(\.modelContext) var modelContext
@@ -24,7 +25,7 @@ struct InvisibleSlider: View {
             let dragGesture = DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     let percent = 1.0 - Double(value.location.y / geo.size.height)
-                    self.drinkNum = max(self.cupMinimumNum, min(cupCapacity, percent * cupCapacity))
+                    self.healthKitManager.drinkNum = max(self.cupMinimumNum, min(cupCapacity, percent * cupCapacity))
                 }
             #endif
             
@@ -53,11 +54,11 @@ struct InvisibleSlider: View {
             self.cupMinimumNum = getCupMinimumNum(config:config)
             self.cupCapacity = getCupCapacity(config:config)
             self.adjustStep = getUnitStep(config:config)
-            self.scroll = Double(drinkNum - cupMinimumNum) / adjustStep
+            self.scroll = Double(self.healthKitManager.drinkNum - cupMinimumNum) / adjustStep
         }
 #if os(watchOS)
         .onChange(of: scroll) {
-            self.drinkNum = max(cupMinimumNum, min(cupCapacity, Double(scroll) * adjustStep))
+            self.healthKitManager.drinkNum = max(cupMinimumNum, min(cupCapacity, Double(scroll) * adjustStep))
             if (scroll > ((cupCapacity - cupMinimumNum) / adjustStep) + 1) {
                 scroll = ((cupCapacity - cupMinimumNum) / adjustStep) + 1
             }
@@ -67,7 +68,12 @@ struct InvisibleSlider: View {
 }
 
 #Preview {
-    @Previewable @State var percent: Double = 20
     @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
-    InvisibleSlider(drinkNum: $percent, waveOffset: $waveOffset)
+    @Previewable @State var healthKitManager = HealthKitManager()
+    ZStack{
+        InvisibleSlider(waveOffset: $waveOffset)
+            .environment(healthKitManager)
+        Text(String(format:"%.1f", healthKitManager.drinkNum))
+            .font(.largeTitle)
+    }
 }

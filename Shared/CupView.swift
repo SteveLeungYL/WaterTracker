@@ -9,9 +9,8 @@ import SwiftUI
 
 struct CupView: View {
     
-    @StateObject var healthKitManager: HealthKitManager = HealthKitManager.shared
+    @Environment(HealthKitManager.self) private var healthKitManager
 
-    @State private var drinkNum: Double = 250.0 // default 100 ml
     @State private var waveOffset = Angle(degrees: 0)
     
     @State private var isShowAlert: Bool = false
@@ -25,16 +24,16 @@ struct CupView: View {
     func setDefaultDrinkNum() {
         self.config = getWaterTracerConfiguration(modelContext: modelContext)
         let cupCapacity = getCupCapacity(config: config)
-        self.drinkNum = Double(Int(cupCapacity * 3 / 4))
+        self.healthKitManager.drinkNum = Double(Int(cupCapacity * 3 / 4))
     }
     
     func updateTextStr() {
         self.config = getWaterTracerConfiguration(modelContext: modelContext)
         self.unitStr = getUnitStr(config: self.config)
         if config.waterUnit == .ml {
-            self.textStr = String(format: "%3d\(self.unitStr)", Int(self.drinkNum))
+            self.textStr = String(format: "%3d\(self.unitStr)", Int(self.healthKitManager.drinkNum))
         } else {
-            self.textStr = String(format: "%.2f\(self.unitStr)", self.drinkNum)
+            self.textStr = String(format: "%.2f\(self.unitStr)", self.healthKitManager.drinkNum)
         }
     }
 
@@ -55,7 +54,7 @@ struct CupView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                             .overlay(
-                                WaveAnimation($drinkNum, $waveOffset, true)
+                                WaveAnimation($waveOffset, true)
                                     .frame(width: cupWidth, alignment: .center)
                                     .aspectRatio( contentMode: .fill)
                                     .mask(
@@ -76,7 +75,7 @@ struct CupView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: cupWidth, alignment: .center)
                             .overlay(
-                                InvisibleSlider(drinkNum: $drinkNum, waveOffset: $waveOffset)
+                                InvisibleSlider(waveOffset: $waveOffset)
                             )
                         
                     }
@@ -88,7 +87,7 @@ struct CupView: View {
                 HStack{
                     Button{
                         Task {
-                            if let alertError = await healthKitManager.saveDrinkWater(drink_num: drinkNum, config: config) {
+                            if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, config: config) {
                                 self.alertError = alertError
                                 self.isShowAlert = true
                             }
@@ -147,7 +146,7 @@ struct CupView: View {
                 setDefaultDrinkNum()
                 updateTextStr()
             }
-            .onChange(of: self.drinkNum) {
+            .onChange(of: self.healthKitManager.drinkNum) {
                 updateTextStr()
             }
         }
@@ -155,6 +154,8 @@ struct CupView: View {
 }
 
 #Preview {
+    @Previewable @State var healthKitManager = HealthKitManager()
     CupView()
         .background(Color.white.edgesIgnoringSafeArea(.all))
+        .environment(healthKitManager)
 }

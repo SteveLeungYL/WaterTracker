@@ -19,5 +19,7 @@ struct ContentView: View {
 }
 
 #Preview {
+    @Previewable @State var healthKitManager = HealthKitManager()
     ContentView()
+        .environment(healthKitManager)
 }
