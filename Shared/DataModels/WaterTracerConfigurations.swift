@@ -12,14 +12,17 @@ import SwiftUI
 class WaterTracerConfiguration {
     var waterUnit: WaterUnits = WaterUnits.ml
     var cupCapacity: Double? = nil
-    
-    init(waterUnit: WaterUnits, cupCapacity: Double) {
+    var dailyGoal: Double? = nil
+
+    init(waterUnit: WaterUnits, cupCapacity: Double, dailyGoals: Double) {
         self.waterUnit = waterUnit
         self.cupCapacity = cupCapacity
+        self.dailyGoal = dailyGoals
     }
     init() {
         self.waterUnit = WaterUnits.ml
         self.cupCapacity = nil
+        self.dailyGoal = nil
     }
 }
 
@@ -50,6 +53,14 @@ func getUnitStep(config: WaterTracerConfiguration) -> Double {
 
 func getUnitStr(config: WaterTracerConfiguration) -> String {
     return config.waterUnit.unitStr
+}
+
+func getDailyGoal(config: WaterTracerConfiguration) -> Double {
+    if let dailyGoal = config.dailyGoal {
+        return dailyGoal
+    } else {
+        return config.waterUnit.defaultDailyGoal
+    }
 }
 
 func getWaterTracerConfiguration(modelContext: ModelContext) -> WaterTracerConfiguration {

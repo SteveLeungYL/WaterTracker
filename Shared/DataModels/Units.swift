@@ -45,4 +45,13 @@ enum WaterUnits: Codable, Hashable {
             return "ml"
         }
     }
+    
+    var defaultDailyGoal: Double {
+        switch self {
+        case .oz:
+            return 64.0
+        case .ml:
+            return 2500.0
+        }
+    }
 }
