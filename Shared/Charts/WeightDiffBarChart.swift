@@ -1,5 +1,12 @@
 //
 //  WeightDiffBarChart.swift
+//  WaterTracer
+//
+//  Modified by Yu Liang on 10/31/24.
+//
+
+//
+//  WeightDiffBarChart.swift
 //  ahowCaseHealthKit
 //
 //  Created by Arthur Nsereko Kahwa on 5/28/24.
@@ -9,11 +16,12 @@ import SwiftUI
 import Charts
 
 struct WeightDiffBarChart: View {
-    var chartData: [WeekDayChartData]
+    var chartData: [HealthMetric]
     
     @State private var rawSelectedDate: Date?
+    @Environment(WaterTracerConfigManager.self) private var config
     
-    var selectedData: WeekDayChartData? {
+    var selectedData: HealthMetric? {
         guard let rawSelectedDate else { return nil }
         
         return chartData.first {
@@ -25,11 +33,11 @@ struct WeightDiffBarChart: View {
         VStack { // Overall chart card
             HStack {
                 VStack(alignment: .leading) {
-                    Label("Weight Change", systemImage: "scalemass.fill")
+                    Label("Water Tracer", systemImage: "drop.fill")
                         .font(.title3.bold())
-                        .foregroundStyle(.indigo)
+                        .foregroundStyle(.blue)
                     
-                    Text("Avereage for last 28 days")
+                    Text("Showing weekly data")
                         .font(.caption)
                 }
                 
@@ -50,11 +58,11 @@ struct WeightDiffBarChart: View {
                         }
                 }
                 
-                ForEach(chartData) { weightDiff in
-                    BarMark(x: .value("Date", weightDiff.date, unit: .day),
-                            y: .value("Steps", weightDiff.value)
+                ForEach(chartData) { curDateTracer in
+                    BarMark(x: .value("Date", curDateTracer.date, unit: .day),
+                            y: .value("Water Drink", curDateTracer.value)
                     )
-                    .foregroundStyle(weightDiff.value >= 0 ? Color.indigo.gradient : Color.mint.gradient)                }
+                    .foregroundStyle(curDateTracer.value >= self.config.getDailyGoal() ? Color.blue.gradient : Color.mint.gradient)                }
             }
             .frame(height: 150)
             .chartXSelection(value: $rawSelectedDate.animation(.easeIn))
@@ -73,7 +81,7 @@ struct WeightDiffBarChart: View {
             }
         }
         .padding()
-        .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
+        .background(RoundedRectangle(cornerRadius: 12).fill(.regularMaterial))
     }
     
     var annotationView: some View {
@@ -89,12 +97,12 @@ struct WeightDiffBarChart: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 4)
-                .fill(Color(.secondarySystemBackground))
+                .fill(.regularMaterial)
                 .shadow(color: .secondary.opacity(0.3), radius: 2, x: 2, y: 2)
         )
     }
 }
 
 #Preview {
-    WeightDiffBarChart(chartData: MockData.weightDiffs)
+//    WeightDiffBarChart(chartData: MockData.weightDiffs)
 }
