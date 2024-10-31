@@ -17,6 +17,18 @@ struct RingView: View {
     @State private var isShowAlert: Bool = false
     @State private var alertError: HealthKitError? = nil
     
+    @State private var textStr: String = "100 ml"
+    @State private var unitStr: String = "ml"
+    
+    func updateTextStr() {
+        self.unitStr = config.getUnitStr()
+        if config.waterUnit == .ml {
+            self.textStr = String(format: "Today you drink \n%3d\(self.unitStr) / %3d\(self.unitStr)", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()))
+        } else {
+            self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) / %.1f\(self.unitStr)", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()))
+        }
+    }
+    
     var body : some View {
         GeometryReader { geometry in
         @State var bodyWidth = geometry.size.width * 0.8
@@ -54,6 +66,19 @@ struct RingView: View {
                         }
                         Spacer()
                     }
+                    VStack{
+                        Spacer()
+                        Text(self.textStr)
+                            .font(.title)
+                            .minimumScaleFactor(0.00001)
+                            .foregroundStyle(.black)
+                            .fontWeight(.bold)
+                            .frame(height: geometry.size.width * 0.30, alignment: .center)
+                            .allowsHitTesting(false)
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                    }
+                    Spacer()
                 }
             } // scrollView
         .onAppear {
@@ -61,6 +86,12 @@ struct RingView: View {
                 self.alertError = err
                 self.isShowAlert = true
             }
+            // For reloading purpose
+            updateTextStr()
+        }
+        .onChange(of: healthKitManager.todayTotalDrinkNum) {
+            // For reloading purpose
+            updateTextStr()
         }
         .alert(isPresented: $isShowAlert, error: alertError) { _ in
             Button("OK", role:.cancel) {}
