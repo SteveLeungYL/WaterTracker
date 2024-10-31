@@ -9,11 +9,20 @@
 import HealthKit
 import WidgetKit
 
+// Copy from
+struct HealthMetric: Identifiable {
+    let id = UUID()
+    let date: Date
+    let value: Double
+}
+
 @Observable
 class HealthKitManager {
     
     var drinkNum: Double = 250.0
     var todayTotalDrinkNum: Double = 0.0 // arbitrary small number
+    
+    var drinkWeekData: [HealthMetric] = []
     
     static let shared = HealthKitManager()
     var healthStore = HKHealthStore()
@@ -144,6 +153,62 @@ class HealthKitManager {
         return nil
     }
     
+    func updateDrinkWaterCollection(waterUnitInput: WaterUnits) async  -> HealthKitError? {
+        if let errMsg = checkHealthKitAvailability() {
+            return errMsg
+        }
+        // Request permission again if the user change the permission outside the app.
+        // OK if the permission is already granted. No repeated pop-up screen.
+        if let errMsg = requestAuthorization() {
+            return errMsg
+        }
+        
+        let calendar = NSCalendar.current
+        let now = Date()
+        let components = calendar.dateComponents([.year, .month, .day], from: now)
+        
+        var waterUnit = HKUnit.fluidOunceUS()
+        if waterUnitInput == .ml {
+            waterUnit = HKUnit.liter()
+        }
+        
+        // Get today.
+        guard let lastMidnightDate = calendar.date(from: components) else {
+            fatalError("*** Unable to create the yesterday ***")
+        }
+        guard let todayMidnightDate = calendar.date(byAdding: .day, value: 1, to: lastMidnightDate) else {
+            fatalError("*** Unable to create the today date ***")
+        }
+        
+        guard let oneWeekBeforeDate = calendar.date(byAdding: .day, value: -7, to: todayMidnightDate) else {
+            fatalError("*** Unable to create the begin date ***")
+        }
+        
+        //1. Use HKQuery to load the most recent samples.
+        let oneWeekPredicate = HKQuery.predicateForSamples(withStart: oneWeekBeforeDate,
+                                                         end: todayMidnightDate,
+                                                         options: [.strictStartDate])
+        let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.dietaryWater), predicate: oneWeekPredicate)
+        
+        let todayDrinkWaterQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
+                                                                         options: .cumulativeSum,
+                                                                         anchorDate: todayMidnightDate,
+                                                                         intervalComponents: .init(day: 1))
+        
+        do {
+            let drinkWeekData = try await todayDrinkWaterQuery.result(for: healthStore)
+            
+            self.drinkWeekData = drinkWeekData.statistics().map {
+                .init(date: $0.startDate, value: ($0.sumQuantity()?.doubleValue(for: waterUnit) ?? 0.0) * 1000.0)
+            }
+            
+        } catch {
+            return .healthKitNotAuthorized
+        }
+        
+        return nil
+    }
+
     init() {
         // TODO:: This should not be here.
         // The check should be in the introduction tab view process.

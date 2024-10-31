@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct RingView: View {
     
@@ -30,73 +31,87 @@ struct RingView: View {
     }
     
     var body : some View {
-        GeometryReader { geometry in
-        @State var bodyWidth = geometry.size.width * 0.8
-        ScrollView {
-                VStack{
-                    Spacer()
-                    HStack{
-                        Spacer()
-                        ZStack{
-                            BodyShape()
-                                .fill(Color.white)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: bodyWidth, alignment: .center)
-                                .overlay(
-                                    WaveAnimation($waveOffset, false)
-                                        .frame(width: bodyWidth, alignment: .center)
-                                        .aspectRatio( contentMode: .fill)
-                                        .mask(
-                                            BodyShape()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: bodyWidth, alignment: .center)
-                                        )
-                                )
-                            
-                            
-                            BodyShape()
-#if !os(watchOS)
-                                .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
-#else
-                                .stroke(Color.black, style: StrokeStyle(lineWidth: 4))
-#endif
-                            
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: bodyWidth, alignment: .center)
-                        }
-                        Spacer()
-                    }
+        ZStack{
+            LinearGradient(gradient: Gradient(colors: [.cyan, .mint]), startPoint: .top, endPoint: .bottom)
+                .clipped()
+                .ignoresSafeArea(.all) // As background.
+            GeometryReader { geometry in
+                @State var bodyWidth = geometry.size.width * 0.8
+                ScrollView {
                     VStack{
                         Spacer()
-                        Text(self.textStr)
-                            .font(.title)
-                            .minimumScaleFactor(0.00001)
-                            .foregroundStyle(.black)
-                            .fontWeight(.bold)
-                            .frame(height: geometry.size.width * 0.30, alignment: .center)
-                            .allowsHitTesting(false)
-                            .multilineTextAlignment(.center)
+                        HStack{
+                            Spacer()
+                            ZStack{
+                                BodyShape()
+                                    .fill(Color.white)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: bodyWidth, alignment: .center)
+                                    .overlay(
+                                        WaveAnimation($waveOffset, false)
+                                            .frame(width: bodyWidth, alignment: .center)
+                                            .aspectRatio( contentMode: .fill)
+                                            .mask(
+                                                BodyShape()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: bodyWidth, alignment: .center)
+                                            )
+                                    )
+                                
+                                
+                                BodyShape()
+#if !os(watchOS)
+                                    .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
+#else
+                                    .stroke(Color.black, style: StrokeStyle(lineWidth: 4))
+#endif
+                                
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: bodyWidth, alignment: .center)
+                            }
+                            Spacer()
+                        }
+                        VStack{
+                            Spacer()
+                            Text(self.textStr)
+                                .font(.title)
+                                .minimumScaleFactor(0.00001)
+                                .foregroundStyle(.black)
+                                .fontWeight(.bold)
+                                .frame(height: geometry.size.width * 0.30, alignment: .center)
+                                .allowsHitTesting(false)
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
                         Spacer()
+                        
+                        WeightDiffBarChart(chartData: self.healthKitManager.drinkWeekData)
+                            .padding()
+                            .onAppear() {
+                                Task{
+                                    await self.healthKitManager.updateDrinkWaterCollection(waterUnitInput: self.config.waterUnit)
+                                }
+                            }
+                        
                     }
-                    Spacer()
+                } // scrollView
+                .onAppear {
+                    if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
+                        self.alertError = err
+                        self.isShowAlert = true
+                    }
+                    // For reloading purpose
+                    updateTextStr()
                 }
-            } // scrollView
-        .onAppear {
-            if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
-                self.alertError = err
-                self.isShowAlert = true
-            }
-            // For reloading purpose
-            updateTextStr()
-        }
-        .onChange(of: healthKitManager.todayTotalDrinkNum) {
-            // For reloading purpose
-            updateTextStr()
-        }
-        .alert(isPresented: $isShowAlert, error: alertError) { _ in
-            Button("OK", role:.cancel) {}
-            } message: { error in
-              Text(error.recoverySuggestion ?? "Try again later.")
+                .onChange(of: healthKitManager.todayTotalDrinkNum) {
+                    // For reloading purpose
+                    updateTextStr()
+                }
+                .alert(isPresented: $isShowAlert, error: alertError) { _ in
+                    Button("OK", role:.cancel) {}
+                } message: { error in
+                    Text(error.recoverySuggestion ?? "Try again later.")
+                }
             }
         }
     }
