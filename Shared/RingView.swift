@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RingView: View {
     
-    @State private var drinkNum: Double = 250.0 // default 100 ml
+    @Environment(HealthKitManager.self) private var healthKitManager
     @State private var waveOffset = Angle(degrees: 0)
     
     var body : some View {
@@ -26,7 +26,7 @@ struct RingView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: bodyWidth, alignment: .center)
                                 .overlay(
-                                    WaveAnimation($drinkNum, $waveOffset, false)
+                                    WaveAnimation($waveOffset, false)
                                         .frame(width: bodyWidth, alignment: .center)
                                         .aspectRatio( contentMode: .fill)
                                         .mask(
@@ -56,6 +56,8 @@ struct RingView: View {
 }
 
 #Preview {
+    @Previewable @State var healthKitManager = HealthKitManager()
     RingView()
         .background(Color.white.edgesIgnoringSafeArea(.all))
+        .environment(healthKitManager)
 }

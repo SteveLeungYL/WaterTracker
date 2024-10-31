@@ -9,7 +9,10 @@
 import HealthKit
 import WidgetKit
 
-class HealthKitManager: ObservableObject {
+@Observable
+class HealthKitManager {
+    
+    var drinkNum: Double = 250.0
     
     static let shared = HealthKitManager()
     var healthStore = HKHealthStore()

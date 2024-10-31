@@ -10,27 +10,26 @@ import SwiftUI
 
 struct WaveAnimation: View {
     
-    @Binding var drinkNum: Double
     @Binding var waveOffset: Angle
     var isCup: Bool
     
-    init(_ drinkNum: Binding<Double>, _ waveOffset: Binding<Angle>, _ isCup: Bool) {
-        self._drinkNum = drinkNum
+    init(_ waveOffset: Binding<Angle>, _ isCup: Bool) {
         self._waveOffset = waveOffset
         self.isCup = isCup
     }
     
     var body: some View {
         ZStack{
-            WaveWithHeight(drinkNum: $drinkNum, waveOffset: $waveOffset, isCup: isCup)
+            WaveWithHeight(waveOffset: $waveOffset, isCup: isCup)
         }
     }
 }
 
 struct WaveWithHeight: View {
-    @Binding var drinkNum: Double
+    @Environment(HealthKitManager.self) private var healthKitManager
     @Binding var waveOffset: Angle
-    var isCup: Bool
+    
+    var isCup: Bool // TODO:: FIXME:: Better implementation?
     
     @Environment(\.modelContext) var modelContext
     @State var cupCapacity: Double = 1000.0
@@ -55,8 +54,8 @@ struct WaveWithHeight: View {
                     }
                     .animation(.linear(duration: 1.7).repeatForever(autoreverses: false), value: waveOffset)
             }
-            .animation(.linear(duration: 0.3), value: drinkNum)
-            .offset(x:0, y: geometry.size.height * (1.0 - drinkNum / self.cupCapacity))
+            .animation(.linear(duration: 0.3), value: self.healthKitManager.drinkNum)
+            .offset(x:0, y: geometry.size.height * (1.0 - self.healthKitManager.drinkNum / self.cupCapacity))
             .frame(width: geometry.size.width, height: geometry.size.height)
         }.onAppear() {
             let config = getWaterTracerConfiguration(modelContext: modelContext)
@@ -116,11 +115,11 @@ struct Wave: Shape {
 
 
 #Preview {
-    @Previewable @State var drinkNum: Double = 100.0
     @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
+    @Previewable @State var healthKitManager = HealthKitManager()
     ZStack {
-        WaveAnimation($drinkNum, $waveOffset, true)
-        InvisibleSlider(drinkNum: $drinkNum, waveOffset: $waveOffset)
-        Text("\(drinkNum)ml")
+        WaveAnimation($waveOffset, true)
+        InvisibleSlider(waveOffset: $waveOffset)
     }
+    .environment(healthKitManager)
 }
