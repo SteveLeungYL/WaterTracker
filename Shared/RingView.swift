@@ -12,6 +12,9 @@ struct RingView: View {
     @Environment(HealthKitManager.self) private var healthKitManager
     @State private var waveOffset = Angle(degrees: 0)
     
+    @State private var isShowAlert: Bool = false
+    @State private var alertError: HealthKitError? = nil
+    
     var body : some View {
         GeometryReader { geometry in
         @State var bodyWidth = geometry.size.width * 0.8
@@ -50,6 +53,14 @@ struct RingView: View {
                         Spacer()
                     }
                 }
+            } // scrollView
+        .onAppear {
+            healthKitManager.updateDrinkWaterToday()
+        }
+        .alert(isPresented: $isShowAlert, error: alertError) { _ in
+            Button("OK", role:.cancel) {}
+            } message: { error in
+              Text(error.recoverySuggestion ?? "Try again later.")
             }
         }
     }

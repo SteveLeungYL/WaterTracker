@@ -30,6 +30,8 @@ struct WaveWithHeight: View {
     @Environment(WaterTracerConfigManager.self) private var config
     @Binding var waveOffset: Angle
     
+    @State var drinkNum: Double = 0.0
+    
     var isCup: Bool // TODO:: FIXME:: Better implementation?
     
     // Use for animation and default value scaling.
@@ -62,8 +64,10 @@ struct WaveWithHeight: View {
             withAnimation(.linear(duration: 0.2)) {
                 if self.isCup {
                     self.cupCapacity = config.cupCapacity
+                    self.drinkNum = healthKitManager.drinkNum
                 } else {
                     self.cupCapacity = config.getDailyGoal()
+                    self.drinkNum = config.getDailyGoal()
                 }
             }
         }
