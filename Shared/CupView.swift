@@ -10,7 +10,7 @@ import SwiftUI
 struct CupView: View {
     
     @Environment(HealthKitManager.self) private var healthKitManager
-
+    
     @State private var waveOffset: Angle = .zero
     
     @State private var isShowAlert: Bool = false
@@ -39,120 +39,125 @@ struct CupView: View {
             self.textStr = String(format: "%.1f\(self.unitStr)", self.healthKitManager.drinkNum)
         }
     }
-
+    
     var body : some View {
         
         NavigationStack {
-            GeometryReader { geometry in
-                VStack{
-                    Spacer()
-                    HStack{
-                        
+            ZStack{
+                LinearGradient(gradient: Gradient(colors: [.cyan, .mint]), startPoint: .top, endPoint: .bottom)
+                    .clipped()
+                    .ignoresSafeArea(.all) // As background.
+                GeometryReader { geometry in
+                    VStack{
                         Spacer()
-                        ZStack{
+                        HStack{
                             
-                            @State var cupWidth = geometry.size.width * 0.8
-                            
-                            Cup()
-                                .fill(Color.white)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: cupWidth, alignment: .center)
-                                .overlay(
-                                    WaveAnimation($waveOffset, true)
-                                        .frame(width: cupWidth, alignment: .center)
-                                        .aspectRatio( contentMode: .fill)
-                                        .mask(
-                                            Cup()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: cupWidth, alignment: .center)
-                                        )
-                                )
-                            
-                            
-                            Cup()
+                            Spacer()
+                            ZStack{
+                                
+                                @State var cupWidth = geometry.size.width * 0.8
+                                
+                                Cup()
+                                    .fill(Color.white)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: cupWidth, alignment: .center)
+                                    .overlay(
+                                        WaveAnimation($waveOffset, true)
+                                            .frame(width: cupWidth, alignment: .center)
+                                            .aspectRatio( contentMode: .fill)
+                                            .mask(
+                                                Cup()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: cupWidth, alignment: .center)
+                                            )
+                                    )
+                                
+                                
+                                Cup()
 #if !os(watchOS)
-                                .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
+                                    .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
 #else
-                                .stroke(Color.black, style: StrokeStyle(lineWidth: 5))
+                                    .stroke(Color.black, style: StrokeStyle(lineWidth: 5))
 #endif
-                            
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: cupWidth, alignment: .center)
-                                .overlay(
-                                    InvisibleSlider(waveOffset: $waveOffset)
-                                )
-                            
-                        }
-                        Spacer()
-                    }
-                    
-                    Spacer()
-                    
-                    HStack{
-                        Button{
-                            Task {
-                                if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
-                                    self.alertError = alertError
-                                    self.isShowAlert = true
-                                }
-                                NotificationHandler.registerLocalNotification()
-                                // DEBUG
-                                //                            healthKitManager.readDrinkWater()
+                                
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: cupWidth, alignment: .center)
+                                    .overlay(
+                                        InvisibleSlider(waveOffset: $waveOffset)
+                                    )
+                                
                             }
-                        } label: {
-                            Image(systemName: "mouth.fill")
-                                .foregroundStyle(.red)
-                                .font(.body)
+                            Spacer()
                         }
-#if !os(watchOS)
-                        .padding()
-#endif
-                        .background(.regularMaterial)
-                        .clipShape(.circle)
-                        .alert(isPresented: $isShowAlert, error: alertError) { _ in
-                            Button("OK", role:.cancel) {}
-                        } message: { error in
-                            Text(error.recoverySuggestion ?? "Try again later.")
-                        }
-                        Spacer()
-                        
-                        Text(self.textStr)
-                            .font(.system(size: 300))
-                            .minimumScaleFactor(0.00001)
-                            .foregroundStyle(.black)
-                            .fontWeight(.bold)
-                            .frame(height: geometry.size.width * 0.30, alignment: .center)
-                            .allowsHitTesting(false)
-                            .multilineTextAlignment(.center)
                         
                         Spacer()
                         
-                        NavigationLink(destination: RingView() ) {
-                            Text("Ring")
-                                .font(.body)
-                        }
+                        HStack{
+                            Button{
+                                Task {
+                                    if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
+                                        self.alertError = alertError
+                                        self.isShowAlert = true
+                                    }
+                                    NotificationHandler.registerLocalNotification()
+                                    // DEBUG
+                                    //                            healthKitManager.readDrinkWater()
+                                }
+                            } label: {
+                                Image(systemName: "mouth.fill")
+                                    .foregroundStyle(.red)
+                                    .font(.body)
+                            }
 #if !os(watchOS)
-                        .padding()
+                            .padding()
 #endif
-                        .background(.regularMaterial)
-                        .clipShape(.circle)
+                            .background(.regularMaterial)
+                            .clipShape(.circle)
+                            .alert(isPresented: $isShowAlert, error: alertError) { _ in
+                                Button("OK", role:.cancel) {}
+                            } message: { error in
+                                Text(error.recoverySuggestion ?? "Try again later.")
+                            }
+                            Spacer()
+                            
+                            Text(self.textStr)
+                                .font(.system(size: 300))
+                                .minimumScaleFactor(0.00001)
+                                .foregroundStyle(.black)
+                                .fontWeight(.bold)
+                                .frame(height: geometry.size.width * 0.30, alignment: .center)
+                                .allowsHitTesting(false)
+                                .multilineTextAlignment(.center)
+                            
+                            Spacer()
+                            
+                            NavigationLink(destination: RingView() ) {
+                                Text("Ring")
+                                    .font(.body)
+                            }
+#if !os(watchOS)
+                            .padding()
+#endif
+                            .background(.regularMaterial)
+                            .clipShape(.circle)
+                            
+                        }
+                        .padding(.horizontal)
+#if !os(watchOS)
+                        .padding(.vertical) // give the small watch screen a break!
+#endif
                         
+                    } // From the VStack. This should expand to the whole screen excluding the safe area
+                    .onAppear() {
+                        config.updateWaterTracerConfig(modelContext: self.modelContext)
+                        setDefaultDrinkNum()
+                        updateTextStr()
+                        // HERE, make sure the animation plays correctly by reset the original value.
+                        self.waveOffset = .zero
                     }
-                    .padding(.horizontal)
-#if !os(watchOS)
-                    .padding(.vertical) // give the small watch screen a break!
-#endif
-                    
-                } // From the VStack. This should expand to the whole screen excluding the safe area
-                .onAppear() {
-                    config.updateWaterTracerConfig(modelContext: self.modelContext)
-                    setDefaultDrinkNum()
-                    updateTextStr()
-                    // HERE, make sure the animation plays correctly by reset the original value.
-                    self.waveOffset = .zero
-                }
-                .onChange(of: self.healthKitManager.drinkNum) {
-                    updateTextStr()
+                    .onChange(of: self.healthKitManager.drinkNum) {
+                        updateTextStr()
+                    }
                 }
             }
         }
