@@ -22,8 +22,13 @@ struct CupView: View {
     @State private var textStr: String = "100 ml"
     @State private var unitStr: String = "ml"
     
+    @State private var isSetDefaultDrinkNum: Bool = false
+    
     func setDefaultDrinkNum() {
-        self.healthKitManager.drinkNum = Double(Int(config.getCupCapacity() * 3 / 4))
+        if (!isSetDefaultDrinkNum) {
+            self.healthKitManager.drinkNum = Double(Int(config.getCupCapacity() * 3 / 4))
+            self.isSetDefaultDrinkNum = true
+        }
     }
     
     func updateTextStr() {
@@ -37,116 +42,117 @@ struct CupView: View {
 
     var body : some View {
         
-        GeometryReader { geometry in
-            VStack{
-                Spacer()
-                HStack{
-                    
+        NavigationStack {
+            GeometryReader { geometry in
+                VStack{
                     Spacer()
-                    ZStack{
+                    HStack{
                         
-                        @State var cupWidth = geometry.size.width * 0.8
-                        
-                        Cup()
-                            .fill(Color.white)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: cupWidth, alignment: .center)
-                            .overlay(
-                                WaveAnimation($waveOffset, true)
-                                    .frame(width: cupWidth, alignment: .center)
-                                    .aspectRatio( contentMode: .fill)
-                                    .mask(
-                                Cup()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: cupWidth, alignment: .center)
+                        Spacer()
+                        ZStack{
+                            
+                            @State var cupWidth = geometry.size.width * 0.8
+                            
+                            Cup()
+                                .fill(Color.white)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: cupWidth, alignment: .center)
+                                .overlay(
+                                    WaveAnimation($waveOffset, true)
+                                        .frame(width: cupWidth, alignment: .center)
+                                        .aspectRatio( contentMode: .fill)
+                                        .mask(
+                                            Cup()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: cupWidth, alignment: .center)
+                                        )
                                 )
-                            )
-                        
-                        
-                        Cup()
-                        #if !os(watchOS)
-                            .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
-                        #else
-                            .stroke(Color.black, style: StrokeStyle(lineWidth: 5))
-                        #endif
-
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: cupWidth, alignment: .center)
-                            .overlay(
-                                InvisibleSlider(waveOffset: $waveOffset)
-                            )
-                        
+                            
+                            
+                            Cup()
+#if !os(watchOS)
+                                .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
+#else
+                                .stroke(Color.black, style: StrokeStyle(lineWidth: 5))
+#endif
+                            
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: cupWidth, alignment: .center)
+                                .overlay(
+                                    InvisibleSlider(waveOffset: $waveOffset)
+                                )
+                            
+                        }
+                        Spacer()
                     }
+                    
                     Spacer()
-                }
-                
-                Spacer()
-                
-                HStack{
-                    Button{
-                        Task {
-                            if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
-                                self.alertError = alertError
-                                self.isShowAlert = true
+                    
+                    HStack{
+                        Button{
+                            Task {
+                                if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
+                                    self.alertError = alertError
+                                    self.isShowAlert = true
+                                }
+                                NotificationHandler.registerLocalNotification()
+                                // DEBUG
+                                //                            healthKitManager.readDrinkWater()
                             }
-                            NotificationHandler.registerLocalNotification()
-                            // DEBUG
-//                            healthKitManager.readDrinkWater()
+                        } label: {
+                            Image(systemName: "mouth.fill")
+                                .foregroundStyle(.red)
+                                .font(.body)
                         }
-                    } label: {
-                        Image(systemName: "mouth.fill")
-                            .foregroundStyle(.red)
-                            .font(.body)
-                    }
-                    #if !os(watchOS)
-                    .padding()
-                    #endif
-                    .background(.regularMaterial)
-                    .clipShape(.circle)
-                    .alert(isPresented: $isShowAlert, error: alertError) { _ in
-                        Button("OK", role:.cancel) {}
+#if !os(watchOS)
+                        .padding()
+#endif
+                        .background(.regularMaterial)
+                        .clipShape(.circle)
+                        .alert(isPresented: $isShowAlert, error: alertError) { _ in
+                            Button("OK", role:.cancel) {}
                         } message: { error in
-                          Text(error.recoverySuggestion ?? "Try again later.")
+                            Text(error.recoverySuggestion ?? "Try again later.")
                         }
-                    Spacer()
-                    
-                    Text(self.textStr)
-                        .font(.system(size: 300))
-                        .minimumScaleFactor(0.00001)
-                        .foregroundStyle(.black)
-                        .fontWeight(.bold)
-                        .frame(height: geometry.size.width * 0.30, alignment: .center)
-                        .allowsHitTesting(false)
-                    
-                    Spacer()
-                    
-                    Button{
-                        // TODO::
-                        // Do something here.
-                    } label: {
-                        Text("Ring")
-                            .font(.body)
+                        Spacer()
+                        
+                        Text(self.textStr)
+                            .font(.system(size: 300))
+                            .minimumScaleFactor(0.00001)
+                            .foregroundStyle(.black)
+                            .fontWeight(.bold)
+                            .frame(height: geometry.size.width * 0.30, alignment: .center)
+                            .allowsHitTesting(false)
+                        
+                        Spacer()
+                        
+                        NavigationLink(destination: RingView() ) {
+                            Text("Ring")
+                                .font(.body)
+                        }
+#if !os(watchOS)
+                        .padding()
+#endif
+                        .background(.regularMaterial)
+                        .clipShape(.circle)
+                        
                     }
-                    #if !os(watchOS)
-                    .padding()
-                    #endif
-                    .background(.regularMaterial)
-                    .clipShape(.circle)
+                    .padding(.horizontal)
+#if !os(watchOS)
+                    .padding(.vertical) // give the small watch screen a break!
+#endif
                     
+                } // From the VStack. This should expand to the whole screen excluding the safe area
+                .onAppear() {
+                    config.updateWaterTracerConfig(modelContext: self.modelContext)
+                    setDefaultDrinkNum()
+                    updateTextStr()
+                    // HERE, make sure the animation plays correctly by reset the original value. 
+                    self.waveOffset = .zero
                 }
-                .padding(.horizontal)
-                #if !os(watchOS)
-                .padding(.vertical) // give the small watch screen a break!
-                #endif
-
-            } // From the VStack. This should expand to the whole screen excluding the safe area
-            .onAppear() {
-                config.updateWaterTracerConfig(modelContext: self.modelContext)
-                setDefaultDrinkNum()
-                updateTextStr()
-            }
-            .onChange(of: self.healthKitManager.drinkNum) {
-                updateTextStr()
+                .onChange(of: self.healthKitManager.drinkNum) {
+                    updateTextStr()
+                }
             }
         }
     }

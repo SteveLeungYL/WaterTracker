@@ -87,7 +87,7 @@ class HealthKitManager {
         return ret_err
     }
     
-    func updateDrinkWaterToday() -> HealthKitError? {
+    func updateDrinkWaterToday(waterUnitInput: WaterUnits) -> HealthKitError? {
         if let errMsg = checkHealthKitAvailability() {
             return errMsg
         }
@@ -125,9 +125,17 @@ class HealthKitManager {
             }
             
             let sum = statistics.sumQuantity()
-            let totalDrinkWaterToday = sum?.doubleValue(for: HKUnit.largeCalorie())
+            var waterUnit = HKUnit.fluidOunceUS()
+            if waterUnitInput == .ml {
+                waterUnit = HKUnit.liter()
+            }
+            let totalDrinkWaterTodayLiter = sum?.doubleValue(for: waterUnit)
+            let totalDrinkWaterTodayML = totalDrinkWaterTodayLiter! * 1000.0
+
             
-            self.todayTotalDrinkNum = totalDrinkWaterToday!
+            print("Getting today drink water num: \(totalDrinkWaterTodayML)")
+            
+            self.todayTotalDrinkNum = totalDrinkWaterTodayML
         }
         
         // Async read.
