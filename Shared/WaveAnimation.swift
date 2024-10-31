@@ -45,17 +45,17 @@ struct WaveWithCupHeight: View {
         GeometryReader { geometry in
             ZStack {
                 Wave(offSet: Angle(degrees: waveOffset.degrees + 270))
-                    .fill(Color.blue)
+                    .fill(Color.blue.gradient)
                     .opacity(0.3)
                     .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
                 
                 Wave(offSet: Angle(degrees: waveOffset.degrees + 90))
-                    .fill(Color.blue)
+                    .fill(Color.blue.gradient)
                     .opacity(0.4)
                     .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
                 
                 Wave(offSet: Angle(degrees: waveOffset.degrees))
-                    .fill(Color.blue)
+                    .fill(Color.blue.gradient)
                     .onAppear {
                         waveOffset = waveOffset + Angle(degrees: 360)
                     }
@@ -86,17 +86,17 @@ struct WaveWithBodyHeight: View {
         GeometryReader { geometry in
             ZStack {
                 Wave(offSet: Angle(degrees: waveOffset.degrees + 270))
-                    .fill(Color.blue)
+                    .fill(Color.blue.gradient)
                     .opacity(0.3)
                     .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
 
                 Wave(offSet: Angle(degrees: waveOffset.degrees + 90))
-                    .fill(Color.blue)
+                    .fill(Color.blue.gradient)
                     .opacity(0.4)
                     .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
 
                 Wave(offSet: Angle(degrees: waveOffset.degrees))
-                    .fill(Color.blue)
+                    .fill(Color.blue.gradient)
                     .onAppear {
                         waveOffset = waveOffset + Angle(degrees: 360)
                     }
