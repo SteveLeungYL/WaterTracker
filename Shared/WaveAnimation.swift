@@ -27,11 +27,12 @@ struct WaveAnimation: View {
 
 struct WaveWithHeight: View {
     @Environment(HealthKitManager.self) private var healthKitManager
+    @Environment(WaterTracerConfigManager.self) private var config
     @Binding var waveOffset: Angle
     
     var isCup: Bool // TODO:: FIXME:: Better implementation?
     
-    @Environment(\.modelContext) var modelContext
+    // Use for animation and default value scaling.
     @State var cupCapacity: Double = 1000.0
     
     var body : some View {
@@ -58,12 +59,11 @@ struct WaveWithHeight: View {
             .offset(x:0, y: geometry.size.height * (1.0 - self.healthKitManager.drinkNum / self.cupCapacity))
             .frame(width: geometry.size.width, height: geometry.size.height)
         }.onAppear() {
-            let config = getWaterTracerConfiguration(modelContext: modelContext)
             withAnimation(.linear(duration: 0.2)) {
                 if self.isCup {
-                    self.cupCapacity = getCupCapacity(config:config)
+                    self.cupCapacity = config.cupCapacity
                 } else {
-                    self.cupCapacity = getDailyGoal(config:config)
+                    self.cupCapacity = config.getDailyGoal()
                 }
             }
         }
@@ -117,9 +117,12 @@ struct Wave: Shape {
 #Preview {
     @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
     @Previewable @State var healthKitManager = HealthKitManager()
+    @Previewable @State var configManager = WaterTracerConfigManager()
     ZStack {
         WaveAnimation($waveOffset, true)
         InvisibleSlider(waveOffset: $waveOffset)
     }
+    .modelContainer(sharedWaterTracerModelContainer)
     .environment(healthKitManager)
+    .environment(configManager)
 }

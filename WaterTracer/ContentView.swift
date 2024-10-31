@@ -20,6 +20,10 @@ struct ContentView: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
+    @Previewable @State var configManager = WaterTracerConfigManager()
+
     ContentView()
+        .modelContainer(sharedWaterTracerModelContainer)
         .environment(healthKitManager)
+        .environment(configManager)
 }

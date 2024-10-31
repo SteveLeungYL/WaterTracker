@@ -16,20 +16,18 @@ struct CupView: View {
     @State private var isShowAlert: Bool = false
     @State private var alertError: HealthKitError? = nil
     
+    @Environment(WaterTracerConfigManager.self) private var config
     @Environment(\.modelContext) var modelContext
-    @State private var config: WaterTracerConfiguration = .init()
+    
     @State private var textStr: String = "100 ml"
     @State private var unitStr: String = "ml"
     
     func setDefaultDrinkNum() {
-        self.config = getWaterTracerConfiguration(modelContext: modelContext)
-        let cupCapacity = getCupCapacity(config: config)
-        self.healthKitManager.drinkNum = Double(Int(cupCapacity * 3 / 4))
+        self.healthKitManager.drinkNum = Double(Int(config.getCupCapacity() * 3 / 4))
     }
     
     func updateTextStr() {
-        self.config = getWaterTracerConfiguration(modelContext: modelContext)
-        self.unitStr = getUnitStr(config: self.config)
+        self.unitStr = config.getUnitStr()
         if config.waterUnit == .ml {
             self.textStr = String(format: "%3d\(self.unitStr)", Int(self.healthKitManager.drinkNum))
         } else {
@@ -87,7 +85,7 @@ struct CupView: View {
                 HStack{
                     Button{
                         Task {
-                            if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, config: config) {
+                            if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
                                 self.alertError = alertError
                                 self.isShowAlert = true
                             }
@@ -143,6 +141,7 @@ struct CupView: View {
 
             } // From the VStack. This should expand to the whole screen excluding the safe area
             .onAppear() {
+                config.updateWaterTracerConfig(modelContext: self.modelContext)
                 setDefaultDrinkNum()
                 updateTextStr()
             }
@@ -155,7 +154,9 @@ struct CupView: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
+    @Previewable @State var configManager = WaterTracerConfigManager()
     CupView()
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .environment(healthKitManager)
+        .environment(configManager)
 }

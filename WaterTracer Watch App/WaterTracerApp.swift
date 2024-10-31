@@ -12,6 +12,7 @@ import SwiftData
 struct WaterTracer_Watch_AppApp: App {
     
     @State private var healthKitManager = HealthKitManager()
+    @State private var configManager = WaterTracerConfigManager()
     
     var body: some Scene {
         WindowGroup {
@@ -19,5 +20,6 @@ struct WaterTracer_Watch_AppApp: App {
         }
         .modelContainer(sharedWaterTracerModelContainer)
         .environment(healthKitManager)
+        .environment(configManager)
     }
 }
