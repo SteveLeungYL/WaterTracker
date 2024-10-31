@@ -45,7 +45,7 @@ class HealthKitManager: ObservableObject {
         return err
     }
     
-    func saveDrinkWater(drink_num: Double, config: WaterTracerConfiguration) -> HealthKitError? {
+    func saveDrinkWater(drink_num: Double, config: WaterTracerConfiguration) async -> HealthKitError? {
         if let errMsg = checkHealthKitAvailability() {
             return errMsg
         }
@@ -68,20 +68,17 @@ class HealthKitManager: ObservableObject {
         
         let waterSample = HKQuantitySample(type: waterNumType, quantity: waterQuantity, start: Date(), end: Date())
         
-        var err: HealthKitError? = nil
+        var ret_err: HealthKitError? = nil
         
-        healthStore.save(waterSample) {
-            success, error in
-            if success {
-                print("DEBUG: Data successfully saved!")
-                print("Saving drink water: \(drink_num) with unit: \(config.waterUnit.unitStr). ")
-            } else {
-                err = .healthKitNotAuthorized
-            }
+        do {
+            try await healthStore.save(waterSample)
+        } catch {
+            ret_err = .healthKitNotAuthorized
         }
-        
-        return err
+        return ret_err
     }
+    
+
     
     init() {
         // TODO:: This should not be here.

@@ -87,11 +87,15 @@ struct CupView: View {
                 
                 HStack{
                     Button{
-                        if let alertError = healthKitManager.saveDrinkWater(drink_num: drinkNum, config: config) {
-                            self.alertError = alertError
-                            self.isShowAlert = true
+                        Task {
+                            if let alertError = await healthKitManager.saveDrinkWater(drink_num: drinkNum, config: config) {
+                                self.alertError = alertError
+                                self.isShowAlert = true
+                            }
+                            NotificationHandler.registerLocalNotification()
+                            // DEBUG
+//                            healthKitManager.readDrinkWater()
                         }
-                        NotificationHandler.registerLocalNotification()
                     } label: {
                         Image(systemName: "mouth.fill")
                             .foregroundStyle(.red)
