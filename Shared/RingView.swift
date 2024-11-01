@@ -89,7 +89,15 @@ struct RingView: View {
                         }
                         Spacer()
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData)
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing last 24 hours data")
+                            .padding()
+                            .onAppear() {
+                                Task{
+                                    await self.healthKitManager.updateDrinkWaterDay(waterUnitInput: self.config.waterUnit)
+                                }
+                            }
+                        
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 24 hours data")
                             .padding()
                             .onAppear() {
                                 Task{
@@ -121,6 +129,9 @@ struct RingView: View {
                     if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
                         self.alertError = err
                         self.isShowAlert = true
+                    }
+                    Task{
+                        await self.healthKitManager.updateDrinkWaterDay(waterUnitInput: self.config.waterUnit)
                     }
                     Task{
                         await self.healthKitManager.updateDrinkWaterWeek(waterUnitInput: self.config.waterUnit)

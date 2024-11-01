@@ -17,27 +17,30 @@ import Charts
 
 struct WaterTracingBarChart: View {
     var chartData: [HealthMetric]
-    
-//    @State private var rawSelectedDate: Date?
+    @State var dateComponents: Calendar.Component
+    @State var mainTitle: String
+    @State var subTitle: String
+
+    //    @State private var rawSelectedDate: Date?
     @Environment(WaterTracerConfigManager.self) private var config
     
-//    var selectedData: HealthMetric? {
-//        guard let rawSelectedDate else { return nil }
-//        
-//        return chartData.first {
-//            Calendar.current.isDate(rawSelectedDate, inSameDayAs: $0.date)
-//        }
-//    }
+    //    var selectedData: HealthMetric? {
+    //        guard let rawSelectedDate else { return nil }
+    //
+    //        return chartData.first {
+    //            Calendar.current.isDate(rawSelectedDate, inSameDayAs: $0.date)
+    //        }
+    //    }
     
     var body: some View {
         VStack { // Overall chart card
             HStack {
                 VStack(alignment: .leading) {
-                    Label("Water Tracer", systemImage: "drop.fill")
+                    Text(mainTitle)
                         .font(.title3.bold())
                         .foregroundStyle(.blue)
                     
-                    Text("Showing weekly data")
+                    Text(subTitle)
                         .font(.caption)
                 }
                 
@@ -47,28 +50,54 @@ struct WaterTracingBarChart: View {
             .padding(.bottom, 12)
             
             Chart {
-//                if let selectedData {
-//                    RuleMark(x: .value("Selected Data", selectedData.date, unit: .day))
-//                        .foregroundStyle(Color.secondary.opacity(0.4))
-//                        .offset(y: -12)
-//                        .annotation(position: .top,
-//                                    spacing: 0,
-//                                    overflowResolution: .init(x: .fit(to: .chart), y: .disabled)) {
-//                            annotationView
-//                        }
-//                }
-                
-                ForEach(chartData) { curDateTracer in
-                    BarMark(x: .value("Date", curDateTracer.date, unit: .day),
-                            y: .value("Water Drink", curDateTracer.value)
-                    )
-                    .foregroundStyle(curDateTracer.value >= self.config.getDailyGoal() ? Color.blue.gradient : Color.mint.gradient)                }
+                //                if let selectedData {
+                //                    RuleMark(x: .value("Selected Data", selectedData.date, unit: .day))
+                //                        .foregroundStyle(Color.secondary.opacity(0.4))
+                //                        .offset(y: -12)
+                //                        .annotation(position: .top,
+                //                                    spacing: 0,
+                //                                    overflowResolution: .init(x: .fit(to: .chart), y: .disabled)) {
+                //                            annotationView
+                //                        }
+                //                }
+                if self.dateComponents == .day {
+                    ForEach(chartData) { curDateTracer in
+                        BarMark(x: .value("Day", curDateTracer.date, unit: .day),
+                                y: .value("Water Drink", curDateTracer.value)
+                        )
+                        .foregroundStyle(curDateTracer.value >= self.config.getDailyGoal() ? Color.blue.gradient : Color.mint.gradient)
+                    }
+                } else if self.dateComponents == .hour {
+                    ForEach(chartData) { curDateTracer in
+                        BarMark(x: .value("Hour", curDateTracer.date, unit: .hour),
+                                y: .value("Water Drink", curDateTracer.value)
+                        )
+                        .foregroundStyle(Color.blue.gradient)
+                    }
+                }
             }
             .frame(height: 150)
-//            .chartXSelection(value: $rawSelectedDate.animation(.easeIn))
+            //            .chartXSelection(value: $rawSelectedDate.animation(.easeIn))
             .chartXAxis {
-                AxisMarks(values: .stride(by: .day)) {
-                    AxisValueLabel(format: .dateTime.weekday(), centered: true)
+                if self.dateComponents == .day {
+                    AxisMarks(values: .stride(by: .day)) {
+                        AxisValueLabel(format: .dateTime.weekday(), centered: true)
+                    }
+                } else {
+                    AxisMarks(values: .stride(by: .hour, count: 3)) { value in
+                        if let date = value.as(Date.self) {
+                            let hour = Calendar.current.component(.hour, from: date)
+                            switch hour {
+                            case 0, 12:
+                                AxisValueLabel(format: .dateTime.hour())
+                            default:
+                                AxisValueLabel(format: .dateTime.hour(.defaultDigits(amPM: .omitted)))
+                            }
+                            
+                            AxisGridLine()
+                            AxisTick()
+                        }
+                    }
                 }
             }
             .chartYAxis {
@@ -84,32 +113,32 @@ struct WaterTracingBarChart: View {
         .background(RoundedRectangle(cornerRadius: 12).fill(.regularMaterial))
     }
     
-//    var annotationView: some View {
-//        VStack(alignment: .leading) {
-//            Text(selectedData?.date ?? .now, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated))
-//                .font(.footnote.bold())
-//                .foregroundStyle(.secondary)
-//            
-//            Text(selectedData?.value ?? 0, format: .number.precision(.fractionLength(2)))
-//                .fontWeight(.heavy)
-//                .foregroundStyle(.blue.gradient)
-//        }
-//        .padding(12)
-//        .background(
-//            RoundedRectangle(cornerRadius: 4)
-//                .fill(.regularMaterial)
-//                .shadow(color: .secondary.opacity(0.3), radius: 2, x: 2, y: 2)
-//        )
-//    }
+    //    var annotationView: some View {
+    //        VStack(alignment: .leading) {
+    //            Text(selectedData?.date ?? .now, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated))
+    //                .font(.footnote.bold())
+    //                .foregroundStyle(.secondary)
+    //
+    //            Text(selectedData?.value ?? 0, format: .number.precision(.fractionLength(2)))
+    //                .fontWeight(.heavy)
+    //                .foregroundStyle(.blue.gradient)
+    //        }
+    //        .padding(12)
+    //        .background(
+    //            RoundedRectangle(cornerRadius: 4)
+    //                .fill(.regularMaterial)
+    //                .shadow(color: .secondary.opacity(0.3), radius: 2, x: 2, y: 2)
+    //        )
+    //    }
 }
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
     @Previewable @State var configManager = WaterTracerConfigManager()
-    @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkWeekDataRaw: [], startDate: Date(), endDate: NSCalendar.current.date(byAdding: .day, value: -7, to: Date())!, gapUnit: .day, isMock: true)
-
+    @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: Date(), endDate: NSCalendar.current.date(byAdding: .day, value: -7, to: Date())!, gapUnit: .day, isMock: true)
+    
     ZStack {
-        WaterTracingBarChart(chartData: mockChartData)
+        WaterTracingBarChart(chartData: mockChartData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data")
             .modelContainer(sharedWaterTracerModelContainer)
             .environment(healthKitManager)
             .environment(configManager)

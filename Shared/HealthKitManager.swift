@@ -16,15 +16,14 @@ struct HealthMetric: Identifiable {
     let value: Double
 }
 
-
 // Move to global scope, so it can be easily called by Previews to mock data. 
-func fillEmptyData(drinkWeekDataRaw: [HealthMetric], startDate: Date, endDate: Date, gapUnit: Calendar.Component, isMock: Bool = false) -> [HealthMetric] {
+func fillEmptyData(drinkDataRaw: [HealthMetric], startDate: Date, endDate: Date, gapUnit: Calendar.Component, isMock: Bool = false) -> [HealthMetric] {
     
     let calendar = NSCalendar.current
     
     // Fill in the empty data with zeros, or random data if using mock == true
     var drinkWeekDataMap: Dictionary<Date, HealthMetric> = [:]
-    for curStatistic in drinkWeekDataRaw {
+    for curStatistic in drinkDataRaw {
         drinkWeekDataMap[curStatistic.date] = curStatistic
     }
     
@@ -56,7 +55,8 @@ class HealthKitManager {
     var todayTotalDrinkNum: Double = 0.0 // arbitrary small number
     
     var drinkWeekData: [HealthMetric] = []
-    
+    var drinkDayData: [HealthMetric] = []
+
     static let shared = HealthKitManager()
     var healthStore = HKHealthStore()
     
@@ -189,7 +189,72 @@ class HealthKitManager {
         return nil
     }
     
+    func updateDrinkWaterDay(waterUnitInput: WaterUnits) async  -> HealthKitError? {
+        // TODO: Merge with updateDrinkWaterWeek
+        
+        if let errMsg = checkHealthKitAvailability() {
+            return errMsg
+        }
+        // Request permission again if the user change the permission outside the app.
+        // OK if the permission is already granted. No repeated pop-up screen.
+        if let errMsg = requestAuthorization() {
+            return errMsg
+        }
+        
+        let calendar = NSCalendar.current
+        let now = Date()
+        let components = calendar.dateComponents([.year, .month, .day, .hour], from: now)
+        
+        var waterUnit = HKUnit.fluidOunceUS()
+        if waterUnitInput == .ml {
+            waterUnit = HKUnit.liter()
+        }
+        
+        // Get today.
+        guard let hourNow = calendar.date(from: components) else {
+            fatalError("*** Unable to create the yesterday ***")
+        }
+        guard let hourOneDayBefore = calendar.date(byAdding: .hour, value: -24, to: hourNow) else {
+            fatalError("*** Unable to create the today date ***")
+        }
+        
+        //1. Use HKQuery to load the most recent samples.
+        let oneWeekPredicate = HKQuery.predicateForSamples(withStart: hourOneDayBefore,
+                                                         end: hourNow,
+                                                           options: [.strictStartDate])
+        let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.dietaryWater), predicate: oneWeekPredicate)
+        
+        let todayDrinkWaterQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
+                                                                         options: .cumulativeSum,
+                                                                         anchorDate: hourOneDayBefore,
+                                                                         intervalComponents: .init(hour: 1))
+        
+        do {
+            let drinkDayData = try await todayDrinkWaterQuery.result(for: healthStore)
+            
+            var unitMultiplyer:Double = 1.0
+            if waterUnitInput == .ml {
+                unitMultiplyer = 1000.0
+            }
+            
+            let drinkDayDataRaw: [HealthMetric] = drinkDayData.statistics().map {
+                .init(date: $0.startDate, value: ($0.sumQuantity()?.doubleValue(for: waterUnit) ?? 0.0) * unitMultiplyer)
+            }
+            
+            print(drinkDayDataRaw)
+            
+            self.drinkDayData = fillEmptyData(drinkDataRaw: drinkDayDataRaw, startDate: hourOneDayBefore, endDate: hourNow, gapUnit: .hour)
+            
+        } catch {
+            return .healthKitNotAuthorized
+        }
+        
+        return nil
+    }
+    
     func updateDrinkWaterWeek(waterUnitInput: WaterUnits) async  -> HealthKitError? {
+        // TODO: Merge with updateDrinkWaterDay
+        
         if let errMsg = checkHealthKitAvailability() {
             return errMsg
         }
@@ -244,7 +309,7 @@ class HealthKitManager {
             }
             
             
-            self.drinkWeekData = fillEmptyData(drinkWeekDataRaw: drinkWeekDataRaw, startDate: oneWeekBeforeDate, endDate: todayMidnightDate, gapUnit: .day)
+            self.drinkWeekData = fillEmptyData(drinkDataRaw: drinkWeekDataRaw, startDate: oneWeekBeforeDate, endDate: todayMidnightDate, gapUnit: .day)
             
         } catch {
             return .healthKitNotAuthorized
