@@ -116,7 +116,7 @@ struct RingView: View {
                     updateTextStr()
                 }
                 .onChange(of: self.updateToggle) {
-                    // Update everything. 
+                    // Update everything.
                     if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
                         self.alertError = err
                         self.isShowAlert = true
