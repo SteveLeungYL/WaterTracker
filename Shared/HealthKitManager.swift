@@ -16,6 +16,39 @@ struct HealthMetric: Identifiable {
     let value: Double
 }
 
+
+// Move to global scope, so it can be easily called by Previews to mock data. 
+func fillEmptyData(drinkWeekDataRaw: [HealthMetric], startDate: Date, endDate: Date, gapUnit: Calendar.Component, isMock: Bool = false) -> [HealthMetric] {
+    
+    let calendar = NSCalendar.current
+    
+    // Fill in the empty data with zeros, or random data if using mock == true
+    var drinkWeekDataMap: Dictionary<Date, HealthMetric> = [:]
+    for curStatistic in drinkWeekDataRaw {
+        drinkWeekDataMap[curStatistic.date] = curStatistic
+    }
+    
+    var startDate = startDate
+    var drinkWeekDataResult: [HealthMetric] = []
+    while (startDate < endDate) {
+        if let curStatistic = drinkWeekDataMap[startDate] {
+            drinkWeekDataResult.append(curStatistic)
+        } else {
+            if !isMock {
+                drinkWeekDataResult.append(.init(date: startDate, value: 0.0))
+            } else {
+                drinkWeekDataResult.append(.init(date: startDate, value: Double.random(in: 10.0 ..< 250.0)))
+            }
+        }
+        guard let newStartDate = calendar.date(byAdding: gapUnit, value: 1, to: startDate) else {
+            fatalError("*** Unable to iterate date ***")
+        }
+        startDate = newStartDate
+    }
+    
+    return drinkWeekDataResult
+}
+
 @Observable
 class HealthKitManager {
     
@@ -156,7 +189,7 @@ class HealthKitManager {
         return nil
     }
     
-    func updateDrinkWaterCollection(waterUnitInput: WaterUnits) async  -> HealthKitError? {
+    func updateDrinkWaterWeek(waterUnitInput: WaterUnits) async  -> HealthKitError? {
         if let errMsg = checkHealthKitAvailability() {
             return errMsg
         }
@@ -190,12 +223,12 @@ class HealthKitManager {
         //1. Use HKQuery to load the most recent samples.
         let oneWeekPredicate = HKQuery.predicateForSamples(withStart: oneWeekBeforeDate,
                                                          end: todayMidnightDate,
-                                                         options: [.strictStartDate])
+                                                           options: [.strictStartDate])
         let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.dietaryWater), predicate: oneWeekPredicate)
         
         let todayDrinkWaterQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
                                                                          options: .cumulativeSum,
-                                                                         anchorDate: todayMidnightDate,
+                                                                         anchorDate: oneWeekBeforeDate,
                                                                          intervalComponents: .init(day: 1))
         
         do {
@@ -206,9 +239,12 @@ class HealthKitManager {
                 unitMultiplyer = 1000.0
             }
             
-            self.drinkWeekData = drinkWeekData.statistics().map {
+            let drinkWeekDataRaw: [HealthMetric] = drinkWeekData.statistics().map {
                 .init(date: $0.startDate, value: ($0.sumQuantity()?.doubleValue(for: waterUnit) ?? 0.0) * unitMultiplyer)
             }
+            
+            
+            self.drinkWeekData = fillEmptyData(drinkWeekDataRaw: drinkWeekDataRaw, startDate: oneWeekBeforeDate, endDate: todayMidnightDate, gapUnit: .day)
             
         } catch {
             return .healthKitNotAuthorized
