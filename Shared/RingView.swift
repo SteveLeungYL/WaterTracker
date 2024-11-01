@@ -89,11 +89,11 @@ struct RingView: View {
                         }
                         Spacer()
                         
-                        WeightDiffBarChart(chartData: self.healthKitManager.drinkWeekData)
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData)
                             .padding()
                             .onAppear() {
                                 Task{
-                                    await self.healthKitManager.updateDrinkWaterCollection(waterUnitInput: self.config.waterUnit)
+                                    await self.healthKitManager.updateDrinkWaterWeek(waterUnitInput: self.config.waterUnit)
                                 }
                             }
                         
@@ -123,7 +123,7 @@ struct RingView: View {
                         self.isShowAlert = true
                     }
                     Task{
-                        await self.healthKitManager.updateDrinkWaterCollection(waterUnitInput: self.config.waterUnit)
+                        await self.healthKitManager.updateDrinkWaterWeek(waterUnitInput: self.config.waterUnit)
                     }
                     updateTextStr()
                 }
