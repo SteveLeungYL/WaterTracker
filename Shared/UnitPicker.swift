@@ -43,7 +43,11 @@ struct UnitPickerView: View {
                         Text($0)
                     }
                 }
+#if os(watchOS)
                 .pickerStyle(.navigationLink)
+                #else
+                .pickerStyle(SegmentedPickerStyle())
+#endif
                 .foregroundStyle(.black)
                 .multilineTextAlignment(.center)
                 .labelsHidden()
