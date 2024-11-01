@@ -22,8 +22,10 @@ struct CupView: View {
     @State private var textStr: String = "100 ml"
     @State private var unitStr: String = "ml"
     
+    @State var hapticTrigger = false
+    
     func setDefaultDrinkNum() {
-            self.healthKitManager.drinkNum = Double(Int(config.getCupCapacity() * 3 / 4))
+        self.healthKitManager.drinkNum = Double(Int(config.getCupCapacity() * 3 / 4))
     }
     
     func updateTextStr() {
@@ -98,6 +100,11 @@ struct CupView: View {
                                     // DEBUG
                                     //                            healthKitManager.readDrinkWater()
                                 }
+#if os(watchOS)
+                                WKInterfaceDevice.current().play(.success)
+#endif
+                                
+                                
                             } label: {
                                 Image(systemName: "mouth.fill")
                                     .foregroundStyle(.red)
@@ -108,11 +115,16 @@ struct CupView: View {
 #endif
                             .background(.regularMaterial)
                             .clipShape(.circle)
+                            .sensoryFeedback(
+                                .impact(weight: .medium, intensity: 0.9),
+                                trigger: hapticTrigger
+                            )
                             .alert(isPresented: $isShowAlert, error: alertError) { _ in
                                 Button("OK", role:.cancel) {}
                             } message: { error in
                                 Text(error.recoverySuggestion ?? "Try again later.")
                             }
+                            
                             Spacer()
                             
                             Text(self.textStr)
