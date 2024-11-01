@@ -15,8 +15,8 @@ struct UnitPickerView: View {
     
     @Binding var updateToggle: Bool
     
-    @State private var waterUnitSelection: String = "ml"
-    private var waterUnitChoice = ["ml", "oz"]
+    @State private var waterUnitSelection: String = "Miniliter\nml"
+    private var waterUnitChoice = ["Miniliter\nml", "Ounce\noz"]
     
     init(updateToggle: Binding<Bool>) {
         self._updateToggle = updateToggle
@@ -24,14 +24,15 @@ struct UnitPickerView: View {
     
     var body : some View {
         
+        NavigationStack {
             HStack{
                 
                 Text("Choose Unit: ")
-                #if !os(watchOS)
+#if !os(watchOS)
                     .font(.title)
-                #else
+#else
                     .font(.body)
-                #endif
+#endif
                     .foregroundStyle(.black)
                     .fontWeight(.bold)
                     .allowsHitTesting(false)
@@ -42,24 +43,28 @@ struct UnitPickerView: View {
                         Text($0)
                     }
                 }
-                .pickerStyle(.inline)
+                .pickerStyle(.navigationLink)
+                .foregroundStyle(.black)
+                .multilineTextAlignment(.center)
+                .labelsHidden()
                 .onAppear {
                     if self.config.waterUnit == .ml {
-                        self.waterUnitSelection = "ml"
+                        self.waterUnitSelection = "Miniliter\nml"
                     } else {
-                        self.waterUnitSelection = "oz"
+                        self.waterUnitSelection = "Ounce\noz"
                     }
                 }
                 .onChange(of: waterUnitSelection) { oldValue, newValue in
-                    if newValue == "ml" {
+                    if newValue == "Miniliter\nml" {
                         self.config.setWaterUnit(.ml, modelContext: modelContext)
                         updateToggle = !updateToggle
                     }
-                    else if newValue == "oz" {
+                    else if newValue == "Ounce\noz" {
                         self.config.setWaterUnit(.oz, modelContext: modelContext)
                         updateToggle = !updateToggle
                     }
                 }
+            }
         }
     }
     
