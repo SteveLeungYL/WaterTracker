@@ -168,6 +168,7 @@ struct CupView: View {
                 }
             }
         }
+        .accentColor(.black)
     }
 }
 
