@@ -16,6 +16,8 @@ struct CupView: View {
     @State private var isShowAlert: Bool = false
     @State private var alertError: HealthKitError? = nil
     
+    private var crossOsConnectivity: CrossOsConnectivity = CrossOsConnectivity.shared
+    
     @Environment(WaterTracerConfigManager.self) private var config
     @Environment(\.modelContext) var modelContext
     
@@ -97,7 +99,8 @@ struct CupView: View {
                                         self.alertError = alertError
                                         self.isShowAlert = true
                                     }
-                                    NotificationHandler.registerLocalNotification()
+                                    LocalNotificationHandler.registerLocalNotification()
+                                    CrossOsConnectivity.shared.sendNotificationReminder()
                                     self.isDrinkButtonExpanded = true
                                     self.textStr = "Water + "
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
