@@ -162,7 +162,6 @@ class HealthKitManager {
             
             guard let statistics = statisticsOrNil else {
                 print("Failure to get statistics? Didn't authroize HealthKit?")
-                
                 return
             }
             
@@ -177,8 +176,6 @@ class HealthKitManager {
             if waterUnitInput == .ml {
                 totalDrinkWaterTodayML *= 1000
             }
-            
-            print("Getting today drink water num: \(totalDrinkWaterTodayML)")
             
             self.todayTotalDrinkNum = totalDrinkWaterTodayML
         }
@@ -240,8 +237,6 @@ class HealthKitManager {
             let drinkDayDataRaw: [HealthMetric] = drinkDayData.statistics().map {
                 .init(date: $0.startDate, value: ($0.sumQuantity()?.doubleValue(for: waterUnit) ?? 0.0) * unitMultiplyer)
             }
-            
-            print(drinkDayDataRaw)
             
             self.drinkDayData = fillEmptyData(drinkDataRaw: drinkDayDataRaw, startDate: hourOneDayBefore, endDate: hourNow, gapUnit: .hour)
             
