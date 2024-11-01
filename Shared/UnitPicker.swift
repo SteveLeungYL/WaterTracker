@@ -27,13 +27,17 @@ struct UnitPickerView: View {
             HStack{
                 
                 Text("Choose Unit: ")
+                #if !os(watchOS)
                     .font(.title)
+                #else
+                    .font(.body)
+                #endif
                     .foregroundStyle(.black)
                     .fontWeight(.bold)
                     .allowsHitTesting(false)
                     .multilineTextAlignment(.leading)
                 
-                Picker("Choose unit: ", selection: self.$waterUnitSelection) {
+                Picker("", selection: self.$waterUnitSelection) {
                     ForEach(self.waterUnitChoice, id: \.self) {
                         Text($0)
                     }
