@@ -87,6 +87,7 @@ struct RingView: View {
                                     // Make it at the bottom.
                                 Text("[1]")
                                     .font(.system(size: 8))
+                                    .foregroundStyle(.black)
                                     .baselineOffset(6.0)
                             }
                             .padding()
@@ -118,6 +119,7 @@ struct RingView: View {
                     }
                     Text("[1] Mayo Foundation for Medical Education and Research. (2022, October 12). How much water do you need to stay healthy?. Mayo Clinic. https://shorturl.at/MT9fz ")
                         .font(.system(size: 8))
+                        .foregroundStyle(.black)
                         .padding()
                 } // scrollView
                 .onAppear {
