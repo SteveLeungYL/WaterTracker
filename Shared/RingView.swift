@@ -67,7 +67,7 @@ struct RingView: View {
 #if !os(watchOS)
                                     .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
 #else
-                                    .stroke(Color.black, style: StrokeStyle(lineWidth: 4))
+                                    .stroke(Color.black, style: StrokeStyle(lineWidth: 3))
 #endif
                                 
                                     .aspectRatio(contentMode: .fit)
@@ -100,6 +100,7 @@ struct RingView: View {
                         Spacer()
                         
                         UnitPickerView(updateToggle: $updateToggle)
+                            .padding()
                         
                     }
                 } // scrollView
