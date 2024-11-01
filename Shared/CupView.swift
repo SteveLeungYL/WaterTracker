@@ -23,6 +23,7 @@ struct CupView: View {
     @State private var unitStr: String = "ml"
     
     @State var hapticTrigger = false
+    @State var isDrinkButtonExpanded: Bool = false
     
     func setDefaultDrinkNum() {
         self.healthKitManager.drinkNum = Double(Int(config.getCupCapacity() * 3 / 4))
@@ -97,8 +98,11 @@ struct CupView: View {
                                         self.isShowAlert = true
                                     }
                                     NotificationHandler.registerLocalNotification()
-                                    // DEBUG
-                                    //                            healthKitManager.readDrinkWater()
+                                    self.isDrinkButtonExpanded = true
+                                    self.textStr = "Water + "
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                        self.isDrinkButtonExpanded = false
+                                    }
                                 }
 #if os(watchOS)
                                 WKInterfaceDevice.current().play(.success)
@@ -115,6 +119,9 @@ struct CupView: View {
 #endif
                             .background(.regularMaterial)
                             .clipShape(.circle)
+                            .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
+                            .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
+                            // Well, sensoryFeedback is not working. :-(
                             .sensoryFeedback(
                                 .impact(weight: .medium, intensity: 0.9),
                                 trigger: hapticTrigger
