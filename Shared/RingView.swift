@@ -28,7 +28,9 @@ struct RingView: View {
         if config.waterUnit == .ml {
             self.textStr = String(format: "Today you drink \n%3d\(self.unitStr) / %3d\(self.unitStr)", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()))
         } else {
-            self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) / %.1f\(self.unitStr)", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()))
+            print("Running update textstr")
+            print()
+            self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) / %.1f\(self.unitStr)", self.healthKitManager.todayTotalDrinkNum, self.config.getDailyGoal())
         }
     }
     
@@ -114,6 +116,11 @@ struct RingView: View {
                     updateTextStr()
                 }
                 .onChange(of: self.updateToggle) {
+                    // Update everything. 
+                    if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
+                        self.alertError = err
+                        self.isShowAlert = true
+                    }
                     Task{
                         await self.healthKitManager.updateDrinkWaterCollection(waterUnitInput: self.config.waterUnit)
                     }
