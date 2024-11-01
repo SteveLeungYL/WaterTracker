@@ -26,11 +26,9 @@ struct RingView: View {
     func updateTextStr() {
         self.unitStr = config.getUnitStr()
         if config.waterUnit == .ml {
-            self.textStr = String(format: "Today you drink \n%3d\(self.unitStr) / %3d\(self.unitStr)", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()))
+            self.textStr = String(format: "Today you drink \n%3d\(self.unitStr) out of the suggested %3d\(self.unitStr), %3d\(self.unitStr) to go", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()), Int(self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))
         } else {
-            print("Running update textstr")
-            print()
-            self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) / %.1f\(self.unitStr)", self.healthKitManager.todayTotalDrinkNum, self.config.getDailyGoal())
+            self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) out of the suggested %.1f\(self.unitStr), %.1f\(self.unitStr) to go", self.healthKitManager.todayTotalDrinkNum, self.config.getDailyGoal(), self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum)
         }
     }
     
@@ -77,14 +75,21 @@ struct RingView: View {
                         }
                         VStack{
                             Spacer()
-                            Text(self.textStr)
-                                .font(.title)
-                                .minimumScaleFactor(0.00001)
-                                .foregroundStyle(.black)
-                                .fontWeight(.bold)
-                                .frame(height: geometry.size.width * 0.30, alignment: .center)
-                                .allowsHitTesting(false)
-                                .multilineTextAlignment(.center)
+                            HStack{
+                                Text(self.textStr)
+                                    .font(.title)
+                                    .minimumScaleFactor(0.00001)
+                                    .foregroundStyle(.black)
+                                    .fontWeight(.bold)
+                                    .frame(height: geometry.size.width * 0.30, alignment: .center)
+                                    .allowsHitTesting(false)
+                                    .multilineTextAlignment(.center)
+                                    // Make it at the bottom.
+                                Text("[1]")
+                                    .font(.system(size: 8))
+                                    .baselineOffset(6.0)
+                            }
+                            .padding()
                             Spacer()
                         }
                         Spacer()
@@ -111,6 +116,9 @@ struct RingView: View {
                             .padding()
                         
                     }
+                    Text("[1] Mayo Foundation for Medical Education and Research. (2022, October 12). How much water do you need to stay healthy?. Mayo Clinic. https://shorturl.at/MT9fz ")
+                        .font(.system(size: 8))
+                        .padding()
                 } // scrollView
                 .onAppear {
                     if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
