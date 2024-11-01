@@ -124,11 +124,11 @@ class WaterTracerConfigManager {
             
             if let _ = all_save.first {
                 // Configuration has been saved before.
-                print("Try to delete the existing config")
                 try modelContext.delete(model: WaterTracerConfiguration.self)
-            } else {
-                print("No previous config exist, won't delete. ")
             }
+//            else {
+//                print("No previous config exist, won't delete. ")
+//            }
         } catch {
             print("Failed to delete all? \(error.localizedDescription)")
         }
