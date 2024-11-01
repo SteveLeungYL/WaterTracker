@@ -28,8 +28,8 @@
 		29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D42CD3047C005AA4A1 /* RingView.swift */; };
 		29A489D82CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
 		29A489D92CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
-		29D17B152CD43B3B0049B75C /* WeightDiffBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* WeightDiffBarChart.swift */; };
-		29D17B162CD43B3B0049B75C /* WeightDiffBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* WeightDiffBarChart.swift */; };
+		29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
+		29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B182CD446970049B75C /* UnitPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B172CD446930049B75C /* UnitPicker.swift */; };
 		29D17B192CD446970049B75C /* UnitPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B172CD446930049B75C /* UnitPicker.swift */; };
 		29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */; };
@@ -105,7 +105,7 @@
 		29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		29A489D42CD3047C005AA4A1 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		29A489D72CD309CC005AA4A1 /* BodyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyShape.swift; sourceTree = "<group>"; };
-		29D17B142CD43B3B0049B75C /* WeightDiffBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDiffBarChart.swift; sourceTree = "<group>"; };
+		29D17B142CD43B3B0049B75C /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		29D17B172CD446930049B75C /* UnitPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPicker.swift; sourceTree = "<group>"; };
 		29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -264,7 +264,7 @@
 		29D17B122CD43B330049B75C /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				29D17B142CD43B3B0049B75C /* WeightDiffBarChart.swift */,
+				29D17B142CD43B3B0049B75C /* BarChart.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -538,7 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29A489D52CD3047E005AA4A1 /* RingView.swift in Sources */,
-				29D17B162CD43B3B0049B75C /* WeightDiffBarChart.swift in Sources */,
+				29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */,
 				29A489A52CD1C048005AA4A1 /* Configurations.swift in Sources */,
 				29A489542CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A4895A2CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
@@ -572,7 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */,
-				29D17B152CD43B3B0049B75C /* WeightDiffBarChart.swift in Sources */,
+				29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */,
 				29A489A62CD1C048005AA4A1 /* Configurations.swift in Sources */,
 				29A489532CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A489592CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
