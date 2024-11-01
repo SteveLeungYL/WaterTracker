@@ -60,3 +60,14 @@ struct UnitPickerView: View {
     }
     
 }
+
+#Preview {
+    @Previewable @State var healthKitManager = HealthKitManager()
+    @Previewable @State var configManager = WaterTracerConfigManager()
+    @Previewable @State var updateToggle = false
+
+    UnitPickerView(updateToggle: $updateToggle)
+        .background(Color.white.edgesIgnoringSafeArea(.all))
+        .environment(healthKitManager)
+        .environment(configManager)
+}
