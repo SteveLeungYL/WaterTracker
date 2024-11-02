@@ -13,9 +13,9 @@ enum WaterUnits: Codable, Hashable {
     var cupDefaultCapacity: Double {
         switch self {
         case .oz:
-            return 8.5
+            return 20.0
         case .ml:
-            return 250.0
+            return 600.0
         }
     }
     
