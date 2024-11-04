@@ -26,9 +26,9 @@ struct RingView: View {
     func updateTextStr() {
         self.unitStr = config.getUnitStr()
         if config.waterUnit == .ml {
-            self.textStr = String(format: "Today you drink \n%3d\(self.unitStr) out of the suggested %3d\(self.unitStr), %3d\(self.unitStr) to go", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()), Int(self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))
+            self.textStr = String(format: "Today you drink \n%3d\(self.unitStr) out of the suggested %3d\(self.unitStr), %3d\(self.unitStr) to go", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()), max(0, Int(self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum)))
         } else {
-            self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) out of the suggested %.1f\(self.unitStr), %.1f\(self.unitStr) to go", self.healthKitManager.todayTotalDrinkNum, self.config.getDailyGoal(), self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum)
+            self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) out of the suggested %.1f\(self.unitStr), %.1f\(self.unitStr) to go", self.healthKitManager.todayTotalDrinkNum, self.config.getDailyGoal(), max(0.0, self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))
         }
     }
     
