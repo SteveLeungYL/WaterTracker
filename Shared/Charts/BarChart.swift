@@ -135,7 +135,7 @@ struct WaterTracingBarChart: View {
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
     @Previewable @State var configManager = WaterTracerConfigManager()
-    @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: Date(), endDate: NSCalendar.current.date(byAdding: .day, value: -7, to: Date())!, gapUnit: .day, isMock: true)
+    @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: Date())!, endDate:Date(), gapUnit: .day, isMock: true)
     
     ZStack {
         WaterTracingBarChart(chartData: mockChartData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data")
