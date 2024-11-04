@@ -65,20 +65,28 @@ class HealthKitManager {
         HKObjectType.quantityType(forIdentifier: .dietaryWater)!])
     
     func checkHealthKitAvailability() -> HealthKitError? {
+        #if !WIDGET
+        
         if HKHealthStore.isHealthDataAvailable() == false {
             return .healthKitNotAvailable
         }
+        
+        #endif
         return nil
+        
     }
     
     func requestAuthorization() -> HealthKitError? {
         
+        var err: HealthKitError? = nil
+        
+        #if !WIDGET
+
         // This is to make sure device's Heath Data is Avaialble
         if let err = checkHealthKitAvailability() {
             return err
         }
         
-        var err: HealthKitError? = nil
         
         // Asking User's permission for their Health Data
         healthStore.requestAuthorization(toShare: toReadAndWrite, read: toReadAndWrite) {
@@ -92,6 +100,9 @@ class HealthKitManager {
         if healthStore.authorizationStatus(for: toReadAndWrite.first!) != .sharingAuthorized {
             err = .healthKitNotAuthorized
         }
+        
+        
+        #endif
         
         return err
     }
