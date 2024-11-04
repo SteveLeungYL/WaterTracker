@@ -28,6 +28,9 @@
 		29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D42CD3047C005AA4A1 /* RingView.swift */; };
 		29A489D82CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
 		29A489D92CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
+		29BC97352CD971E300E9F55F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97342CD971E300E9F55F /* WidgetKit.framework */; };
+		29BC97372CD971E300E9F55F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97362CD971E300E9F55F /* SwiftUI.framework */; };
+		29BC97442CD971E400E9F55F /* WaterTracer WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29BC97322CD971E300E9F55F /* WaterTracer WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B182CD446970049B75C /* UnitPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B172CD446930049B75C /* UnitPicker.swift */; };
@@ -72,6 +75,13 @@
 			remoteGlobalIDString = 297759362CCD881D00D54F00;
 			remoteInfo = "WaterTracer Watch App";
 		};
+		29BC97422CD971E400E9F55F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 297759092CCD881B00D54F00 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29BC97312CD971E300E9F55F;
+			remoteInfo = "WaterTracer WidgetExtension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +94,17 @@
 				297759382CCD881D00D54F00 /* WaterTracer Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29BC97452CD971E400E9F55F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				29BC97442CD971E400E9F55F /* WaterTracer WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -105,6 +126,10 @@
 		29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		29A489D42CD3047C005AA4A1 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		29A489D72CD309CC005AA4A1 /* BodyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyShape.swift; sourceTree = "<group>"; };
+		29BC97322CD971E300E9F55F /* WaterTracer WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WaterTracer WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29BC97342CD971E300E9F55F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		29BC97362CD971E300E9F55F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		29BC974A2CD9720B00E9F55F /* WaterTracer WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WaterTracer WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		29D17B142CD43B3B0049B75C /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		29D17B172CD446930049B75C /* UnitPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPicker.swift; sourceTree = "<group>"; };
 		29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
@@ -117,6 +142,13 @@
 				Info.plist,
 			);
 			target = 297759102CCD881C00D54F00 /* WaterTracer */;
+		};
+		29BC97492CD971E400E9F55F /* Exceptions for "WaterTracer Widget" folder in "WaterTracer WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 29BC97312CD971E300E9F55F /* WaterTracer WidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -157,6 +189,14 @@
 		297759562CCD881E00D54F00 /* WaterTracer Watch AppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "WaterTracer Watch AppUITests";
+			sourceTree = "<group>";
+		};
+		29BC97382CD971E300E9F55F /* WaterTracer Widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				29BC97492CD971E400E9F55F /* Exceptions for "WaterTracer Widget" folder in "WaterTracer WidgetExtension" target */,
+			);
+			path = "WaterTracer Widget";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -204,12 +244,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		29BC972F2CD971E300E9F55F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29BC97372CD971E300E9F55F /* SwiftUI.framework in Frameworks */,
+				29BC97352CD971E300E9F55F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		297759082CCD881B00D54F00 = {
 			isa = PBXGroup;
 			children = (
+				29BC974A2CD9720B00E9F55F /* WaterTracer WidgetExtension.entitlements */,
 				29D8FE7F2CCECD8200504B17 /* Shared */,
 				297759132CCD881C00D54F00 /* WaterTracer */,
 				297759242CCD881D00D54F00 /* WaterTracerTests */,
@@ -217,6 +267,8 @@
 				2977593B2CCD881D00D54F00 /* WaterTracer Watch App */,
 				2977594C2CCD881E00D54F00 /* WaterTracer Watch AppTests */,
 				297759562CCD881E00D54F00 /* WaterTracer Watch AppUITests */,
+				29BC97382CD971E300E9F55F /* WaterTracer Widget */,
+				29BC97332CD971E300E9F55F /* Frameworks */,
 				297759122CCD881C00D54F00 /* Products */,
 				2965A2422CCF204B00E75A0F /* Supplimentary Materials */,
 			);
@@ -231,6 +283,7 @@
 				297759372CCD881D00D54F00 /* WaterTracer Watch App.app */,
 				297759492CCD881E00D54F00 /* WaterTracer Watch AppTests.xctest */,
 				297759532CCD881E00D54F00 /* WaterTracer Watch AppUITests.xctest */,
+				29BC97322CD971E300E9F55F /* WaterTracer WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -259,6 +312,15 @@
 				29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		29BC97332CD971E300E9F55F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29BC97342CD971E300E9F55F /* WidgetKit.framework */,
+				29BC97362CD971E300E9F55F /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		29D17B122CD43B330049B75C /* Charts */ = {
@@ -298,11 +360,13 @@
 				2977590E2CCD881C00D54F00 /* Frameworks */,
 				2977590F2CCD881C00D54F00 /* Resources */,
 				297759602CCD881E00D54F00 /* Embed Watch Content */,
+				29BC97452CD971E400E9F55F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				2977593A2CCD881D00D54F00 /* PBXTargetDependency */,
+				29BC97432CD971E400E9F55F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				2965A2422CCF204B00E75A0F /* Supplimentary Materials */,
@@ -429,6 +493,28 @@
 			productReference = 297759532CCD881E00D54F00 /* WaterTracer Watch AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		29BC97312CD971E300E9F55F /* WaterTracer WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29BC97482CD971E400E9F55F /* Build configuration list for PBXNativeTarget "WaterTracer WidgetExtension" */;
+			buildPhases = (
+				29BC972E2CD971E300E9F55F /* Sources */,
+				29BC972F2CD971E300E9F55F /* Frameworks */,
+				29BC97302CD971E300E9F55F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				29BC97382CD971E300E9F55F /* WaterTracer Widget */,
+			);
+			name = "WaterTracer WidgetExtension";
+			packageProductDependencies = (
+			);
+			productName = "WaterTracer WidgetExtension";
+			productReference = 29BC97322CD971E300E9F55F /* WaterTracer WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -436,7 +522,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					297759102CCD881C00D54F00 = {
@@ -461,6 +547,9 @@
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = 297759362CCD881D00D54F00;
 					};
+					29BC97312CD971E300E9F55F = {
+						CreatedOnToolsVersion = 16.1;
+					};
 				};
 			};
 			buildConfigurationList = 2977590C2CCD881B00D54F00 /* Build configuration list for PBXProject "WaterTracer" */;
@@ -483,6 +572,7 @@
 				297759362CCD881D00D54F00 /* WaterTracer Watch App */,
 				297759482CCD881E00D54F00 /* WaterTracer Watch AppTests */,
 				297759522CCD881E00D54F00 /* WaterTracer Watch AppUITests */,
+				29BC97312CD971E300E9F55F /* WaterTracer WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -524,6 +614,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		297759512CCD881E00D54F00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29BC97302CD971E300E9F55F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -601,6 +698,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		29BC972E2CD971E300E9F55F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -628,6 +732,11 @@
 			isa = PBXTargetDependency;
 			target = 297759362CCD881D00D54F00 /* WaterTracer Watch App */;
 			targetProxy = 297759542CCD881E00D54F00 /* PBXContainerItemProxy */;
+		};
+		29BC97432CD971E400E9F55F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29BC97312CD971E300E9F55F /* WaterTracer WidgetExtension */;
+			targetProxy = 29BC97422CD971E400E9F55F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1062,6 +1171,69 @@
 			};
 			name = Release;
 		};
+		29BC97462CD971E400E9F55F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "WaterTracer WidgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47X549R648;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WaterTracer Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer.WaterTracer-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WIDGET;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29BC97472CD971E400E9F55F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "WaterTracer WidgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47X549R648;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WaterTracer Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer.WaterTracer-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WIDGET;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1124,6 +1296,15 @@
 			buildConfigurations = (
 				2977596E2CCD881E00D54F00 /* Debug */,
 				2977596F2CCD881E00D54F00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29BC97482CD971E400E9F55F /* Build configuration list for PBXNativeTarget "WaterTracer WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29BC97462CD971E400E9F55F /* Debug */,
+				29BC97472CD971E400E9F55F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
