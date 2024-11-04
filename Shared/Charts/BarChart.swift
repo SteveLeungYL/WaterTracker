@@ -22,7 +22,7 @@ struct WaterTracingBarChart: View {
     @State var subTitle: String
 
     //    @State private var rawSelectedDate: Date?
-    @Environment(WaterTracerConfigManager.self) private var config
+    @State var config: WaterTracerConfigManager
     
     //    var selectedData: HealthMetric? {
     //        guard let rawSelectedDate else { return nil }
@@ -138,7 +138,7 @@ struct WaterTracingBarChart: View {
     @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: Date())!, endDate:Date(), gapUnit: .day, isMock: true)
     
     ZStack {
-        WaterTracingBarChart(chartData: mockChartData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data")
+        WaterTracingBarChart(chartData: mockChartData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data", config: WaterTracerConfigManager())
             .modelContainer(sharedWaterTracerModelContainer)
             .environment(healthKitManager)
             .environment(configManager)

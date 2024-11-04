@@ -29,6 +29,10 @@
 		29BC97352CD971E300E9F55F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97342CD971E300E9F55F /* WidgetKit.framework */; };
 		29BC97372CD971E300E9F55F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97362CD971E300E9F55F /* SwiftUI.framework */; };
 		29BC97442CD971E400E9F55F /* WaterTracer WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 29BC97322CD971E300E9F55F /* WaterTracer WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		29BC97A32CD973E500E9F55F /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */; };
+		29BC97A42CD973E500E9F55F /* WaterTracerConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489AB2CD2BD38005AA4A1 /* WaterTracerConfigurations.swift */; };
+		29BC97A52CD973E500E9F55F /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489A82CD2B9D2005AA4A1 /* Units.swift */; };
+		29BC97A62CD973E500E9F55F /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B182CD446970049B75C /* UnitPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B172CD446930049B75C /* UnitPicker.swift */; };
@@ -696,6 +700,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29BC97A32CD973E500E9F55F /* HealthKitManager.swift in Sources */,
+				29BC97A42CD973E500E9F55F /* WaterTracerConfigurations.swift in Sources */,
+				29BC97A52CD973E500E9F55F /* Units.swift in Sources */,
+				29BC97A62CD973E500E9F55F /* BarChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

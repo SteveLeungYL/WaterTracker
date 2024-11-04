@@ -95,7 +95,7 @@ struct RingView: View {
                         }
                         Spacer()
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing last 24 hours data")
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing last 24 hours data", config: self.config)
                             .padding()
                             .onAppear() {
                                 Task{
@@ -103,7 +103,7 @@ struct RingView: View {
                                 }
                             }
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data")
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data", config: self.config)
                             .padding()
                             .onAppear() {
                                 Task{
