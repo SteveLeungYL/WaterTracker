@@ -8,6 +8,8 @@
 import SwiftData
 import SwiftUI
 
+let AppName = "Water Tracer"
+
 @Model
 class WaterTracerConfiguration {
     var waterUnit: WaterUnits = WaterUnits.ml
