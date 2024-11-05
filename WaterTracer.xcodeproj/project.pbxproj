@@ -870,6 +870,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer Watch Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Watch Widget";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -882,6 +884,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WATCH_WIDGET;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -901,6 +904,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer Watch Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Watch Widget";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -913,6 +918,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = WATCH_WIDGET;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
