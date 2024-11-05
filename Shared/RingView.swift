@@ -19,7 +19,7 @@ struct RingView: View {
     @State private var isShowAlert: Bool = false
     @State private var alertError: HealthKitError? = nil
     
-    @State private var textStr: String = "100 ml"
+    @State private var textStr: LocalizedStringKey = "100 ml"
     @State private var unitStr: String = "ml"
     
     @State var updateToggle: Bool = false
@@ -27,9 +27,18 @@ struct RingView: View {
     func updateTextStr() {
         self.unitStr = config.getUnitStr()
         if config.waterUnit == .ml {
-            self.textStr = String(format: "Today you drink \n%3d\(self.unitStr) out of the suggested %3d\(self.unitStr), %3d\(self.unitStr) to go", Int(self.healthKitManager.todayTotalDrinkNum), Int(self.config.getDailyGoal()), max(0, Int(self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum)))
+            let drinkNumStr = String(format: "%.3d", Int(self.healthKitManager.todayTotalDrinkNum))
+            let suggestedNumStr = String(format: "%.3d", Int(self.config.getDailyGoal()))
+            let leftNumStr = String(format: "%.3d", Int(max(0, Int(self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))))
+            
+            self.textStr = LocalizedStringKey("Today you drink \(drinkNumStr)\(self.unitStr) out of the suggested \(suggestedNumStr)\(self.unitStr), \(leftNumStr)\(self.unitStr) to go")
         } else {
-            self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) out of the suggested %.1f\(self.unitStr), %.1f\(self.unitStr) to go", self.healthKitManager.todayTotalDrinkNum, self.config.getDailyGoal(), max(0.0, self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))
+            
+            let drinkNumStr = String(format: "%.1f", self.healthKitManager.todayTotalDrinkNum)
+            let suggestedNumStr = String(format: "%.1f", self.config.getDailyGoal())
+            let leftNumStr = String(format: "%.1f", max(0.0, self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))
+            
+            self.textStr = LocalizedStringKey("Today you drink \(drinkNumStr)\(self.unitStr) out of the suggested \(suggestedNumStr)\(self.unitStr), \(leftNumStr)\(self.unitStr) to go")
         }
     }
     
@@ -104,7 +113,7 @@ struct RingView: View {
                         }
                         Spacer()
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing 24 hours data", config: self.config)
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: LocalizedStringKey("Day Water Tracer"), subTitle: LocalizedStringKey("Showing 24 hours data"), config: self.config)
                             .padding()
                             .onAppear() {
                                 Task{
@@ -112,7 +121,7 @@ struct RingView: View {
                                 }
                             }
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data", config: self.config)
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: LocalizedStringKey("Week Water Tracer"), subTitle: LocalizedStringKey("Showing last 7 days data"), config: self.config)
                             .padding()
                             .onAppear() {
                                 Task{

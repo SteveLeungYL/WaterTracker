@@ -22,7 +22,7 @@ struct CupView: View {
     @Environment(WaterTracerConfigManager.self) private var config
     @Environment(\.modelContext) var modelContext
     
-    @State private var textStr: String = "100 ml"
+    @State private var textStr: LocalizedStringKey = "100 ml"
     @State private var unitStr: String = "ml"
     
     @State var hapticTrigger = false
@@ -37,9 +37,11 @@ struct CupView: View {
     func updateTextStr() {
         self.unitStr = config.getUnitStr()
         if config.waterUnit == .ml {
-            self.textStr = String(format: "%3d\(self.unitStr)", Int(self.healthKitManager.drinkNum))
+            let drinkNumStr = String(format: "%.3d", Int(self.healthKitManager.drinkNum))
+            self.textStr = LocalizedStringKey("\(drinkNumStr)\(self.unitStr)")
         } else {
-            self.textStr = String(format: "%.1f\(self.unitStr)", self.healthKitManager.drinkNum)
+            let drinkNumStr = String(format: "%.1f", self.healthKitManager.drinkNum)
+            self.textStr = LocalizedStringKey("\(drinkNumStr)\(self.unitStr)")
         }
     }
     

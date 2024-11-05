@@ -81,7 +81,7 @@ struct UnitPickerView: View {
                 
                 Picker("", selection: self.$waterUnitSelection) {
                     ForEach(self.waterUnitChoice, id: \.self) {
-                        Text($0)
+                        Text(LocalizedStringKey($0))
                     }
                 }
 #if os(watchOS)
