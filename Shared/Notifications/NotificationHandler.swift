@@ -9,6 +9,7 @@ import UserNotifications
 import WatchConnectivity
 import WidgetKit
 import Foundation
+import SwiftUICore
 
 final class CrossOsConnectivity: NSObject, ObservableObject {
     
@@ -79,8 +80,8 @@ public final class LocalNotificationHandler {
         
         // Configure the notification's payload.
         let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: "Time to drink water!", arguments: nil)
-        content.body = NSString.localizedUserNotificationString(forKey: "Log your water status in \(AppName).", arguments: nil)
+        content.title = NSString.localizedUserNotificationString(forKey: String(localized: "Time to drink water!"), arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: String(localized: "Log your water status in \(AppName)."), arguments: nil)
         content.sound = UNNotificationSound.default
         
         // Deliver the notification in five seconds.
