@@ -27,7 +27,7 @@ struct WaterTracingBarChart: View {
     @State var hourGap: Int = 6
     #else
     // in App.
-    @State var hourGap: Int = 3
+    @State var hourGap: Int = 4
     #endif
 
     //    @State private var rawSelectedDate: Date?
