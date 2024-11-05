@@ -12,6 +12,7 @@ struct RingView: View {
     
     @Environment(HealthKitManager.self) private var healthKitManager
     @Environment(WaterTracerConfigManager.self) private var config
+    @Environment(\.scenePhase) var scenePhase
     
     @State private var waveOffset = Angle(degrees: 0)
     
@@ -30,6 +31,19 @@ struct RingView: View {
         } else {
             self.textStr = String(format: "Today you drink \n%.1f\(self.unitStr) out of the suggested %.1f\(self.unitStr), %.1f\(self.unitStr) to go", self.healthKitManager.todayTotalDrinkNum, self.config.getDailyGoal(), max(0.0, self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))
         }
+    }
+    
+    func updateEverything() async {
+        // Update everything.
+        // No need to update config here, because it is binding
+        // directly to the unit picker. 
+        if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
+            self.alertError = err
+            self.isShowAlert = true
+        }
+        _ = await self.healthKitManager.updateDrinkWaterDay(waterUnitInput: self.config.waterUnit)
+        _ = await self.healthKitManager.updateDrinkWaterWeek(waterUnitInput: self.config.waterUnit)
+        updateTextStr()
     }
     
     var body : some View {
@@ -84,7 +98,7 @@ struct RingView: View {
                                     .frame(height: geometry.size.width * 0.30, alignment: .center)
                                     .allowsHitTesting(false)
                                     .multilineTextAlignment(.center)
-                                    // Make it at the bottom.
+                                // Make it at the bottom.
                                 Text("[1]")
                                     .font(.system(size: 8))
                                     .foregroundStyle(.black)
@@ -135,18 +149,18 @@ struct RingView: View {
                     updateTextStr()
                 }
                 .onChange(of: self.updateToggle) {
-                    // Update everything.
-                    if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
-                        self.alertError = err
-                        self.isShowAlert = true
-                    }
                     Task{
-                        await self.healthKitManager.updateDrinkWaterDay(waterUnitInput: self.config.waterUnit)
+                        await self.updateEverything()
                     }
-                    Task{
-                        await self.healthKitManager.updateDrinkWaterWeek(waterUnitInput: self.config.waterUnit)
+                }
+                .onChange(of: self.scenePhase) {
+                    oldPhase, newPhase in
+                    if newPhase == .active {
+                        // Refresh the page when the app goes to the foreground.
+                        Task{
+                            await self.updateEverything()
+                        }
                     }
-                    updateTextStr()
                 }
                 .alert(isPresented: $isShowAlert, error: alertError) { _ in
                     Button("OK", role:.cancel) {}
