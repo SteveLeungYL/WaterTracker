@@ -51,9 +51,9 @@ struct InvisibleSlider: View {
         }
 #if os(watchOS)
         .onChange(of: scroll) {
-            self.healthKitManager.drinkNum = max(config.cupMinimumNum, min(config.cupCapacity, Double(scroll) * config.adjustStep))
-            if (scroll > ((config.cupCapacity - config.cupMinimumNum) / config.adjustStep) + 1) {
-                scroll = ((config.cupCapacity - config.cupMinimumNum) / config.adjustStep) + 1
+            self.healthKitManager.drinkNum = max(config.cupMinimumNum, min(config.cupCapacity, Double(scroll) * config.adjustStep + config.cupMinimumNum))
+            if (scroll > (config.cupCapacity - config.cupMinimumNum) / config.adjustStep) {
+                scroll = ((config.cupCapacity - config.cupMinimumNum) / config.adjustStep)
             }
         }
 #endif
