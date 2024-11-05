@@ -20,6 +20,15 @@ struct WaterTracingBarChart: View {
     @State var dateComponents: Calendar.Component
     @State var mainTitle: String
     @State var subTitle: String
+    
+    #if WIDGET
+    @State var hourGap: Int = 4
+    #elseif WATCH_WIDGET || os(watchOS)
+    @State var hourGap: Int = 6
+    #else
+    // in App.
+    @State var hourGap: Int = 3
+    #endif
 
     //    @State private var rawSelectedDate: Date?
     @State var config: WaterTracerConfigManager
