@@ -18,8 +18,8 @@ import Charts
 struct WaterTracingBarChart: View {
     var chartData: [HealthMetric]
     @State var dateComponents: Calendar.Component
-    @State var mainTitle: String
-    @State var subTitle: String
+    @State var mainTitle: LocalizedStringKey
+    @State var subTitle: LocalizedStringKey
     
     #if WIDGET
     @State var hourGap: Int = 4

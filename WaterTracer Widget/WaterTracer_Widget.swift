@@ -114,9 +114,9 @@ struct WaterTracer_WidgetEntryView : View {
     var body: some View {
         ZStack {
             if entry.configuration.chosenView == .week {
-                WaterTracingBarChart(chartData: entry.weekData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing week data", config: entry.waterConfigMgr)
+                WaterTracingBarChart(chartData: entry.weekData, dateComponents: .day, mainTitle: LocalizedStringKey("Week Water Tracer"), subTitle: LocalizedStringKey("Showing week data"), config: entry.waterConfigMgr)
             } else {
-                WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing 24 hours data", config: entry.waterConfigMgr)
+                WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: LocalizedStringKey("Day Water Tracer"), subTitle: LocalizedStringKey("Showing 24 hours data"), config: entry.waterConfigMgr)
             }
         }
     }
