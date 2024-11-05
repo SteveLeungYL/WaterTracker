@@ -68,21 +68,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "297759362CCD881D00D54F00"
-            BuildableName = "WaterTracer Watch App.app"
-            BlueprintName = "WaterTracer Watch App"
-            ReferencedContainer = "container:WaterTracer.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
             BlueprintIdentifier = "297759102CCD881C00D54F00"
             BuildableName = "WaterTracer.app"
             BlueprintName = "WaterTracer"
             ReferencedContainer = "container:WaterTracer.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

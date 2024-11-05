@@ -96,6 +96,10 @@ class WaterTracerConfigManager {
         }
     }
     
+    func getDailyGoalCustomRange() -> [Double] {
+        return self.config.waterUnit.dailyGoalRange
+    }
+
     func updateWaterTracerConfig(modelContext: ModelContext) {
         do {
             let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>(predicate: nil)
@@ -142,6 +146,7 @@ class WaterTracerConfigManager {
         
         waterTracerConfiguration.waterUnit = waterUnit
         waterTracerConfiguration.cupCapacity = nil
+        waterTracerConfiguration.dailyGoal = nil
         modelContext.insert(waterTracerConfiguration)
         do {
             try modelContext.save()
@@ -162,6 +167,20 @@ class WaterTracerConfigManager {
             fatalError(error.localizedDescription)
         }
     }
+    
+    func setDailyGoal(_ newDailyGoal: Double, modelContext: ModelContext) {
+        let waterTracerConfiguration = getWaterTracerConfiguration(modelContext: modelContext)
+        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
+        
+        waterTracerConfiguration.dailyGoal = newDailyGoal
+        modelContext.insert(waterTracerConfiguration)
+        do {
+            try modelContext.save()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
     
     func setWaterTracerConfiguration(_ newConfig: WaterTracerConfiguration, modelContext: ModelContext) {
         self.deleteAllWaterTracerConfigs(modelContext: modelContext)

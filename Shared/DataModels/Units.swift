@@ -49,9 +49,18 @@ enum WaterUnits: Codable, Hashable {
     var defaultDailyGoal: Double {
         switch self {
         case .oz:
-            return 85.0
+            return 100.0
         case .ml:
-            return 2500.0
+            return 3100.0
+        }
+    }
+    
+    var dailyGoalRange: [Double] {
+        switch self {
+        case .oz:
+            return Array(stride(from: 70.0, to: 160, by: 10.0))
+        case .ml:
+            return Array(stride(from: 1900.0, to: 3700.0, by: 100.0))
         }
     }
 }
