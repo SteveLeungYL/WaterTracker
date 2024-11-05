@@ -77,6 +77,18 @@ struct WaterTracingBarChart: View {
                     Spacer()
                 }
             }
+            #elseif WATCH_WIDGET
+            // This is watch widget rending mode.
+            VStack{
+                HStack{
+                    HStack{
+                        Text(subTitle)
+                            .font(.caption)
+                        Spacer()
+                    }
+                    Spacer()
+                }
+            }
             #endif
             
             Chart {

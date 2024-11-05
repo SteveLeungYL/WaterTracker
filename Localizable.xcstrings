@@ -153,6 +153,16 @@
         }
       }
     },
+    "Showing 24 hours water tracer data" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示24小时喝水数据"
+          }
+        }
+      }
+    },
     "Showing last 7 days data" : {
       "localizations" : {
         "zh-Hans" : {
@@ -169,6 +179,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "显示一周数据"
+          }
+        }
+      }
+    },
+    "Showing week water tracer data" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示一周喝水数据"
           }
         }
       }
