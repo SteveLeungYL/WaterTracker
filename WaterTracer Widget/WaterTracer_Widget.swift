@@ -16,8 +16,8 @@ struct Provider: AppIntentTimelineProvider {
     @State var dataToShown: [HealthMetric] = []
     
     func placeholder(in context: Context) -> SimpleEntry {
-        let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: true)
-        let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
+        let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: false)
+        let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
         return SimpleEntry(date: getStartOfDate(date: Date()), configuration: ConfigurationAppIntent(), dayData: mockDayData, weekData: mockWeekData, waterConfig: config)
     }
 
@@ -44,18 +44,28 @@ struct Provider: AppIntentTimelineProvider {
             config.updateWaterTracerConfig(modelContext: context)
             _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
-            
-            let lastMidnight = getStartOfDate(date: Date())
-            let todayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: lastMidnight)!
-            let nextdayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: todayMidnight)!
-
-            for hourOffset in 0 ..< 5 {
-                if NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())! >= todayMidnight {
-                    let emptyData = fillEmptyData(drinkDataRaw: [], startDate: todayMidnight, endDate: nextdayMidnight, gapUnit: .hour)
-                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: emptyData, weekData: [], waterConfig: config)
-                    entries.append(entry)
-                } else {
-                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: [], waterConfig: config)
+                
+            if configuration.chosenView == .hour {
+                
+                // hour view
+                let lastMidnight = getStartOfDate(date: Date())
+                let todayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: lastMidnight)!
+                let nextdayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: todayMidnight)!
+                
+                for hourOffset in 0 ..< 5 {
+                    if NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())! >= todayMidnight {
+                        let emptyData = fillEmptyData(drinkDataRaw: [], startDate: todayMidnight, endDate: nextdayMidnight, gapUnit: .hour)
+                        let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: emptyData, weekData: [], waterConfig: config)
+                        entries.append(entry)
+                    } else {
+                        let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: [], waterConfig: config)
+                        entries.append(entry)
+                    }
+                }
+            } else {
+                // week view
+                for _ in 0 ..< 3 {
+                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: [], weekData: healthKitManager.drinkWeekData, waterConfig: config)
                     entries.append(entry)
                 }
             }
@@ -94,7 +104,11 @@ struct WaterTracer_WidgetEntryView : View {
 
     var body: some View {
         ZStack {
-            WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing 24 hours data", config: entry.waterConfigMgr)
+            if entry.configuration.chosenView == .week {
+                WaterTracingBarChart(chartData: entry.weekData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing week data", config: entry.waterConfigMgr)
+            } else {
+                WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing 24 hours data", config: entry.waterConfigMgr)
+            }
         }
     }
 }
@@ -111,23 +125,9 @@ struct WaterTracer_Widget: Widget {
     }
 }
 
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
-    }
-}
-
 #Preview(as: .systemMedium) {
     WaterTracer_Widget()
 } timeline: {
     let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate: getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
-    SimpleEntry(date: .now, configuration: .smiley, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
 }
