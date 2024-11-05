@@ -36,7 +36,7 @@ struct RingView: View {
     func updateEverything() async {
         // Update everything.
         // No need to update config here, because it is binding
-        // directly to the unit picker. 
+        // directly to the unit picker.
         if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
             self.alertError = err
             self.isShowAlert = true
@@ -98,11 +98,6 @@ struct RingView: View {
                                     .frame(height: geometry.size.width * 0.30, alignment: .center)
                                     .allowsHitTesting(false)
                                     .multilineTextAlignment(.center)
-                                // Make it at the bottom.
-                                Text("[1]")
-                                    .font(.system(size: 8))
-                                    .foregroundStyle(.black)
-                                    .baselineOffset(6.0)
                             }
                             .padding()
                             Spacer()
@@ -131,10 +126,12 @@ struct RingView: View {
                             .padding()
                         
                     }
-                    Text("[1] Mayo Foundation for Medical Education and Research. (2022, October 12). How much water do you need to stay healthy?. Mayo Clinic. https://shorturl.at/MT9fz ")
+                    #if os(iOS)
+                    Text("[1] Cleveland Clinic. (2024, October 3). How much water you should drink every day. https://health.clevelandclinic.org/how-much-water-do-you-need-daily")
                         .font(.system(size: 8))
                         .foregroundStyle(.black)
                         .padding()
+                    #endif
                 } // scrollView
                 .onAppear {
                     if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
