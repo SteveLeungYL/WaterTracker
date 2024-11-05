@@ -34,6 +34,7 @@ struct WaterTracingBarChart: View {
     
     var body: some View {
         VStack { // Overall chart card
+            #if !WIDGET
             HStack {
                 VStack(alignment: .leading) {
                     Text(mainTitle)
@@ -48,6 +49,26 @@ struct WaterTracingBarChart: View {
             }
             .foregroundStyle(.secondary)
             .padding(.bottom, 12)
+            #else
+            // This is widget rending mode.
+            VStack{
+                HStack{
+                    Text(mainTitle)
+                        .font(.subheadline)
+                        .foregroundStyle(.blue)
+                    Spacer()
+                }
+                HStack{
+                    HStack{
+                        Text(subTitle)
+                            .font(.caption)
+                            .foregroundStyle(.gray)
+                        Spacer()
+                    }
+                    Spacer()
+                }
+            }
+            #endif
             
             Chart {
                 //                if let selectedData {
@@ -76,7 +97,9 @@ struct WaterTracingBarChart: View {
                     }
                 }
             }
+            #if !WIDGET
             .frame(height: 150)
+            #endif
             //            .chartXSelection(value: $rawSelectedDate.animation(.easeIn))
             .chartXAxis {
                 if self.dateComponents == .day {
@@ -109,8 +132,10 @@ struct WaterTracingBarChart: View {
                 }
             }
         }
+        #if !WIDGET
         .padding()
         .background(RoundedRectangle(cornerRadius: 12).fill(.regularMaterial))
+        #endif
     }
     
     //    var annotationView: some View {

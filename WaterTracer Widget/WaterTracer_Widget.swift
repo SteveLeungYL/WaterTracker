@@ -43,12 +43,15 @@ struct Provider: AppIntentTimelineProvider {
             let context = ModelContext(container)
             config.updateWaterTracerConfig(modelContext: context)
             _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
+            _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
             
             let currentDate = Date()
             for hourOffset in 0 ..< 5 {
-                let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                // TODO:: FIXME:: Adjust by hour.
-                let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
+                let dataStartDate = healthKitManager.drinkDayData.last?.date ?? currentDate
+                let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: dataStartDate)!
+                let startDate = Calendar.current.date(byAdding: .hour, value: -24, to: entryDate)!
+                let adjustedData = fillEmptyData(drinkDataRaw: healthKitManager.drinkDayData, startDate: startDate, endDate: entryDate, gapUnit: .hour)
+                let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: adjustedData, weekData: [], waterConfig: config)
                 entries.append(entry)
             }
             
@@ -99,6 +102,7 @@ struct WaterTracer_Widget: Widget {
             WaterTracer_WidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
+        .supportedFamilies([.systemMedium, .systemLarge, .systemExtraLarge])
     }
 }
 
@@ -116,9 +120,9 @@ extension ConfigurationAppIntent {
     }
 }
 
-#Preview(as: .systemSmall) {
+#Preview(as: .systemMedium) {
     WaterTracer_Widget()
 } timeline: {
-    var mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: Date())!, endDate: Date(), gapUnit: .day, isMock: true)
+    var mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: Date())!, endDate: Date(), gapUnit: .day, isMock: true)
     SimpleEntry(date: .now, configuration: .smiley, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
 }

@@ -1185,6 +1185,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Widget";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1216,6 +1218,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Widget";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
