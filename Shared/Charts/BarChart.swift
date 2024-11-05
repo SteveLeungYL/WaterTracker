@@ -107,7 +107,7 @@ struct WaterTracingBarChart: View {
                         AxisValueLabel(format: .dateTime.weekday(), centered: true)
                     }
                 } else {
-                    AxisMarks(values: .stride(by: .hour, count: 3)) { value in
+                    AxisMarks(values: .stride(by: .hour, count: self.hourGap)) { value in
                         if let date = value.as(Date.self) {
                             let hour = Calendar.current.component(.hour, from: date)
                             switch hour {
@@ -160,7 +160,7 @@ struct WaterTracingBarChart: View {
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
     @Previewable @State var configManager = WaterTracerConfigManager()
-    @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: Date())!, endDate:Date(), gapUnit: .day, isMock: true)
+    @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
     
     ZStack {
         WaterTracingBarChart(chartData: mockChartData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data", config: WaterTracerConfigManager())
