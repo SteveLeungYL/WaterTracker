@@ -27,6 +27,8 @@ struct CupView: View {
     @State var hapticTrigger = false
     @State var isDrinkButtonExpanded: Bool = false
     
+    @State var updateToggle: Bool = false
+    
     func setDefaultDrinkNum() {
         self.healthKitManager.drinkNum = Double(Int(config.getCupCapacity() * 3 / 4))
     }
@@ -48,14 +50,13 @@ struct CupView: View {
                     .clipped()
                     .ignoresSafeArea(.all) // As background.
                 GeometryReader { geometry in
+                    @State var cupWidth = geometry.size.width * 0.8
                     VStack{
                         Spacer()
                         HStack{
                             
                             Spacer()
                             ZStack{
-                                
-                                @State var cupWidth = geometry.size.width * 0.8
                                 
                                 Cup()
                                     .fill(Color.white)
@@ -106,12 +107,11 @@ struct CupView: View {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                                         self.isDrinkButtonExpanded = false
                                     }
+                                    updateToggle.toggle()
                                 }
 #if os(watchOS)
                                 WKInterfaceDevice.current().play(.success)
 #endif
-                                
-                                
                             } label: {
                                 Image(systemName: "mouth.fill")
                                     .foregroundStyle(.red)
@@ -119,6 +119,7 @@ struct CupView: View {
                             }
 #if !os(watchOS)
                             .padding()
+                            .frame(width: 70, height: 70, alignment: .center)
 #endif
                             .background(.regularMaterial)
                             .clipShape(.circle)
@@ -149,15 +150,22 @@ struct CupView: View {
                             Spacer()
                             
                             NavigationLink(destination: RingView() ) {
-                                Image(systemName: "ellipsis.circle")
-                                    .font(.body)
+                                HStack{
+                                    Spacer(minLength: 0)
+                                    VStack{
+                                        Spacer(minLength: 0)
+                                        CircularProgressView(healthKitManager: self.healthKitManager, config: self.config, updateToggle: self.$updateToggle)
+                                        Spacer(minLength: 0)
+                                    }
+                                    Spacer(minLength: 0)
+                                }
                             }
 #if !os(watchOS)
                             .padding()
+                            .frame(width: 70, height: 70, alignment: .center)
 #endif
                             .background(.regularMaterial)
                             .clipShape(.circle)
-                            
                         }
                         .padding(.horizontal)
 #if !os(watchOS)

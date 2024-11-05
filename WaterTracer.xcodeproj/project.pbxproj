@@ -36,6 +36,14 @@
 		29BC97A42CD973E500E9F55F /* WaterTracerConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489AB2CD2BD38005AA4A1 /* WaterTracerConfigurations.swift */; };
 		29BC97A52CD973E500E9F55F /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489A82CD2B9D2005AA4A1 /* Units.swift */; };
 		29BC97A62CD973E500E9F55F /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
+		29C2FF272CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C2FF262CD9AEF9008A4EC7 /* CircularProgress.swift */; };
+		29C2FF282CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C2FF262CD9AEF9008A4EC7 /* CircularProgress.swift */; };
+		29C2FF292CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C2FF262CD9AEF9008A4EC7 /* CircularProgress.swift */; };
+		29C2FF2A2CD9B102008A4EC7 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C2FF262CD9AEF9008A4EC7 /* CircularProgress.swift */; };
+		29C2FF2B2CD9B158008A4EC7 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489582CD07F7B005AA4A1 /* HealthKitManager.swift */; };
+		29C2FF2C2CD9B158008A4EC7 /* WaterTracerConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489AB2CD2BD38005AA4A1 /* WaterTracerConfigurations.swift */; };
+		29C2FF2D2CD9B158008A4EC7 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489A82CD2B9D2005AA4A1 /* Units.swift */; };
+		29C2FF2E2CD9B158008A4EC7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B182CD446970049B75C /* UnitPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B172CD446930049B75C /* UnitPicker.swift */; };
@@ -154,6 +162,7 @@
 		29BC97362CD971E300E9F55F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		29BC974A2CD9720B00E9F55F /* WaterTracer WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WaterTracer WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		29C2FEF12CD9ADBE008A4EC7 /* WaterTracer Watch WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WaterTracer Watch WidgetExtension.entitlements"; sourceTree = "<group>"; };
+		29C2FF262CD9AEF9008A4EC7 /* CircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
 		29D17B142CD43B3B0049B75C /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		29D17B172CD446930049B75C /* UnitPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPicker.swift; sourceTree = "<group>"; };
 		29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
@@ -377,6 +386,7 @@
 		29D17B122CD43B330049B75C /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				29C2FF262CD9AEF9008A4EC7 /* CircularProgress.swift */,
 				29D17B142CD43B3B0049B75C /* BarChart.swift */,
 			);
 			path = Charts;
@@ -719,6 +729,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C2FF2B2CD9B158008A4EC7 /* HealthKitManager.swift in Sources */,
+				29C2FF2C2CD9B158008A4EC7 /* WaterTracerConfigurations.swift in Sources */,
+				29C2FF2D2CD9B158008A4EC7 /* Units.swift in Sources */,
+				29C2FF2E2CD9B158008A4EC7 /* BarChart.swift in Sources */,
+				29C2FF2A2CD9B102008A4EC7 /* CircularProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +742,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29A489D52CD3047E005AA4A1 /* RingView.swift in Sources */,
+				29C2FF272CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 				29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */,
 				29A489542CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A4895A2CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
@@ -760,6 +776,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */,
+				29C2FF292CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 				29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */,
 				29A489532CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
 				29A489592CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
@@ -796,6 +813,7 @@
 				29BC97A42CD973E500E9F55F /* WaterTracerConfigurations.swift in Sources */,
 				29BC97A52CD973E500E9F55F /* Units.swift in Sources */,
 				29BC97A62CD973E500E9F55F /* BarChart.swift in Sources */,
+				29C2FF282CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
