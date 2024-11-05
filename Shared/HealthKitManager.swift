@@ -65,7 +65,7 @@ class HealthKitManager {
         HKObjectType.quantityType(forIdentifier: .dietaryWater)!])
     
     func checkHealthKitAvailability() -> HealthKitError? {
-        #if !WIDGET
+        #if !WIDGET && !WATCH_WIDGET
         
         if HKHealthStore.isHealthDataAvailable() == false {
             return .healthKitNotAvailable
@@ -80,7 +80,7 @@ class HealthKitManager {
         
         var err: HealthKitError? = nil
         
-        #if !WIDGET
+        #if !WIDGET && !WATCH_WIDGET
 
         // This is to make sure device's Heath Data is Avaialble
         if let err = checkHealthKitAvailability() {

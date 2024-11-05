@@ -89,7 +89,7 @@ struct WaterTracer_WidgetEntryView : View {
 
     var body: some View {
         ZStack {
-            WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing last 24 hours data", config: entry.waterConfigMgr)
+            WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing 24 hours data", config: entry.waterConfigMgr)
         }
     }
 }
