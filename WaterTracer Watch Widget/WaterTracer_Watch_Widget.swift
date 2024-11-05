@@ -45,9 +45,19 @@ struct Provider: AppIntentTimelineProvider {
             _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
             
-            for _ in 0 ..< 5 {
-                let entry = SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: [], waterConfig: config)
-                entries.append(entry)
+            let lastMidnight = getStartOfDate(date: Date())
+            let todayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: lastMidnight)!
+            let nextdayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: todayMidnight)!
+
+            for hourOffset in 0 ..< 5 {
+                if NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())! >= todayMidnight {
+                    let emptyData = fillEmptyData(drinkDataRaw: [], startDate: todayMidnight, endDate: nextdayMidnight, gapUnit: .hour)
+                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: emptyData, weekData: [], waterConfig: config)
+                    entries.append(entry)
+                } else {
+                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: [], waterConfig: config)
+                    entries.append(entry)
+                }
             }
             
             return Timeline(entries: entries, policy: .atEnd)
