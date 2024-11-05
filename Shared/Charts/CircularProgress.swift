@@ -103,7 +103,6 @@ struct CircularProgressView: View {
             }
         }
         .onChange(of: updateToggle) {
-            print("Update toggle")
             _ =  healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
