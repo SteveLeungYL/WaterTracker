@@ -10,6 +10,7 @@ import SwiftUI
 struct CupView: View {
     
     @Environment(HealthKitManager.self) private var healthKitManager
+    @Environment(\.scenePhase) var scenePhase
     
     @State private var waveOffset: Angle = .zero
     
@@ -182,6 +183,14 @@ struct CupView: View {
                     }
                     .onChange(of: self.healthKitManager.drinkNum) {
                         updateTextStr()
+                    }
+                    .onChange(of: scenePhase) {
+                        // When re-enter the app, refresh the
+                        // circular progress bar.
+                        oldPhase, newPhase in
+                        if newPhase == .active {
+                            self.updateToggle.toggle()
+                        }
                     }
                 }
             }
