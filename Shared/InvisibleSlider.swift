@@ -39,7 +39,7 @@ struct InvisibleSlider: View {
                 .focusable()
                 .digitalCrownRotation(detent: $scroll,
                                       from: 0.0,
-                                      through: 100.0,
+                                      through: 10000.0, // arbitrary large number
                                       by: 1.0,
                                       isContinuous: false
                 ) { crownEvent in

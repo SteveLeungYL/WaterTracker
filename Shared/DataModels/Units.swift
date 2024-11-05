@@ -33,7 +33,7 @@ enum WaterUnits: Codable, Hashable {
         case .oz:
             return 0.1
         case .ml:
-            return 10
+            return 5
         }
     }
     
@@ -49,7 +49,7 @@ enum WaterUnits: Codable, Hashable {
     var defaultDailyGoal: Double {
         switch self {
         case .oz:
-            return 64.0
+            return 85.0
         case .ml:
             return 2500.0
         }
