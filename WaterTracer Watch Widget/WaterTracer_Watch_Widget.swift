@@ -114,7 +114,7 @@ struct WaterTracer_Watch_WidgetEntryView : View {
 
 struct WaterTracer_Watch_Widget: Widget {
     
-    let kind: String = "WaterTracer_Watch_Widget"
+    var kind: String = "WaterTracer_Watch_Widget"
     var isDayView: Bool = true
     
     var body: some WidgetConfiguration {
@@ -125,7 +125,8 @@ struct WaterTracer_Watch_Widget: Widget {
         .supportedFamilies([.accessoryRectangular, .accessoryCorner, .accessoryInline, .accessoryCircular])
     }
     
-    init(isDayView: Bool) {
+    init(isDayView: Bool, kind: String = "WaterTracer_Watch_Widget") {
+        self.kind = kind
         self.isDayView = isDayView
     }
     
