@@ -7,6 +7,7 @@
 
 import UserNotifications
 import WatchConnectivity
+import WidgetKit
 import Foundation
 
 final class CrossOsConnectivity: NSObject, ObservableObject {
@@ -121,6 +122,7 @@ extension CrossOsConnectivity: WCSessionDelegate {
         // Just register the information.
         // And that's it.
         LocalNotificationHandler.registerLocalNotification()
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
 }
