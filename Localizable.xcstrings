@@ -183,12 +183,12 @@
         }
       }
     },
-    "Today you drink %@%@ out of the suggested %@%@, %@%@ to go" : {
+    "Today you drink %@%@ out of the goal %@%@, %@%@ to go" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Today you drink %1$@%2$@ out of the suggested %3$@%4$@, %5$@%6$@ to go"
+            "value" : "Today you drink %1$@%2$@ out of the goal %3$@%4$@, %5$@%6$@ to go"
           }
         },
         "zh-Hans" : {
