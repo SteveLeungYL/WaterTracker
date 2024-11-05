@@ -188,7 +188,9 @@ class HealthKitManager {
                 totalDrinkWaterTodayML *= 1000
             }
             
-            self.todayTotalDrinkNum = totalDrinkWaterTodayML
+            DispatchQueue.main.async{
+                self.todayTotalDrinkNum = totalDrinkWaterTodayML
+            }
         }
         
         // Async read.

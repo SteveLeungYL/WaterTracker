@@ -12,5 +12,6 @@ import SwiftUI
 struct WaterTracer_WidgetBundle: WidgetBundle {
     var body: some Widget {
         WaterTracer_Widget()
+        WaterTracer_Accessory_Widget()
     }
 }
