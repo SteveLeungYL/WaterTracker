@@ -16,26 +16,27 @@ struct Provider: AppIntentTimelineProvider {
     @State var dataToShown: [HealthMetric] = []
     
     func placeholder(in context: Context) -> SimpleEntry {
-        let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: true)
-        let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
+        let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: false)
+        let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
         return SimpleEntry(date: getStartOfDate(date: Date()), configuration: ConfigurationAppIntent(), dayData: mockDayData, weekData: mockWeekData, waterConfig: config)
     }
-
+    
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-            do {
-                let container = try ModelContainer(for: WaterTracerConfiguration.self)
-                let context = ModelContext(container)
-                config.updateWaterTracerConfig(modelContext: context)
-                _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
-                return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
-            } catch {
-                fatalError("Cannot get model container for config. ")
-            }
+        do {
+            let container = try ModelContainer(for: WaterTracerConfiguration.self)
+            let context = ModelContext(container)
+            config.updateWaterTracerConfig(modelContext: context)
+            _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
+            _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
+            return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
+        } catch {
+            fatalError("Cannot get model container for config. ")
+        }
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         var entries: [SimpleEntry] = []
-
+        
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         
         do {
@@ -45,17 +46,19 @@ struct Provider: AppIntentTimelineProvider {
             _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
             
+            
+            // hour view
             let lastMidnight = getStartOfDate(date: Date())
             let todayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: lastMidnight)!
             let nextdayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: todayMidnight)!
-
-            for hourOffset in 0 ..< 5 {
+            
+            for hourOffset in 0 ..< 3 {
                 if NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())! >= todayMidnight {
                     let emptyData = fillEmptyData(drinkDataRaw: [], startDate: todayMidnight, endDate: nextdayMidnight, gapUnit: .hour)
-                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: emptyData, weekData: [], waterConfig: config)
+                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: emptyData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                     entries.append(entry)
                 } else {
-                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: [], waterConfig: config)
+                    let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                     entries.append(entry)
                 }
             }
@@ -65,15 +68,15 @@ struct Provider: AppIntentTimelineProvider {
             fatalError("Cannot get model container for config. ")
         }
     }
-
+    
     func recommendations() -> [AppIntentRecommendation<ConfigurationAppIntent>] {
         // Create an array with all the preconfigured widgets to show.
-        [AppIntentRecommendation(intent: ConfigurationAppIntent(), description: "Example Widget")]
+        [AppIntentRecommendation(intent: ConfigurationAppIntent(), description: "Water Tracer Widget")]
     }
-
-//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
+    
+    //    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
+    //        // Generate a list containing the contexts this widget is relevant in.
+    //    }
 }
 
 struct SimpleEntry: TimelineEntry {
@@ -96,44 +99,43 @@ struct SimpleEntry: TimelineEntry {
 
 struct WaterTracer_Watch_WidgetEntryView : View {
     var entry: Provider.Entry
-
+    let isDayView: Bool
+    
     var body: some View {
         ZStack {
-            WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing 24 hours data", config: entry.waterConfigMgr)
+            if isDayView == false {
+                WaterTracingBarChart(chartData: entry.weekData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing week data", config: entry.waterConfigMgr)
+            } else {
+                WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: "Day Tracer", subTitle: "Showing 24 hours data", config: entry.waterConfigMgr)
+            }
         }
     }
 }
 
-@main
 struct WaterTracer_Watch_Widget: Widget {
+    
     let kind: String = "WaterTracer_Watch_Widget"
-
+    var isDayView: Bool = true
+    
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            WaterTracer_Watch_WidgetEntryView(entry: entry)
+            WaterTracer_Watch_WidgetEntryView(entry: entry, isDayView: isDayView)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .supportedFamilies([.accessoryRectangular, .accessoryCorner, .accessoryInline, .accessoryCircular])
     }
-}
-
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
+    
+    init(isDayView: Bool) {
+        self.isDayView = isDayView
     }
     
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
+    init() {
     }
 }
 
 #Preview(as: .accessoryRectangular) {
-    WaterTracer_Watch_Widget()
+    WaterTracer_Watch_Widget(isDayView: true)
 } timeline: {
     let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate: getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
-    SimpleEntry(date: .now, configuration: .smiley, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
 }
