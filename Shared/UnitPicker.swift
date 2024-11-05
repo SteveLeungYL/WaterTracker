@@ -53,6 +53,7 @@ struct UnitPickerView: View {
                 }
                 .pickerStyle(.wheel)
                 .foregroundStyle(.black)
+                .accentColor(.black)
                 .multilineTextAlignment(.center)
                 .labelsHidden()
                 .onAppear {
@@ -90,6 +91,7 @@ struct UnitPickerView: View {
                 .pickerStyle(SegmentedPickerStyle())
 #endif
                 .foregroundStyle(.black)
+                .accentColor(.black)
                 .multilineTextAlignment(.center)
                 .labelsHidden()
                 .onAppear {
