@@ -153,7 +153,7 @@ class HealthKitManager {
         let waterNumType = HKSampleType.quantityType(forIdentifier: .dietaryWater)!
         
         let calendar = NSCalendar.current
-        let now = Date()
+        let now = getStartOfDate(date: Date())
         let components = calendar.dateComponents([.year, .month, .day], from: now)
         
         guard let lastMidnightDate = calendar.date(from: components) else {
@@ -217,20 +217,26 @@ class HealthKitManager {
         }
         
         // Get today.
-        let hourNow = Date()
-        guard let hourOneDayBefore = calendar.date(byAdding: .hour, value: -24, to: hourNow) else {
-            fatalError("*** Unable to create the today date ***")
+        guard let lastMidnightDate = calendar.date(from: calendar.dateComponents([.year, .month, .day, .hour], from: getStartOfDate(date: Date()))) else {
+            fatalError("*** Unable to create the start date ***")
         }
+         
+        guard let todayMidnightDate = calendar.date(byAdding: .day, value: 1, to: lastMidnightDate) else {
+            fatalError("*** Unable to create the end date ***")
+        }
+//        guard let hourOneDayBefore = calendar.date(byAdding: .hour, value: -24, to: todayMidnightDate) else {
+//            fatalError("*** Unable to create the today date ***")
+//        }
         
         //1. Use HKQuery to load the most recent samples.
-        let oneDayPredicate = HKQuery.predicateForSamples(withStart: hourOneDayBefore,
-                                                         end: hourNow,
-                                                           options: [.strictStartDate])
+        let oneDayPredicate = HKQuery.predicateForSamples(withStart: lastMidnightDate,
+                                                          end: todayMidnightDate,
+                                                           options: [])
         let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.dietaryWater), predicate: oneDayPredicate)
         
         let todayDrinkWaterQuery = HKStatisticsCollectionQueryDescriptor(predicate: samplePredicate,
                                                                          options: .cumulativeSum,
-                                                                         anchorDate: hourOneDayBefore,
+                                                                         anchorDate: lastMidnightDate,
                                                                          intervalComponents: .init(hour: 1))
         
         do {
@@ -245,7 +251,7 @@ class HealthKitManager {
                 .init(date: $0.startDate, value: ($0.sumQuantity()?.doubleValue(for: waterUnit) ?? 0.0) * unitMultiplyer)
             }
             
-            self.drinkDayData = fillEmptyData(drinkDataRaw: drinkDayDataRaw, startDate: hourOneDayBefore, endDate: hourNow, gapUnit: .hour)
+            self.drinkDayData = fillEmptyData(drinkDataRaw: drinkDayDataRaw, startDate: lastMidnightDate, endDate: todayMidnightDate, gapUnit: .hour)
             
         } catch {
             return .healthKitNotAuthorized
@@ -267,7 +273,7 @@ class HealthKitManager {
         }
         
         let calendar = NSCalendar.current
-        let now = Date()
+        let now = getStartOfDate(date: Date())
         let components = calendar.dateComponents([.year, .month, .day], from: now)
         
         var waterUnit = HKUnit.fluidOunceUS()

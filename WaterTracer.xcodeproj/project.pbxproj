@@ -10,6 +10,10 @@
 		295CA1AD2CD9AA9E00FDFC2B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97342CD971E300E9F55F /* WidgetKit.framework */; };
 		295CA1AE2CD9AA9E00FDFC2B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97362CD971E300E9F55F /* SwiftUI.framework */; };
 		295CA1B92CD9AA9F00FDFC2B /* WaterTracer Watch WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 295CA1AC2CD9AA9E00FDFC2B /* WaterTracer Watch WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2964344F2CD9D6A7008429BC /* DateHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2964344E2CD9D6A4008429BC /* DateHandling.swift */; };
+		296434502CD9D6A7008429BC /* DateHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2964344E2CD9D6A4008429BC /* DateHandling.swift */; };
+		296434512CD9D6A7008429BC /* DateHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2964344E2CD9D6A4008429BC /* DateHandling.swift */; };
+		296434522CD9D6A7008429BC /* DateHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2964344E2CD9D6A4008429BC /* DateHandling.swift */; };
 		2965A2622CCF254500E75A0F /* CupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2965A2612CCF254500E75A0F /* CupView.swift */; };
 		2965A2632CCF254500E75A0F /* CupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2965A2612CCF254500E75A0F /* CupView.swift */; };
 		297759382CCD881D00D54F00 /* WaterTracer Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 297759372CCD881D00D54F00 /* WaterTracer Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -142,6 +146,7 @@
 
 /* Begin PBXFileReference section */
 		295CA1AC2CD9AA9E00FDFC2B /* WaterTracer Watch WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WaterTracer Watch WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2964344E2CD9D6A4008429BC /* DateHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandling.swift; sourceTree = "<group>"; };
 		2965A2612CCF254500E75A0F /* CupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupView.swift; sourceTree = "<group>"; };
 		297759112CCD881C00D54F00 /* WaterTracer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterTracer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297759212CCD881D00D54F00 /* WaterTracerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterTracerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -360,6 +365,7 @@
 		29A489A72CD2B9C1005AA4A1 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				2964344E2CD9D6A4008429BC /* DateHandling.swift */,
 				29A489AB2CD2BD38005AA4A1 /* WaterTracerConfigurations.swift */,
 				29A489A82CD2B9D2005AA4A1 /* Units.swift */,
 			);
@@ -729,6 +735,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				296434522CD9D6A7008429BC /* DateHandling.swift in Sources */,
 				29C2FF2B2CD9B158008A4EC7 /* HealthKitManager.swift in Sources */,
 				29C2FF2C2CD9B158008A4EC7 /* WaterTracerConfigurations.swift in Sources */,
 				29C2FF2D2CD9B158008A4EC7 /* Units.swift in Sources */,
@@ -741,6 +748,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2964344F2CD9D6A7008429BC /* DateHandling.swift in Sources */,
 				29A489D52CD3047E005AA4A1 /* RingView.swift in Sources */,
 				29C2FF272CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 				29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */,
@@ -775,6 +783,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				296434502CD9D6A7008429BC /* DateHandling.swift in Sources */,
 				29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */,
 				29C2FF292CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 				29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */,
@@ -813,6 +822,7 @@
 				29BC97A42CD973E500E9F55F /* WaterTracerConfigurations.swift in Sources */,
 				29BC97A52CD973E500E9F55F /* Units.swift in Sources */,
 				29BC97A62CD973E500E9F55F /* BarChart.swift in Sources */,
+				296434512CD9D6A7008429BC /* DateHandling.swift in Sources */,
 				29C2FF282CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

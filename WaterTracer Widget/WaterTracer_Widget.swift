@@ -16,9 +16,9 @@ struct Provider: AppIntentTimelineProvider {
     @State var dataToShown: [HealthMetric] = []
     
     func placeholder(in context: Context) -> SimpleEntry {
-        let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: Date())!, endDate:Date(), gapUnit: .hour, isMock: true)
-        let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: Date())!, endDate:Date(), gapUnit: .day, isMock: true)
-        return SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), dayData: mockDayData, weekData: mockWeekData, waterConfig: config)
+        let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: true)
+        let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
+        return SimpleEntry(date: getStartOfDate(date: Date()), configuration: ConfigurationAppIntent(), dayData: mockDayData, weekData: mockWeekData, waterConfig: config)
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
@@ -27,7 +27,7 @@ struct Provider: AppIntentTimelineProvider {
             let context = ModelContext(container)
             config.updateWaterTracerConfig(modelContext: context)
             _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
-            return SimpleEntry(date: Date(), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
+            return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
         } catch {
             fatalError("Cannot get model container for config. ")
         }
@@ -45,13 +45,8 @@ struct Provider: AppIntentTimelineProvider {
             _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
             
-            let currentDate = Date()
-            for hourOffset in 0 ..< 5 {
-                let dataStartDate = healthKitManager.drinkDayData.last?.date ?? currentDate
-                let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: dataStartDate)!
-                let startDate = Calendar.current.date(byAdding: .hour, value: -24, to: entryDate)!
-                let adjustedData = fillEmptyData(drinkDataRaw: healthKitManager.drinkDayData, startDate: startDate, endDate: entryDate, gapUnit: .hour)
-                let entry = SimpleEntry(date: Date(), configuration: configuration, dayData: adjustedData, weekData: [], waterConfig: config)
+            for _ in 0 ..< 5 {
+                let entry = SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, dayData: healthKitManager.drinkDayData, weekData: [], waterConfig: config)
                 entries.append(entry)
             }
             
@@ -123,6 +118,6 @@ extension ConfigurationAppIntent {
 #Preview(as: .systemMedium) {
     WaterTracer_Widget()
 } timeline: {
-    let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: Date())!, endDate: Date(), gapUnit: .day, isMock: true)
+    let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate: getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
     SimpleEntry(date: .now, configuration: .smiley, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
 }
