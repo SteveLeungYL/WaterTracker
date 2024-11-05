@@ -56,10 +56,10 @@ struct Provider: AppIntentTimelineProvider {
             for hourOffset in 0 ..< 3 {
                 if NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())! >= todayMidnight {
                     let emptyData = fillEmptyData(drinkDataRaw: [], startDate: todayMidnight, endDate: nextdayMidnight, gapUnit: .hour)
-                    let entry = SimpleEntry(date: Date(), configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: emptyData, weekData: [], waterConfig: config)
+                    let entry = SimpleEntry(date: Date(), configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: emptyData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                     entries.append(entry)
                 } else {
-                    let entry = SimpleEntry(date: Date(), configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: healthKitManager.drinkDayData, weekData: [], waterConfig: config)
+                    let entry = SimpleEntry(date: Date(), configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                     entries.append(entry)
                 }
             }
