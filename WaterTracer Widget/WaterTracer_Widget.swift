@@ -123,6 +123,6 @@ extension ConfigurationAppIntent {
 #Preview(as: .systemMedium) {
     WaterTracer_Widget()
 } timeline: {
-    var mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: Date())!, endDate: Date(), gapUnit: .day, isMock: true)
+    let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: Date())!, endDate: Date(), gapUnit: .day, isMock: true)
     SimpleEntry(date: .now, configuration: .smiley, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
 }
