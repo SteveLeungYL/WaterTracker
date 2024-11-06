@@ -44,6 +44,7 @@ struct WaveWithCupHeight: View {
     var body : some View {
         GeometryReader { geometry in
             ZStack {
+                #if !os(watchOS)
                 Wave(offSet: Angle(degrees: waveOffset.degrees + 270))
                     .fill(Color.blue.gradient)
                     .opacity(0.3)
@@ -53,6 +54,7 @@ struct WaveWithCupHeight: View {
                     .fill(Color.blue.gradient)
                     .opacity(0.4)
                     .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
+                #endif
                 
                 Wave(offSet: Angle(degrees: waveOffset.degrees))
                     .fill(Color.blue.gradient)
