@@ -15,8 +15,8 @@ struct UnitPickerView: View {
     
     @Binding var updateToggle: Bool
     
-    @State private var waterUnitSelection: String = "Miniliter\nml"
-    @State private var waterUnitChoice = ["Miniliter\nml", "Ounce\noz"]
+    @State private var waterUnitSelection: String = "Milliliter"
+    @State private var waterUnitChoice = ["Milliliter", "Ounce"]
     
     @State private var dailyGoal: Double = 2500.0
     @State private var dailyGoalChoice: [Double] = [2500]
@@ -96,19 +96,19 @@ struct UnitPickerView: View {
                 .labelsHidden()
                 .onAppear {
                     if self.config.waterUnit == .ml {
-                        self.waterUnitSelection = "Miniliter\nml"
+                        self.waterUnitSelection = "Milliliter"
                     } else {
-                        self.waterUnitSelection = "Ounce\noz"
+                        self.waterUnitSelection = "Ounce"
                     }
                 }
                 .onChange(of: waterUnitSelection) { oldValue, newValue in
-                    if newValue == "Miniliter\nml" {
+                    if newValue == "Milliliter" {
                         self.config.setWaterUnit(.ml, modelContext: modelContext)
                         self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
                         self.dailyGoal = self.config.getDailyGoal()
                         updateToggle = !updateToggle
                     }
-                    else if newValue == "Ounce\noz" {
+                    else if newValue == "Ounce" {
                         self.config.setWaterUnit(.oz, modelContext: modelContext)
                         self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
                         self.dailyGoal = self.config.getDailyGoal()
