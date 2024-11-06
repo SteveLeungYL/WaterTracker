@@ -34,7 +34,28 @@ struct WaterTracer_Accessory_WidgetEntryView : View {
                 }
                 .progressViewStyle(.circular)
                 .rotationEffect(.degrees(180))
-            default:
+            case .accessoryCorner:
+                let progress = max(0, min(1.0, entry.todayTotalDrinkNum / entry.dailyGoal))
+                ProgressView(value: progress) {
+                    Image(systemName: "drop.fill")
+                        .rotationEffect(.degrees(180))
+                }
+                .progressViewStyle(.circular)
+                .rotationEffect(.degrees(180))
+            case .accessoryInline:
+                HStack {
+                    let waterUnitStr = entry.waterConfigMgr.waterUnit == .ml ? "ml" : "oz"
+                    if entry.waterConfigMgr.waterUnit == .ml {
+                        let drinkNumStr = String(format: "%d", Int(entry.todayTotalDrinkNum))
+                        let leftNumStr = String(format: "%d", max(0, Int(entry.dailyGoal - entry.todayTotalDrinkNum)))
+                        Text(LocalizedStringKey("Drink \(drinkNumStr)\(waterUnitStr), \(leftNumStr)\(waterUnitStr) to go"))
+                    } else {
+                        let drinkNumStr = String(format: "%.1f", entry.todayTotalDrinkNum)
+                        let leftNumStr = String(format: "%.1f", max(0.0, entry.dailyGoal - entry.todayTotalDrinkNum))
+                        Text(LocalizedStringKey("Drink \(drinkNumStr)\(waterUnitStr), \(leftNumStr)\(waterUnitStr) to go"))
+                    }
+                }
+            case .accessoryRectangular:
                 ZStack {
                     let waterUnitStr = entry.waterConfigMgr.waterUnit == .ml ? "ml" : "oz"
                     VStack(alignment: .leading) {
@@ -49,6 +70,10 @@ struct WaterTracer_Accessory_WidgetEntryView : View {
                         }
                     }.frame(maxWidth: .infinity, alignment: .leading)
                 }
+            default:
+                ZStack{
+                    // Empty
+                }
             }
         }
     }
@@ -62,7 +87,10 @@ struct WaterTracer_Accessory_Widget: Widget {
             WaterTracer_Accessory_WidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
-        .supportedFamilies([.accessoryCircular, .accessoryRectangular])
+        .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
+        #if os(watchOS)
+        .supportedFamilies([.accessoryCorner])
+        #endif
     }
 }
 
