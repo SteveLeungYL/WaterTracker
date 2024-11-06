@@ -58,12 +58,13 @@ struct Provider: AppIntentTimelineProvider {
                 let nextdayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: todayMidnight)!
                 
                 for hourOffset in 0 ..< 5 {
-                    if NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())! >= todayMidnight {
+                    let entryDate = NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
+                    if entryDate >= todayMidnight {
                         let emptyData = fillEmptyData(drinkDataRaw: [], startDate: todayMidnight, endDate: nextdayMidnight, gapUnit: .hour)
-                        let entry = SimpleEntry(date: Date(), configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: emptyData, weekData: [], waterConfig: config)
+                        let entry = SimpleEntry(date: entryDate, configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: emptyData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                         entries.append(entry)
                     } else {
-                        let entry = SimpleEntry(date: Date(), configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: healthKitManager.drinkDayData, weekData: [], waterConfig: config)
+                        let entry = SimpleEntry(date: entryDate, configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                         entries.append(entry)
                     }
                 }
