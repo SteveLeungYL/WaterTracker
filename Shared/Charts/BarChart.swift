@@ -124,9 +124,15 @@ struct WaterTracingBarChart: View {
             //            .chartXSelection(value: $rawSelectedDate.animation(.easeIn))
             .chartXAxis {
                 if self.dateComponents == .day {
+                    #if !os(watchOS)
                     AxisMarks(values: .stride(by: .day)) {
                         AxisValueLabel(format: .dateTime.weekday(), centered: true)
                     }
+                    #else
+                    AxisMarks(values: .stride(by: .day)) {
+                        AxisValueLabel(format: Date.FormatStyle().weekday(.short), centered: true)
+                    }
+                    #endif
                 } else {
                     AxisMarks(values: .stride(by: .hour, count: self.hourGap)) { value in
                         if let date = value.as(Date.self) {
