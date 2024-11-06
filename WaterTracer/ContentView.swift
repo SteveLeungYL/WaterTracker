@@ -12,7 +12,31 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
-        CupView()
+        #if os(iOS)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // iPad
+            RingView()
+                .onChange(of: scenePhase) { oldPhase, newPhase in
+                    if newPhase == .inactive {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    } else if newPhase == .background {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                }
+        } else {
+            // iPhone
+            CupView()
+                .onChange(of: scenePhase) { oldPhase, newPhase in
+                    if newPhase == .inactive {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    } else if newPhase == .background {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                }
+        }
+        #elseif os(visionOS)
+        // visionOS
+        RingView()
             .onChange(of: scenePhase) { oldPhase, newPhase in
                 if newPhase == .inactive {
                     WidgetCenter.shared.reloadAllTimelines()
@@ -20,6 +44,7 @@ struct ContentView: View {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
             }
+        #endif
     }
 }
 
