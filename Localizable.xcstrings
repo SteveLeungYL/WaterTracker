@@ -47,6 +47,22 @@
         }
       }
     },
+    "%@%@ to go" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@ to go"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还剩%1$@%2$@"
+          }
+        }
+      }
+    },
     "100 ml" : {
       "localizations" : {
         "zh-Hans" : {
@@ -113,6 +129,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "天喝水追踪"
+          }
+        }
+      }
+    },
+    "Drink %@%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Drink %1$@%2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "喝了%1$@%2$@"
           }
         }
       }

@@ -27,7 +27,7 @@ struct WaterTracer_Accessory_WidgetEntryView : View {
         ZStack {
             switch widgetFamily {
             case .accessoryCircular:
-                let progress = max(0, min(1.0, entry.todayTotalDrinkNum / entry.dailyGoal))
+                let progress = max(0.0, min(1.0, entry.todayTotalDrinkNum / entry.dailyGoal))
                 ProgressView(value: progress) {
                     Image(systemName: "drop.fill")
                         .rotationEffect(.degrees(180))
@@ -35,7 +35,7 @@ struct WaterTracer_Accessory_WidgetEntryView : View {
                 .progressViewStyle(.circular)
                 .rotationEffect(.degrees(180))
             case .accessoryCorner:
-                let progress = max(0, min(1.0, entry.todayTotalDrinkNum / entry.dailyGoal))
+                let progress = max(0.0, min(1.0, entry.todayTotalDrinkNum / entry.dailyGoal))
                 ProgressView(value: progress) {
                     Image(systemName: "drop.fill")
                         .rotationEffect(.degrees(180))
@@ -64,9 +64,16 @@ struct WaterTracer_Accessory_WidgetEntryView : View {
                         .widgetAccentable()
                         
                         if entry.waterConfigMgr.waterUnit == .ml {
-                            Text(String(format:"Drink %d \(waterUnitStr)", Int(entry.todayTotalDrinkNum)))
-                                 
-                            Text(String(format:"%d \(waterUnitStr) to go", Int(entry.dailyGoal - entry.todayTotalDrinkNum)))
+                            let drinkNumStr = String(format: "%d", Int(entry.todayTotalDrinkNum))
+                            let leftNumStr = String(format: "%d", max(0, Int(entry.dailyGoal - entry.todayTotalDrinkNum)))
+                            Text(LocalizedStringKey("Drink \(drinkNumStr)\(waterUnitStr)"))
+                            Text(LocalizedStringKey("\(leftNumStr)\(waterUnitStr) to go"))
+                        } else {
+                            // .oz
+                            let drinkNumStr = String(format: "%.1f", entry.todayTotalDrinkNum)
+                            let leftNumStr = String(format: "%.1f", max(0.0, entry.dailyGoal - entry.todayTotalDrinkNum))
+                            Text(LocalizedStringKey("Drink \(drinkNumStr)\(waterUnitStr)"))
+                            Text(LocalizedStringKey("\(leftNumStr)\(waterUnitStr) to go"))
                         }
                     }.frame(maxWidth: .infinity, alignment: .leading)
                 }
