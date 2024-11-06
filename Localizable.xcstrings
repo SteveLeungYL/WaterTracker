@@ -2,10 +2,24 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "[1]" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "[1]"
+          }
+        }
+      }
     },
     "[1] Cleveland Clinic. (2024, October 3). How much water you should drink every day. https://health.clevelandclinic.org/how-much-water-do-you-need-daily" : {
       "localizations" : {
@@ -24,11 +38,24 @@
             "state" : "new",
             "value" : "%1$@%2$@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@"
+          }
         }
       }
     },
     "100 ml" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100 ml"
+          }
+        }
+      }
     },
     "Choose Unit: " : {
       "localizations" : {
@@ -90,6 +117,22 @@
         }
       }
     },
+    "Drink %@%@, %@%@ to go" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Drink %1$@%2$@, %3$@%4$@ to go"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "喝了%1$@%2$@，还剩%3$@%4$@"
+          }
+        }
+      }
+    },
     "For Digital Crown" : {
       "localizations" : {
         "zh-Hans" : {
@@ -131,7 +174,14 @@
       }
     },
     "OK" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "Showing 24 hour view or week view" : {
       "localizations" : {
@@ -257,7 +307,14 @@
       }
     },
     "Water Tracer Widget" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Water Tracer 小组件"
+          }
+        }
+      }
     },
     "Week View" : {
       "localizations" : {
