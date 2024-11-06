@@ -43,9 +43,10 @@ struct Provider: AppIntentTimelineProvider {
             let container = try ModelContainer(for: WaterTracerConfiguration.self)
             let context = ModelContext(container)
             config.updateWaterTracerConfig(modelContext: context)
-            _ = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit)
+//            _ = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
+            let todayTotalDrinkNum = healthKitManager.drinkWeekData.last?.value ?? 0.0
             
             
             // hour view
@@ -57,10 +58,10 @@ struct Provider: AppIntentTimelineProvider {
                 let entryDate = NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
                 if entryDate >= todayMidnight {
                     let emptyData = fillEmptyData(drinkDataRaw: [], startDate: todayMidnight, endDate: nextdayMidnight, gapUnit: .hour)
-                    let entry = SimpleEntry(date: entryDate, configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: emptyData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
+                    let entry = SimpleEntry(date: entryDate, configuration: configuration, todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: emptyData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                     entries.append(entry)
                 } else {
-                    let entry = SimpleEntry(date: entryDate, configuration: configuration, todayTotalDrinkNum: healthKitManager.todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
+                    let entry = SimpleEntry(date: entryDate, configuration: configuration, todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                     entries.append(entry)
                 }
             }
