@@ -88,7 +88,7 @@ struct WaterTracer_Accessory_Widget: Widget {
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         #if os(watchOS)
-        .supportedFamilies([.accessoryCorner, .accessoryCircular, .accessoryRectangular, .accessoryInline])
+        .supportedFamilies([.accessoryCorner, .accessoryCircular, .accessoryRectangular])
         #elseif os(iOS)
         .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
         #endif
