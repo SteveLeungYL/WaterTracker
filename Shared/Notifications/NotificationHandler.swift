@@ -123,7 +123,9 @@ extension CrossOsConnectivity: WCSessionDelegate {
         // Just register the information.
         // And that's it.
         LocalNotificationHandler.registerLocalNotification()
-        WidgetCenter.shared.reloadAllTimelines()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
     
 }
