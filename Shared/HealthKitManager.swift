@@ -172,7 +172,9 @@ class HealthKitManager {
         let todayDrinkWaterQuery = HKStatisticsQuery(quantityType: waterNumType, quantitySamplePredicate: todayPredicate, options: .cumulativeSum) { (query, statisticsOrNil, errorOrNil) in
             
             guard let statistics = statisticsOrNil else {
-                print("Failure to get statistics? Didn't authroize HealthKit?")
+                DispatchQueue.main.async{
+                    self.todayTotalDrinkNum = 0.0
+                }
                 return
             }
             
