@@ -91,22 +91,15 @@ struct CircularProgressView: View {
                 Spacer(minLength: 0)
             }
         }
-        .onAppear {
-            Task{
+        .onChange(of: updateToggle) {
+            Task {
                 let container = try ModelContainer(for: WaterTracerConfiguration.self)
                 let context = ModelContext(container)
                 config.updateWaterTracerConfig(modelContext: context)
-                _ =  healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.progress = healthKitManager.todayTotalDrinkNum / config.getDailyGoal()
+                _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
+                DispatchQueue.main.async {
+                    self.progress = (healthKitManager.drinkWeekData.last?.value ?? 0.0) / config.getDailyGoal()
                 }
-            }
-        }
-        .onChange(of: updateToggle) {
-            _ =  healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.progress = healthKitManager.todayTotalDrinkNum / config.getDailyGoal()
             }
         }
     }
