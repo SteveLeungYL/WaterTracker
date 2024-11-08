@@ -97,12 +97,8 @@ class WaterTracerConfigManager {
 
     func updateWaterTracerConfig(modelContext: ModelContext) {
         do {
-//            print("Fetching updates. ")
             let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>()
             let all_save = try modelContext.fetch(fecthDescriptor)
-            
-//            print("all_save is: ")
-//            print(all_save)
             
             if let data = all_save.first {
                 self.config = data
@@ -131,9 +127,6 @@ class WaterTracerConfigManager {
                 // Configuration has been saved before.
                 try modelContext.delete(model: WaterTracerConfiguration.self)
             }
-//            else {
-//                print("No previous config exist, won't delete. ")
-//            }
         } catch {
             print("Failed to delete all? \(error.localizedDescription)")
         }
@@ -141,11 +134,7 @@ class WaterTracerConfigManager {
     
     func setWaterUnit(_ waterUnit: WaterUnits, modelContext: ModelContext) {
         
-//        print("Set water unit. ")
-        print(waterUnit)
-        
         let waterTracerConfiguration = self.getWaterTracerConfiguration(modelContext: modelContext)
-//        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
         
         waterTracerConfiguration.waterUnit = waterUnit
         waterTracerConfiguration.cupCapacity = nil
@@ -155,9 +144,6 @@ class WaterTracerConfigManager {
         modelContext.insert(waterTracerConfiguration)
         do {
             try modelContext.save()
-//            print("Saved successfully")
-            updateWaterTracerConfig(modelContext: modelContext)
-            print(getWaterTracerConfiguration(modelContext: modelContext).waterUnit)
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -165,7 +151,6 @@ class WaterTracerConfigManager {
     
     func setCupCapacity(_ newCupCapacity: Double, modelContext: ModelContext) {
         let waterTracerConfiguration = getWaterTracerConfiguration(modelContext: modelContext)
-//        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
         
         waterTracerConfiguration.cupCapacity = newCupCapacity
         self.config = waterTracerConfiguration
@@ -179,7 +164,6 @@ class WaterTracerConfigManager {
     
     func setDailyGoal(_ newDailyGoal: Double, modelContext: ModelContext) {
         let waterTracerConfiguration = getWaterTracerConfiguration(modelContext: modelContext)
-//        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
         
         waterTracerConfiguration.dailyGoal = newDailyGoal
         modelContext.insert(waterTracerConfiguration)
@@ -192,7 +176,6 @@ class WaterTracerConfigManager {
 
     
     func setWaterTracerConfiguration(_ newConfig: WaterTracerConfiguration, modelContext: ModelContext) {
-//        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
         self.config = newConfig
         modelContext.insert(newConfig)
         do {
