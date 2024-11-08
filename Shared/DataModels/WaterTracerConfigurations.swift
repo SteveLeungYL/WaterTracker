@@ -12,19 +12,14 @@ let AppName = "Water Tracer"
 
 @Model
 class WaterTracerConfiguration {
-    var waterUnit: WaterUnits = WaterUnits.ml
-    var cupCapacity: Double? = nil
-    var dailyGoal: Double? = nil
+    var waterUnit: WaterUnits?
+    var cupCapacity: Double?
+    var dailyGoal: Double?
     
     init(waterUnit: WaterUnits, cupCapacity: Double, dailyGoals: Double) {
         self.waterUnit = waterUnit
         self.cupCapacity = cupCapacity
         self.dailyGoal = dailyGoals
-    }
-    init() {
-        self.waterUnit = WaterUnits.ml
-        self.cupCapacity = nil
-        self.dailyGoal = nil
     }
 }
 
@@ -62,54 +57,58 @@ class WaterTracerConfigManager {
     
     var waterUnit: WaterUnits {
         get {
-            return self.config.waterUnit
+            return self.config?.waterUnit ?? .ml
         }
     }
     
-    var config = WaterTracerConfiguration()
+    var config: WaterTracerConfiguration? = nil
     
     func getUnit() -> WaterUnits {
-        return self.config.waterUnit
+        return self.config?.waterUnit ?? .ml
     }
     
     func getCupCapacity() -> Double {
-        return self.config.cupCapacity ?? config.waterUnit.cupDefaultCapacity
+        return self.config?.cupCapacity ?? config?.waterUnit?.cupDefaultCapacity ?? WaterUnits.ml.cupDefaultCapacity
     }
     
     func getCupMinimumNum() -> Double {
-        return self.config.waterUnit.cupMinimumNum
+        return self.config?.waterUnit?.cupMinimumNum ?? WaterUnits.ml.cupMinimumNum
     }
     
     func getUnitStep() -> Double {
-        return self.config.waterUnit.unitStep
+        return self.config?.waterUnit?.unitStep ?? WaterUnits.ml.unitStep
     }
     
     func getUnitStr() -> String {
-        return self.config.waterUnit.unitStr
+        return self.config?.waterUnit?.unitStr ?? WaterUnits.ml.unitStr
     }
     
     func getDailyGoal() -> Double {
-        if let dailyGoal = self.config.dailyGoal {
+        if let dailyGoal = self.config?.dailyGoal {
             return dailyGoal
         } else {
-            return self.config.waterUnit.defaultDailyGoal
+            return self.config?.waterUnit?.defaultDailyGoal ?? WaterUnits.ml.defaultDailyGoal
         }
     }
     
     func getDailyGoalCustomRange() -> [Double] {
-        return self.config.waterUnit.dailyGoalRange
+        return self.config?.waterUnit?.dailyGoalRange ?? WaterUnits.ml.dailyGoalRange
     }
 
     func updateWaterTracerConfig(modelContext: ModelContext) {
         do {
-            let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>(predicate: nil)
+//            print("Fetching updates. ")
+            let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>()
             let all_save = try modelContext.fetch(fecthDescriptor)
+            
+//            print("all_save is: ")
+//            print(all_save)
             
             if let data = all_save.first {
                 self.config = data
             } else {
                 // No custom value, use default.
-                self.config = WaterTracerConfiguration()
+                self.config = WaterTracerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal)
             }
         } catch {
             print("Warnaing: Fail to get model. Use default. ")
@@ -118,7 +117,7 @@ class WaterTracerConfigManager {
     
     func getWaterTracerConfiguration(modelContext: ModelContext) -> WaterTracerConfiguration {
         self.updateWaterTracerConfig(modelContext: modelContext)
-        return self.config
+        return self.config ?? WaterTracerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal)
     }
     
     func deleteAllWaterTracerConfigs(modelContext: ModelContext) {
@@ -141,15 +140,24 @@ class WaterTracerConfigManager {
     }
     
     func setWaterUnit(_ waterUnit: WaterUnits, modelContext: ModelContext) {
+        
+//        print("Set water unit. ")
+        print(waterUnit)
+        
         let waterTracerConfiguration = self.getWaterTracerConfiguration(modelContext: modelContext)
-        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
+//        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
         
         waterTracerConfiguration.waterUnit = waterUnit
         waterTracerConfiguration.cupCapacity = nil
         waterTracerConfiguration.dailyGoal = nil
+        
+        self.config = waterTracerConfiguration
         modelContext.insert(waterTracerConfiguration)
         do {
             try modelContext.save()
+//            print("Saved successfully")
+            updateWaterTracerConfig(modelContext: modelContext)
+            print(getWaterTracerConfiguration(modelContext: modelContext).waterUnit)
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -157,9 +165,10 @@ class WaterTracerConfigManager {
     
     func setCupCapacity(_ newCupCapacity: Double, modelContext: ModelContext) {
         let waterTracerConfiguration = getWaterTracerConfiguration(modelContext: modelContext)
-        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
+//        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
         
         waterTracerConfiguration.cupCapacity = newCupCapacity
+        self.config = waterTracerConfiguration
         modelContext.insert(waterTracerConfiguration)
         do {
             try modelContext.save()
@@ -170,7 +179,7 @@ class WaterTracerConfigManager {
     
     func setDailyGoal(_ newDailyGoal: Double, modelContext: ModelContext) {
         let waterTracerConfiguration = getWaterTracerConfiguration(modelContext: modelContext)
-        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
+//        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
         
         waterTracerConfiguration.dailyGoal = newDailyGoal
         modelContext.insert(waterTracerConfiguration)
@@ -183,8 +192,8 @@ class WaterTracerConfigManager {
 
     
     func setWaterTracerConfiguration(_ newConfig: WaterTracerConfiguration, modelContext: ModelContext) {
-        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
-        
+//        self.deleteAllWaterTracerConfigs(modelContext: modelContext)
+        self.config = newConfig
         modelContext.insert(newConfig)
         do {
             try modelContext.save()
