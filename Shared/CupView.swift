@@ -182,6 +182,9 @@ struct CupView: View {
                         updateTextStr()
                         // HERE, make sure the animation plays correctly by reset the original value.
                         self.waveOffset = .zero
+                        // If the user change the daily goal, update the circular progress bar when this view onAppear.
+                        // Might be duplicated with the onChange(of: scenePhase), but should be fine to call it multiple times.
+                        self.updateToggle.toggle()
                     }
                     .onChange(of: self.healthKitManager.drinkNum) {
                         updateTextStr()
