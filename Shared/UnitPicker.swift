@@ -15,10 +15,10 @@ struct UnitPickerView: View {
     
     @Binding var updateToggle: Bool
     
-    @State private var waterUnitSelection: String = "Milliliter"
+    @State private var waterUnitSelection: String = ""
     @State private var waterUnitChoice = ["Milliliter", "Ounce"]
     
-    @State private var dailyGoal: Double = 2500.0
+    @State private var dailyGoal: Double = 0.0
     @State private var dailyGoalChoice: [Double] = [2500]
     
     init(updateToggle: Binding<Bool>) {
@@ -61,8 +61,10 @@ struct UnitPickerView: View {
                     self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
                 }
                 .onChange(of: self.dailyGoal) { oldValue, newValue in
-                    self.config.setDailyGoal(self.dailyGoal, modelContext: modelContext)
-                    updateToggle = !updateToggle
+                    if oldValue != 0.0 {
+                        self.config.setDailyGoal(self.dailyGoal, modelContext: modelContext)
+                        updateToggle = !updateToggle
+                    }
                 }
             }
 #endif
@@ -102,13 +104,13 @@ struct UnitPickerView: View {
                     }
                 }
                 .onChange(of: waterUnitSelection) { oldValue, newValue in
-                    if newValue == "Milliliter" {
+                    if newValue == "Milliliter" && oldValue != "" {
                         self.config.setWaterUnit(.ml, modelContext: modelContext)
                         self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
                         self.dailyGoal = self.config.getDailyGoal()
                         updateToggle = !updateToggle
                     }
-                    else if newValue == "Ounce" {
+                    else if newValue == "Ounce" && oldValue != "" {
                         self.config.setWaterUnit(.oz, modelContext: modelContext)
                         self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
                         self.dailyGoal = self.config.getDailyGoal()
