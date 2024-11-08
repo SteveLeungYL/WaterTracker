@@ -116,22 +116,6 @@ class WaterTracerConfigManager {
         return self.config ?? WaterTracerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal)
     }
     
-    func deleteAllWaterTracerConfigs(modelContext: ModelContext) {
-        
-        
-        do {
-            let fecthDescriptor = FetchDescriptor<WaterTracerConfiguration>(predicate: nil)
-            let all_save = try modelContext.fetch(fecthDescriptor)
-            
-            if let _ = all_save.first {
-                // Configuration has been saved before.
-                try modelContext.delete(model: WaterTracerConfiguration.self)
-            }
-        } catch {
-            print("Failed to delete all? \(error.localizedDescription)")
-        }
-    }
-    
     func setWaterUnit(_ waterUnit: WaterUnits, modelContext: ModelContext) {
         
         let waterTracerConfiguration = self.getWaterTracerConfiguration(modelContext: modelContext)
@@ -143,6 +127,7 @@ class WaterTracerConfigManager {
         self.config = waterTracerConfiguration
         modelContext.insert(waterTracerConfiguration)
         do {
+            // This will override the original save, not append.
             try modelContext.save()
         } catch {
             fatalError(error.localizedDescription)
@@ -156,6 +141,7 @@ class WaterTracerConfigManager {
         self.config = waterTracerConfiguration
         modelContext.insert(waterTracerConfiguration)
         do {
+            // This will override the original save, not append.
             try modelContext.save()
         } catch {
             fatalError(error.localizedDescription)
@@ -168,6 +154,7 @@ class WaterTracerConfigManager {
         waterTracerConfiguration.dailyGoal = newDailyGoal
         modelContext.insert(waterTracerConfiguration)
         do {
+            // This will override the original save, not append.
             try modelContext.save()
         } catch {
             fatalError(error.localizedDescription)
@@ -179,6 +166,7 @@ class WaterTracerConfigManager {
         self.config = newConfig
         modelContext.insert(newConfig)
         do {
+            // This will override the original save, not append.
             try modelContext.save()
         } catch {
             fatalError(error.localizedDescription)
