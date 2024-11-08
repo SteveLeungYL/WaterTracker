@@ -16,7 +16,7 @@ struct UnitPickerView: View {
     @Binding var updateToggle: Bool
     
     @State private var waterUnitSelection: String = ""
-    @State private var waterUnitChoice = ["Milliliter", "Ounce"]
+    @State private var waterUnitChoice = ["Milliliter", "Ounce", ""]
     
     @State private var dailyGoal: Double = 0.0
     @State private var dailyGoalChoice: [Double] = [2500]
@@ -102,6 +102,8 @@ struct UnitPickerView: View {
                     } else {
                         self.waterUnitSelection = "Ounce"
                     }
+                    // Remove the empty choice.
+                    self.waterUnitChoice = ["Milliliter", "Ounce"]
                 }
                 .onChange(of: waterUnitSelection) { oldValue, newValue in
                     if newValue == "Milliliter" && oldValue != "" {
