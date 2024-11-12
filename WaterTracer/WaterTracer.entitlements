@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.WaterTracer</string>
+		<string>group.YuLiang.WaterTracer</string>
 	</array>
 </dict>
 </plist>
