@@ -86,7 +86,7 @@ public final class LocalNotificationHandler {
         
         // Deliver the notification in five seconds.
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 7200, repeats: false) //  2 hours.
-        let request = UNNotificationRequest(identifier: "SteveLeung.WaterTracer.DeferredNotification", content: content, trigger: trigger) // Schedule the notification.
+        let request = UNNotificationRequest(identifier: "YuLiang.SimpleWaterTracer.DeferredNotification", content: content, trigger: trigger) // Schedule the notification.
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error : Error?) in
             if let theError = error {

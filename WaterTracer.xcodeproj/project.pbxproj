@@ -905,7 +905,7 @@
 				CODE_SIGN_ENTITLEMENTS = "WaterTracer Watch WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 47X549R648;
+				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer Watch Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Watch Widget";
@@ -919,7 +919,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer.watchkitapp.WaterTracer-Watch-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "YuLiang.SimpleWaterTracer.watchkitapp.WaterTracer-Watch-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -939,7 +939,7 @@
 				CODE_SIGN_ENTITLEMENTS = "WaterTracer Watch WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 47X549R648;
+				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer Watch Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Watch Widget";
@@ -953,7 +953,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer.watchkitapp.WaterTracer-Watch-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "YuLiang.SimpleWaterTracer.watchkitapp.WaterTracer-Watch-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1093,7 +1093,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterTracer Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 47X549R648;
+				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer-Watch-App-Info.plist";
@@ -1102,13 +1102,13 @@
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = SteveLeung.WaterTracer;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = YuLiang.SimpleWaterTracer;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTracer.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = YuLiang.SimpleWaterTracer.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1128,7 +1128,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterTracer Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 47X549R648;
+				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer-Watch-App-Info.plist";
@@ -1137,13 +1137,13 @@
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Trace uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = SteveLeung.WaterTracer;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = YuLiang.SimpleWaterTracer;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTracer.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = YuLiang.SimpleWaterTracer.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1164,7 +1164,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterTracer/Preview Content\"";
-				DEVELOPMENT_TEAM = 47X549R648;
+				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WaterTracer/Info.plist;
@@ -1183,7 +1183,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTracer;
+				PRODUCT_BUNDLE_IDENTIFIER = YuLiang.SimpleWaterTracer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1205,7 +1205,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterTracer/Preview Content\"";
-				DEVELOPMENT_TEAM = 47X549R648;
+				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WaterTracer/Info.plist;
@@ -1224,7 +1224,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTracer;
+				PRODUCT_BUNDLE_IDENTIFIER = YuLiang.SimpleWaterTracer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1406,7 +1406,7 @@
 				CODE_SIGN_ENTITLEMENTS = "WaterTracer WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 47X549R648;
+				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Widget";
@@ -1420,7 +1420,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer.WaterTracer-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "YuLiang.SimpleWaterTracer.WaterTracer-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1439,7 +1439,7 @@
 				CODE_SIGN_ENTITLEMENTS = "WaterTracer WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 47X549R648;
+				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracer Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracer Widget";
@@ -1453,7 +1453,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer.WaterTracer-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "YuLiang.SimpleWaterTracer.WaterTracer-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
