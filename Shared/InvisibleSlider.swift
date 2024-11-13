@@ -17,6 +17,7 @@ struct InvisibleSlider: View {
     var body: some View {
         GeometryReader { geo in
             #if !os(watchOS)
+            // For non-watchOS, detect touch location to determine water fill percentage and drink num.
             let dragGesture = DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     let percent = 1.0 - Double(value.location.y / geo.size.height)
@@ -32,6 +33,7 @@ struct InvisibleSlider: View {
             #endif
             
 #if os(watchOS)
+            // For watchOS, the screen is too small for touch detection, so instead should use the digital crown for drink number adjustment.
             Text("For Digital Crown")
                 .opacity(0.000001)
                 .focusable()
