@@ -1,3 +1,12 @@
+//
+//  Wave.swift
+//  WaterTracer
+//
+//  Created by Yu Liang on 11/12/24.
+//
+
+import SwiftUI
+
 struct Wave: Shape {
     
     var offSet: Angle
