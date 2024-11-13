@@ -12,6 +12,7 @@ let AppName = "Water Tracer"
 
 @Model
 class WaterTracerConfiguration {
+    // All optional to be compatible with iOS 16's SwiftData setting.
     var waterUnit: WaterUnits?
     var cupCapacity: Double?
     var dailyGoal: Double?
@@ -24,6 +25,10 @@ class WaterTracerConfiguration {
 }
 
 var sharedWaterTracerModelContainer: ModelContainer = {
+    /*
+     * Shared model to be synced and used everywhere in the app
+     * (except in widget, come on Apple...😭)
+     */
     let schema = Schema([
         WaterTracerConfiguration.self
     ])
@@ -38,6 +43,11 @@ var sharedWaterTracerModelContainer: ModelContainer = {
 
 @Observable
 class WaterTracerConfigManager {
+    /*
+     * Manager for the WaterTracer Configurations (SwiftData),
+     * provide an abstraction above the SwiftData @Model struct.
+     * If no custom setting saved, return the default one.
+     */
     
     var cupMinimumNum: Double {
         get{
@@ -107,7 +117,7 @@ class WaterTracerConfigManager {
                 self.config = WaterTracerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal)
             }
         } catch {
-            print("Warnaing: Fail to get model. Use default. ")
+            fatalError("Fatal Error: Fail to get model. ")
         }
     }
     
