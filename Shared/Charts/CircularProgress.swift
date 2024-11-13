@@ -25,7 +25,8 @@ import Charts
 import SwiftData
 
 struct CircularProgressView: View {
-    @State var healthKitManager: HealthKitManager
+    /* A dump circular progress bar view. Might be replaced by built-in progress bar later */
+    @Environment(HealthKitManager.self) private var healthKitManager
     
     //    @State private var rawSelectedDate: Date?
     @State var config: WaterTracerConfigManager
@@ -96,6 +97,7 @@ struct CircularProgressView: View {
                 let container = try ModelContainer(for: WaterTracerConfiguration.self)
                 let context = ModelContext(container)
                 config.updateWaterTracerConfig(modelContext: context)
+                /* Get week data can retrieve the last date as today. */
                 _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
                 DispatchQueue.main.async {
                     self.progress = (healthKitManager.drinkWeekData.last?.value ?? 0.0) / config.getDailyGoal()
@@ -109,5 +111,6 @@ struct CircularProgressView: View {
     @Previewable @State var healthKitManager = HealthKitManager()
     @Previewable @State var config = WaterTracerConfigManager()
     @Previewable @State var updateToggle = false
-    CircularProgressView(healthKitManager: healthKitManager, config: config, updateToggle: $updateToggle)
+    CircularProgressView(config: config, updateToggle: $updateToggle)
+        .environment(healthKitManager)
 }
