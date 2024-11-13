@@ -12,6 +12,10 @@ struct CupView: View {
     @Environment(HealthKitManager.self) private var healthKitManager
     @Environment(\.scenePhase) var scenePhase
     
+    // FIXME:: Animation glitches.
+    // The waveOffset is necessary as a State here.
+    // If move the waveOffset into waveAnimation, the start
+    // position of the waveOffset will cause problem of the animation.
     @State private var waveOffset: Angle = .zero
     
     @State private var isShowAlert: Bool = false
@@ -152,7 +156,7 @@ struct CupView: View {
                             
                             Spacer()
                             
-                            NavigationLink(destination: RingView() ) {
+                            NavigationLink(destination: SummaryView() ) {
                                 HStack{
                                     Spacer(minLength: 0)
                                     VStack{

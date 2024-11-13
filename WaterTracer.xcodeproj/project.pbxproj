@@ -29,8 +29,8 @@
 		29A489AD2CD2BD3C005AA4A1 /* WaterTracerConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489AB2CD2BD38005AA4A1 /* WaterTracerConfigurations.swift */; };
 		29A489D22CD2F988005AA4A1 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */; };
 		29A489D32CD2F988005AA4A1 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */; };
-		29A489D52CD3047E005AA4A1 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D42CD3047C005AA4A1 /* RingView.swift */; };
-		29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D42CD3047C005AA4A1 /* RingView.swift */; };
+		29A489D52CD3047E005AA4A1 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D42CD3047C005AA4A1 /* SummaryView.swift */; };
+		29A489D62CD3047E005AA4A1 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D42CD3047C005AA4A1 /* SummaryView.swift */; };
 		29A489D82CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
 		29A489D92CD309CC005AA4A1 /* BodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489D72CD309CC005AA4A1 /* BodyShape.swift */; };
 		29BC97352CD971E300E9F55F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97342CD971E300E9F55F /* WidgetKit.framework */; };
@@ -168,7 +168,7 @@
 		29A489A82CD2B9D2005AA4A1 /* Units.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
 		29A489AB2CD2BD38005AA4A1 /* WaterTracerConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterTracerConfigurations.swift; sourceTree = "<group>"; };
 		29A489D12CD2F984005AA4A1 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
-		29A489D42CD3047C005AA4A1 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
+		29A489D42CD3047C005AA4A1 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		29A489D72CD309CC005AA4A1 /* BodyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyShape.swift; sourceTree = "<group>"; };
 		29BC97322CD971E300E9F55F /* WaterTracer WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WaterTracer WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29BC97342CD971E300E9F55F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -415,7 +415,7 @@
 				29E22C522CDAB790006D186E /* Widgets */,
 				29D17B172CD446930049B75C /* UnitPicker.swift */,
 				29D17B122CD43B330049B75C /* Charts */,
-				29A489D42CD3047C005AA4A1 /* RingView.swift */,
+				29A489D42CD3047C005AA4A1 /* SummaryView.swift */,
 				29A489D02CD2F97B005AA4A1 /* Notifications */,
 				29A489A72CD2B9C1005AA4A1 /* DataModels */,
 				29A4897F2CD168C0005AA4A1 /* Shapes */,
@@ -776,7 +776,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2964344F2CD9D6A7008429BC /* DateHandling.swift in Sources */,
-				29A489D52CD3047E005AA4A1 /* RingView.swift in Sources */,
+				29A489D52CD3047E005AA4A1 /* SummaryView.swift in Sources */,
 				29C2FF272CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 				29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */,
 				29A489542CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
@@ -811,7 +811,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				296434502CD9D6A7008429BC /* DateHandling.swift in Sources */,
-				29A489D62CD3047E005AA4A1 /* RingView.swift in Sources */,
+				29A489D62CD3047E005AA4A1 /* SummaryView.swift in Sources */,
 				29C2FF292CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 				29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */,
 				29A489532CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,

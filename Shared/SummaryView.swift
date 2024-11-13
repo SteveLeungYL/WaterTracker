@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct RingView: View {
+struct SummaryView: View {
     /* Not used in widgets, thus fine for environment variables. */
     
     @Environment(HealthKitManager.self) private var healthKitManager
@@ -197,7 +197,7 @@ struct RingView: View {
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
     @Previewable @State var configManager = WaterTracerConfigManager()
-    RingView()
+    SummaryView()
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .environment(healthKitManager)
         .environment(configManager)
