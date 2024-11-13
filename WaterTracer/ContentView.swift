@@ -36,6 +36,7 @@ struct ContentView: View {
         }
         #elseif os(visionOS)
         // visionOS
+        // Do not support his platform at the moment, because no actual device for testing.
         RingView()
             .onChange(of: scenePhase) { oldPhase, newPhase in
                 if newPhase == .inactive {
