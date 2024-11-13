@@ -5,14 +5,6 @@
 //  Created by Yu Liang on 11/5/24.
 //
 
-
-//
-//  WaterTracer_Widget.swift
-//  WaterTracer Widget
-//
-//  Created by Yu Liang on 11/4/24.
-//
-
 import WidgetKit
 import SwiftUI
 import SwiftData
@@ -35,6 +27,8 @@ struct WaterTracer_Accessory_WidgetEntryView : View {
                 .progressViewStyle(.circular)
                 .rotationEffect(.degrees(180))
             case .accessoryCorner:
+                // TODO: Change this to a rounded design around the clock.
+                // Now it is the same as the accessoryCircular.
                 let progress = max(0.0, min(1.0, entry.todayTotalDrinkNum / entry.dailyGoal))
                 ProgressView(value: progress) {
                     Image(systemName: "drop.fill")
@@ -79,7 +73,7 @@ struct WaterTracer_Accessory_WidgetEntryView : View {
                 }
             default:
                 ZStack{
-                    // Empty
+                    // Empty. Should not come here.
                 }
             }
         }
@@ -95,16 +89,43 @@ struct WaterTracer_Accessory_Widget: Widget {
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         #if os(watchOS)
+        // .accessoryInline has too limited space for watchOS. might add back later.
         .supportedFamilies([.accessoryCorner, .accessoryCircular, .accessoryRectangular])
         #elseif os(iOS)
+        // .accessoryCorner not supported by iOS as of iOS 18.
         .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
         #endif
     }
 }
 
+let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate: getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
+
 #Preview(as: .accessoryCircular) {
     WaterTracer_Accessory_Widget()
 } timeline: {
-    let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate: getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
-    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 3100.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
 }
+
+#Preview(as: .accessoryRectangular) {
+    WaterTracer_Accessory_Widget()
+} timeline: {
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
+}
+
+#if os(iOS)
+
+#Preview(as: .accessoryInline) {
+    WaterTracer_Accessory_Widget()
+} timeline: {
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
+}
+
+#elseif os(watchOS)
+
+#Preview(as: .accessoryCorner) {
+    WaterTracer_Accessory_Widget()
+} timeline: {
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
+}
+
+#endif
