@@ -72,49 +72,49 @@
 			containerPortal = 297759092CCD881B00D54F00 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 295CA1AB2CD9AA9E00FDFC2B;
-			remoteInfo = "WaterTracer Watch WidgetExtension";
+			remoteInfo = "WaterTracker Watch WidgetExtension";
 		};
 		297759222CCD881D00D54F00 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 297759092CCD881B00D54F00 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 297759102CCD881C00D54F00;
-			remoteInfo = WaterTracer;
+			remoteInfo = WaterTracker;
 		};
 		2977592C2CCD881D00D54F00 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 297759092CCD881B00D54F00 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 297759102CCD881C00D54F00;
-			remoteInfo = WaterTracer;
+			remoteInfo = WaterTracker;
 		};
 		297759392CCD881D00D54F00 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 297759092CCD881B00D54F00 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 297759362CCD881D00D54F00;
-			remoteInfo = "WaterTracer Watch App";
+			remoteInfo = "WaterTracker Watch App";
 		};
 		2977594A2CCD881E00D54F00 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 297759092CCD881B00D54F00 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 297759362CCD881D00D54F00;
-			remoteInfo = "WaterTracer Watch App";
+			remoteInfo = "WaterTracker Watch App";
 		};
 		297759542CCD881E00D54F00 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 297759092CCD881B00D54F00 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 297759362CCD881D00D54F00;
-			remoteInfo = "WaterTracer Watch App";
+			remoteInfo = "WaterTracker Watch App";
 		};
 		29BC97422CD971E400E9F55F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 297759092CCD881B00D54F00 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 29BC97312CD971E300E9F55F;
-			remoteInfo = "WaterTracer WidgetExtension";
+			remoteInfo = "WaterTracker WidgetExtension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -460,7 +460,7 @@
 			name = "WaterTracker Watch WidgetExtension";
 			packageProductDependencies = (
 			);
-			productName = "WaterTracer Watch WidgetExtension";
+			productName = "WaterTracker Watch WidgetExtension";
 			productReference = 295CA1AC2CD9AA9E00FDFC2B /* WaterTracker Watch WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
@@ -487,7 +487,7 @@
 			name = WaterTracker;
 			packageProductDependencies = (
 			);
-			productName = WaterTracer;
+			productName = WaterTracker;
 			productReference = 297759112CCD881C00D54F00 /* WaterTracker.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -510,7 +510,7 @@
 			name = WaterTrackerTests;
 			packageProductDependencies = (
 			);
-			productName = WaterTracerTests;
+			productName = WaterTrackerTests;
 			productReference = 297759212CCD881D00D54F00 /* WaterTrackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -533,7 +533,7 @@
 			name = WaterTrackerUITests;
 			packageProductDependencies = (
 			);
-			productName = WaterTracerUITests;
+			productName = WaterTrackerUITests;
 			productReference = 2977592B2CCD881D00D54F00 /* WaterTrackerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -557,7 +557,7 @@
 			name = "WaterTracker Watch App";
 			packageProductDependencies = (
 			);
-			productName = "WaterTracer Watch App";
+			productName = "WaterTracker Watch App";
 			productReference = 297759372CCD881D00D54F00 /* WaterTracker Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -580,7 +580,7 @@
 			name = "WaterTracker Watch AppTests";
 			packageProductDependencies = (
 			);
-			productName = "WaterTracer Watch AppTests";
+			productName = "WaterTracker Watch AppTests";
 			productReference = 297759492CCD881E00D54F00 /* WaterTracker Watch AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -603,7 +603,7 @@
 			name = "WaterTracker Watch AppUITests";
 			packageProductDependencies = (
 			);
-			productName = "WaterTracer Watch AppUITests";
+			productName = "WaterTracker Watch AppUITests";
 			productReference = 297759532CCD881E00D54F00 /* WaterTracker Watch AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -625,7 +625,7 @@
 			name = "WaterTracker WidgetExtension";
 			packageProductDependencies = (
 			);
-			productName = "WaterTracer WidgetExtension";
+			productName = "WaterTracker WidgetExtension";
 			productReference = 29BC97322CD971E300E9F55F /* WaterTracker WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
@@ -1258,7 +1258,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTracerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1278,7 +1278,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTracerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1298,13 +1298,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTracerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTrackerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = WaterTracer;
+				TEST_TARGET_NAME = WaterTracker;
 			};
 			name = Debug;
 		};
@@ -1317,13 +1317,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTracerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = SteveLeung.WaterTrackerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = WaterTracer;
+				TEST_TARGET_NAME = WaterTracker;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1337,7 +1337,7 @@
 				DEVELOPMENT_TEAM = 47X549R648;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer-Watch-AppTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracker-Watch-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1357,7 +1357,7 @@
 				DEVELOPMENT_TEAM = 47X549R648;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer-Watch-AppTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracker-Watch-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1377,13 +1377,13 @@
 				DEVELOPMENT_TEAM = 47X549R648;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer-Watch-AppUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracker-Watch-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "WaterTracer Watch App";
+				TEST_TARGET_NAME = "WaterTracker Watch App";
 				WATCHOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
@@ -1396,13 +1396,13 @@
 				DEVELOPMENT_TEAM = 47X549R648;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracer-Watch-AppUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "SteveLeung.WaterTracker-Watch-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "WaterTracer Watch App";
+				TEST_TARGET_NAME = "WaterTracker Watch App";
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 11.0;
 			};

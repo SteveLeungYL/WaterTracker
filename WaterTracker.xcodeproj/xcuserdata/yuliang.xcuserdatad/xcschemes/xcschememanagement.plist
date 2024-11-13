@@ -4,22 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>WaterTracer Watch App.xcscheme_^#shared#^_</key>
+		<key>WaterTracker Watch App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>WaterTracer Watch WidgetExtension.xcscheme_^#shared#^_</key>
+		<key>WaterTracker Watch WidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>WaterTracer WidgetExtension.xcscheme_^#shared#^_</key>
+		<key>WaterTracker WidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>WaterTracer.xcscheme_^#shared#^_</key>
+		<key>WaterTracker.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
