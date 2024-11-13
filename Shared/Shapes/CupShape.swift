@@ -1,6 +1,6 @@
 //
 //  Cup.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 10/29/24.
 //

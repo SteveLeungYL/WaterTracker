@@ -1,6 +1,6 @@
 //
 //  Units.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 10/30/24.
 //

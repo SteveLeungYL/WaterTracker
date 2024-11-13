@@ -123,7 +123,7 @@
         }
       }
     },
-    "Day Water Tracer" : {
+    "Day Water Tracker" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -257,7 +257,7 @@
         }
       }
     },
-    "Showing 24 hours water tracer data" : {
+    "Showing 24 hours water tracker data" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -287,7 +287,7 @@
         }
       }
     },
-    "Showing week water tracer data" : {
+    "Showing week water tracker data" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -343,29 +343,22 @@
         }
       }
     },
-    "Water Tracer" : {
-      "extractionState" : "manual",
+    "Water Tracker" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Water Tracer"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喝水追踪器"
+            "value" : "Water Tracker"
           }
         }
       }
     },
-    "Water Tracer Widget" : {
+    "Water Tracker Widget" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Water Tracer 小组件"
+            "value" : "Water Tracker 小组件"
           }
         }
       }
@@ -380,7 +373,7 @@
         }
       }
     },
-    "Week Water Tracer" : {
+    "Week Water Tracker" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {

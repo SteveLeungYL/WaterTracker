@@ -1,6 +1,6 @@
 //
 //  NotificationHandler.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 10/30/24.
 //
@@ -15,7 +15,7 @@ final class CrossOsConnectivity: NSObject, ObservableObject {
     /*
      * Since we are not using a server to communicating between different devices, the WCSession that used to communicate
      * between the iPhone and Apple Watch is the main method we used to sync notification data.
-     * And yes, WaterTracer uses local notification instead of remote notification.
+     * And yes, WaterTracker uses local notification instead of remote notification.
      * If WCSession failed to communicate between the phone and watch (such as the watch is in its cellular mode), then
      * the notification of phone and watch would be out of sync.
      * I have no money for a remote server, so local notification (full local mode / full privacy) it is. 🤷‍♂️
@@ -86,7 +86,7 @@ public final class LocalNotificationHandler {
         
         // Deliver the notification after 2 hours of each time the user log its water drinking.
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 7200, repeats: false) //  2 hours.
-        let request = UNNotificationRequest(identifier: "YuLiang.SimpleWaterTracer.DeferredNotification", content: content, trigger: trigger) // Schedule the notification.
+        let request = UNNotificationRequest(identifier: "YuLiang.SimpleWaterTracker.DeferredNotification", content: content, trigger: trigger) // Schedule the notification.
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error : Error?) in
             if let theError = error {

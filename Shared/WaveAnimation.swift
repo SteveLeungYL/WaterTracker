@@ -1,6 +1,6 @@
 //
 //  WaveAnimation.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 10/27/24.
 //  Copied by Yu Liang from https://github.com/RedDragonJ/Swift-Learning/tree/main/Animations/Animations/Animations
@@ -33,7 +33,7 @@ struct WaveAnimation: View {
 
 struct WaveWithCupHeight: View {
     @Environment(HealthKitManager.self) private var healthKitManager
-    @Environment(WaterTracerConfigManager.self) private var config
+    @Environment(WaterTrackerConfigManager.self) private var config
     @Binding var waveOffset: Angle
     
     @State var drinkNum: Double = 0.0
@@ -79,7 +79,7 @@ struct WaveWithCupHeight: View {
 
 struct WaveWithBodyHeight: View {
     @Environment(HealthKitManager.self) private var healthKitManager
-    @Environment(WaterTracerConfigManager.self) private var config
+    @Environment(WaterTrackerConfigManager.self) private var config
     @Binding var waveOffset: Angle
 
     @State var drinkNum: Double = 0.0
@@ -127,12 +127,12 @@ struct WaveWithBodyHeight: View {
 #Preview {
     @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
     @Previewable @State var healthKitManager = HealthKitManager()
-    @Previewable @State var configManager = WaterTracerConfigManager()
+    @Previewable @State var configManager = WaterTrackerConfigManager()
     ZStack {
         WaveAnimation($waveOffset, true)
         InvisibleSlider()
     }
-    .modelContainer(sharedWaterTracerModelContainer)
+    .modelContainer(sharedWaterTrackerModelContainer)
     .environment(healthKitManager)
     .environment(configManager)
 }

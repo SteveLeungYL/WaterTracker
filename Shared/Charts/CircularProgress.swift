@@ -1,6 +1,6 @@
 //
 //  WaterTracingBarChart.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 11/4/24.
 //
@@ -8,7 +8,7 @@
 
 //
 //  WeightDiffBarChart.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Modified by Yu Liang on 10/31/24.
 //
@@ -29,7 +29,7 @@ struct CircularProgressView: View {
     @Environment(HealthKitManager.self) private var healthKitManager
     
     //    @State private var rawSelectedDate: Date?
-    @State var config: WaterTracerConfigManager
+    @State var config: WaterTrackerConfigManager
     @State var progress: Double = 0.00
     
 #if !os(watchOS)
@@ -94,9 +94,9 @@ struct CircularProgressView: View {
         }
         .onChange(of: updateToggle) {
             Task {
-                let container = try ModelContainer(for: WaterTracerConfiguration.self)
+                let container = try ModelContainer(for: WaterTrackerConfiguration.self)
                 let context = ModelContext(container)
-                config.updateWaterTracerConfig(modelContext: context)
+                config.updateWaterTrackerConfig(modelContext: context)
                 /* Get week data can retrieve the last date as today. */
                 _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
                 DispatchQueue.main.async {
@@ -109,7 +109,7 @@ struct CircularProgressView: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
-    @Previewable @State var config = WaterTracerConfigManager()
+    @Previewable @State var config = WaterTrackerConfigManager()
     @Previewable @State var updateToggle = false
     CircularProgressView(config: config, updateToggle: $updateToggle)
         .environment(healthKitManager)

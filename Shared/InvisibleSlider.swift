@@ -1,6 +1,6 @@
 //
 //  InvisibleSlider.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 10/28/24.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 struct InvisibleSlider: View {
     
     @Environment(HealthKitManager.self) private var healthKitManager
-    @Environment(WaterTracerConfigManager.self) private var config
+    @Environment(WaterTrackerConfigManager.self) private var config
 
     @State var scroll: Double = 0.0
 
@@ -62,7 +62,7 @@ struct InvisibleSlider: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
-    @Previewable @State var configManager = WaterTracerConfigManager()
+    @Previewable @State var configManager = WaterTrackerConfigManager()
     ZStack{
         InvisibleSlider()
         Text(String(format:"%.1f", healthKitManager.drinkNum))
