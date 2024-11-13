@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		291A0F342CE4597100BD8B88 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A0F332CE4597100BD8B88 /* Wave.swift */; };
+		291A0F352CE4597100BD8B88 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A0F332CE4597100BD8B88 /* Wave.swift */; };
 		295CA1AD2CD9AA9E00FDFC2B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97342CD971E300E9F55F /* WidgetKit.framework */; };
 		295CA1AE2CD9AA9E00FDFC2B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97362CD971E300E9F55F /* SwiftUI.framework */; };
 		295CA1B92CD9AA9F00FDFC2B /* WaterTracer Watch WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 295CA1AC2CD9AA9E00FDFC2B /* WaterTracer Watch WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -153,6 +155,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		291A0F332CE4597100BD8B88 /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		295CA1AC2CD9AA9E00FDFC2B /* WaterTracer Watch WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WaterTracer Watch WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2964344E2CD9D6A4008429BC /* DateHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandling.swift; sourceTree = "<group>"; };
 		2965A2612CCF254500E75A0F /* CupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupView.swift; sourceTree = "<group>"; };
@@ -367,6 +370,7 @@
 		29A4897F2CD168C0005AA4A1 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
+				291A0F332CE4597100BD8B88 /* Wave.swift */,
 				29A489D72CD309CC005AA4A1 /* BodyShape.swift */,
 				29A4897C2CD16841005AA4A1 /* CupShape.swift */,
 			);
@@ -780,6 +784,7 @@
 				29C2FF272CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 				29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */,
 				29A489542CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
+				291A0F352CE4597100BD8B88 /* Wave.swift in Sources */,
 				29A4895A2CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
 				29A489D32CD2F988005AA4A1 /* NotificationHandler.swift in Sources */,
 				2965A2632CCF254500E75A0F /* CupView.swift in Sources */,
@@ -815,6 +820,7 @@
 				29C2FF292CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 				29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */,
 				29A489532CD02922005AA4A1 /* InvisibleSlider.swift in Sources */,
+				291A0F342CE4597100BD8B88 /* Wave.swift in Sources */,
 				29A489592CD07F7B005AA4A1 /* HealthKitManager.swift in Sources */,
 				29A489D22CD2F988005AA4A1 /* NotificationHandler.swift in Sources */,
 				2965A2622CCF254500E75A0F /* CupView.swift in Sources */,
