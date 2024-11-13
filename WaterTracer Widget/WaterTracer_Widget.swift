@@ -30,7 +30,7 @@ struct Provider: AppIntentTimelineProvider {
             config.updateWaterTracerConfig(modelContext: context)
             let dailyGoal = 3100.0
             let todayTotalDrinkNum = 3100.0
-            _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
+            _ = await healthKitManager.updateDrinkWaterOneDay(waterUnitInput: config.waterUnit)
             return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: dailyGoal, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
         } catch {
             fatalError("Cannot get model container for config. ")
@@ -47,7 +47,7 @@ struct Provider: AppIntentTimelineProvider {
             let context = ModelContext(container)
             config.updateWaterTracerConfig(modelContext: context)
 //            _ = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit)
-            _ = await healthKitManager.updateDrinkWaterDay(waterUnitInput: config.waterUnit)
+            _ = await healthKitManager.updateDrinkWaterOneDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
             let todayTotalDrinkNum = healthKitManager.drinkWeekData.last?.value ?? 0.0
             

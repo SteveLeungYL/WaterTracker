@@ -63,7 +63,7 @@ struct SummaryView: View {
             self.alertError = err
             self.isShowAlert = true
         }
-        _ = await self.healthKitManager.updateDrinkWaterDay(waterUnitInput: self.config.waterUnit)
+        _ = await self.healthKitManager.updateDrinkWaterOneDay(waterUnitInput: self.config.waterUnit)
         _ = await self.healthKitManager.updateDrinkWaterWeek(waterUnitInput: self.config.waterUnit)
         updateTextStr()
     }
@@ -130,7 +130,7 @@ struct SummaryView: View {
                             .padding()
                             .onAppear() {
                                 Task{
-                                    await self.healthKitManager.updateDrinkWaterDay(waterUnitInput: self.config.waterUnit)
+                                    await self.healthKitManager.updateDrinkWaterOneDay(waterUnitInput: self.config.waterUnit)
                                 }
                             }
                         

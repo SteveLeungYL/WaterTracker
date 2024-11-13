@@ -16,7 +16,8 @@ struct HealthMetric: Identifiable {
     let value: Double
 }
 
-// Move to global scope, so it can be easily called by Previews to mock data. 
+// Helper data mocking function.
+// Move to global scope, so it can be easily called by Previews to mock data.
 func fillEmptyData(drinkDataRaw: [HealthMetric], startDate: Date, endDate: Date, gapUnit: Calendar.Component, isMock: Bool = false) -> [HealthMetric] {
     
     let calendar = NSCalendar.current
@@ -66,6 +67,7 @@ class HealthKitManager {
     
     func checkHealthKitAvailability() -> HealthKitError? {
         #if !WIDGET && !WATCH_WIDGET
+        // Don't check in widget mode as documented.
         
         if HKHealthStore.isHealthDataAvailable() == false {
             return .healthKitNotAvailable
@@ -81,6 +83,7 @@ class HealthKitManager {
         var err: HealthKitError? = nil
         
         #if !WIDGET && !WATCH_WIDGET
+        // Don't check in widget mode as documented.
 
         // This is to make sure device's Heath Data is Avaialble
         if let err = checkHealthKitAvailability() {
@@ -141,6 +144,8 @@ class HealthKitManager {
     }
     
     func updateDrinkWaterToday(waterUnitInput: WaterUnits) -> HealthKitError? {
+        // TODO: Merge with updateDrinkWaterWeek. Use the last day in the week as today's drink data.
+        
         if let errMsg = checkHealthKitAvailability() {
             return errMsg
         }
@@ -201,7 +206,7 @@ class HealthKitManager {
         return nil
     }
     
-    func updateDrinkWaterDay(waterUnitInput: WaterUnits) async  -> HealthKitError? {
+    func updateDrinkWaterOneDay(waterUnitInput: WaterUnits) async  -> HealthKitError? {
         // TODO: Merge with updateDrinkWaterWeek
         
         if let errMsg = checkHealthKitAvailability() {
@@ -228,11 +233,7 @@ class HealthKitManager {
         guard let todayMidnightDate = calendar.date(byAdding: .day, value: 1, to: lastMidnightDate) else {
             fatalError("*** Unable to create the end date ***")
         }
-//        guard let hourOneDayBefore = calendar.date(byAdding: .hour, value: -24, to: todayMidnightDate) else {
-//            fatalError("*** Unable to create the today date ***")
-//        }
         
-        //1. Use HKQuery to load the most recent samples.
         let oneDayPredicate = HKQuery.predicateForSamples(withStart: lastMidnightDate,
                                                           end: todayMidnightDate,
                                                            options: [])
@@ -265,7 +266,7 @@ class HealthKitManager {
     }
     
     func updateDrinkWaterWeek(waterUnitInput: WaterUnits) async  -> HealthKitError? {
-        // TODO: Merge with updateDrinkWaterDay
+        // TODO: Merge with updateDrinkWaterOneDay
         
         if let errMsg = checkHealthKitAvailability() {
             return errMsg
@@ -331,9 +332,6 @@ class HealthKitManager {
     }
 
     init() {
-        // TODO:: This should not be here.
-        // The check should be in the introduction tab view process.
-        // FIXME:: Fix later.
         _ = requestAuthorization()
     }
 }
