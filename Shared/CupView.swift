@@ -101,46 +101,103 @@ struct CupView: View {
                         Spacer()
                         
                         HStack{
-                            Button{
-                                Task {
-                                    if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
-                                        self.alertError = alertError
-                                        self.isShowAlert = true
+                            if #available(watchOS 11.0, *) {
+                                /*
+                                 * FIXME:: HELP!!!!!!
+                                 * This is super ugly but I don't know another way around it.
+                                 * THE ONLY DIFFERENCE IS THE .handGestureShortcut(.primaryAction) in watchOS.
+                                 */
+                                Button{
+                                    Task {
+                                        if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
+                                            self.alertError = alertError
+                                            self.isShowAlert = true
+                                        }
+                                        LocalNotificationHandler.registerLocalNotification()
+                                        CrossOsConnectivity.shared.sendNotificationReminder()
+                                        self.isDrinkButtonExpanded = true
+                                        self.textStr = "Water + "
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            self.isDrinkButtonExpanded = false
+                                        }
+                                        updateToggle.toggle()
                                     }
-                                    LocalNotificationHandler.registerLocalNotification()
-                                    CrossOsConnectivity.shared.sendNotificationReminder()
-                                    self.isDrinkButtonExpanded = true
-                                    self.textStr = "Water + "
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                        self.isDrinkButtonExpanded = false
-                                    }
-                                    updateToggle.toggle()
-                                }
 #if os(watchOS)
-                                WKInterfaceDevice.current().play(.success)
+                                    WKInterfaceDevice.current().play(.success)
 #endif
-                            } label: {
-                                Image(systemName: "mouth.fill")
-                                    .foregroundStyle(.red)
-                                    .font(.body)
-                            }
+                                } label: {
+                                    Image(systemName: "mouth.fill")
+                                        .foregroundStyle(.red)
+                                        .font(.body)
+                                }
 #if !os(watchOS)
-                            .padding()
-                            .frame(width: 70, height: 70, alignment: .center)
+                                .padding()
+                                .frame(width: 70, height: 70, alignment: .center)
+#else
+                                .handGestureShortcut(.primaryAction)
 #endif
-                            .background(.regularMaterial)
-                            .clipShape(.circle)
-                            .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
-                            .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
-                            // Well, sensoryFeedback is not working. :-(
-                            .sensoryFeedback(
-                                .impact(weight: .medium, intensity: 0.9),
-                                trigger: hapticTrigger
-                            )
-                            .alert(isPresented: $isShowAlert, error: alertError) { _ in
-                                Button("OK", role:.cancel) {}
-                            } message: { error in
-                                Text(error.recoverySuggestion ?? "Try again later.")
+                                .background(.regularMaterial)
+                                .clipShape(.circle)
+                                .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
+                                .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
+                                // Well, sensoryFeedback is not working. :-(
+                                .sensoryFeedback(
+                                    .impact(weight: .medium, intensity: 0.9),
+                                    trigger: hapticTrigger
+                                )
+                                .alert(isPresented: $isShowAlert, error: alertError) { _ in
+                                    Button("OK", role:.cancel) {}
+                                } message: { error in
+                                    Text(error.recoverySuggestion ?? "Try again later.")
+                                }
+                            } else {
+                                // Fallback on earlier versions
+                                /*
+                                 * FIXME:: HELP!!!!!!
+                                 * The whole thing repeats again without .handGestureShortcut(.primaryAction)
+                                 * That's the only difference.
+                                 */
+                                Button{
+                                    Task {
+                                        if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
+                                            self.alertError = alertError
+                                            self.isShowAlert = true
+                                        }
+                                        LocalNotificationHandler.registerLocalNotification()
+                                        CrossOsConnectivity.shared.sendNotificationReminder()
+                                        self.isDrinkButtonExpanded = true
+                                        self.textStr = "Water + "
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            self.isDrinkButtonExpanded = false
+                                        }
+                                        updateToggle.toggle()
+                                    }
+#if os(watchOS)
+                                    WKInterfaceDevice.current().play(.success)
+#endif
+                                } label: {
+                                    Image(systemName: "mouth.fill")
+                                        .foregroundStyle(.red)
+                                        .font(.body)
+                                }
+#if !os(watchOS)
+                                .padding()
+                                .frame(width: 70, height: 70, alignment: .center)
+#endif
+                                .background(.regularMaterial)
+                                .clipShape(.circle)
+                                .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
+                                .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
+                                // Well, sensoryFeedback is not working. :-(
+                                .sensoryFeedback(
+                                    .impact(weight: .medium, intensity: 0.9),
+                                    trigger: hapticTrigger
+                                )
+                                .alert(isPresented: $isShowAlert, error: alertError) { _ in
+                                    Button("OK", role:.cancel) {}
+                                } message: { error in
+                                    Text(error.recoverySuggestion ?? "Try again later.")
+                                }
                             }
                             
                             Spacer()
