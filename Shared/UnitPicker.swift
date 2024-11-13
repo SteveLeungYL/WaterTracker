@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct UnitPickerView: View {
-    
+    /* Not used in widgets, thus fine to use environment variables. */
     @Environment(HealthKitManager.self) private var healthKitManager
     @Environment(WaterTracerConfigManager.self) private var config
     @Environment(\.modelContext) var modelContext
     
+    // Connect to the parent view to update the whole page when configurations are updated.
     @Binding var updateToggle: Bool
     
+    /* Placeholder for the pickers. */
     @State private var waterUnitSelection: String = ""
     @State private var waterUnitChoice = ["Milliliter", "Ounce", ""]
     
@@ -38,7 +40,7 @@ struct UnitPickerView: View {
                     .fontWeight(.bold)
                     .allowsHitTesting(false)
                     .multilineTextAlignment(.leading)
-                // Make it at the bottom.
+                // Trick for citation.
                 Text("[1]")
                     .font(.system(size: 8))
                     .foregroundStyle(.black)
@@ -52,8 +54,8 @@ struct UnitPickerView: View {
                     }
                 }
                 .pickerStyle(.wheel)
-                .foregroundStyle(.black)
-                .accentColor(.black)
+                .foregroundStyle(.black) // FIXME: Does not have effect on the wheel text.
+                .accentColor(.black) // FIXME: Another failed attempt to change the wheel text to black.
                 .multilineTextAlignment(.center)
                 .labelsHidden()
                 .onAppear {
@@ -62,6 +64,8 @@ struct UnitPickerView: View {
                 }
                 .onChange(of: self.dailyGoal) { oldValue, newValue in
                     if oldValue != 0.0 {
+                        // onChange is triggered when changing values in onAppear.
+                        // But the placeholder is 0.0, thus won't run setDailyGoal on view onAppear.
                         self.config.setDailyGoal(self.dailyGoal, modelContext: modelContext)
                         updateToggle = !updateToggle
                     }
@@ -88,11 +92,12 @@ struct UnitPickerView: View {
                     }
                 }
 #if os(watchOS)
+                // navigationLink looks terrible on iOS.
                 .pickerStyle(.navigationLink)
 #else
                 .pickerStyle(SegmentedPickerStyle())
 #endif
-                .foregroundStyle(.black)
+                .foregroundStyle(.black) // FIXME: Same as above.
                 .accentColor(.black)
                 .multilineTextAlignment(.center)
                 .labelsHidden()
@@ -106,6 +111,7 @@ struct UnitPickerView: View {
                     self.waterUnitChoice = ["Milliliter", "Ounce"]
                 }
                 .onChange(of: waterUnitSelection) { oldValue, newValue in
+                    // Same as above. Will trigger on onAppear() but avoided by "" placeholder.
                     if newValue == "Milliliter" && oldValue != "" {
                         self.config.setWaterUnit(.ml, modelContext: modelContext)
                         self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
