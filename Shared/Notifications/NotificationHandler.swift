@@ -12,9 +12,14 @@ import Foundation
 import SwiftUICore
 
 final class CrossOsConnectivity: NSObject, ObservableObject {
-    
-    // Is published necessary?
-    @Published var receivedInfo: String = ""
+    /*
+     * Since we are not using a server to communicating between different devices, the WCSession that used to communicate
+     * between the iPhone and Apple Watch is the main method we used to sync notification data.
+     * And yes, WaterTracer uses local notification instead of remote notification.
+     * If WCSession failed to communicate between the phone and watch (such as the watch is in its cellular mode), then
+     * the notification of phone and watch would be out of sync.
+     * I have no money for a remote server, so local notification (full local mode / full privacy) it is. 🤷‍♂️
+     */
     
     // For communicating between watchOS and iOS
     static let shared = CrossOsConnectivity()
@@ -29,23 +34,18 @@ final class CrossOsConnectivity: NSObject, ObservableObject {
 #endif
         WCSession.default.delegate = self
         WCSession.default.activate()
-        
     }
     
     public func sendNotificationReminder() {
-        
         guard WCSession.default.activationState == .activated else {
             return
         }
         
-        // 1
 #if os(watchOS)
-        // 2
         guard WCSession.default.isCompanionAppInstalled else {
             return
         }
 #else
-        // 3
         guard WCSession.default.isWatchAppInstalled else {
             return
         }
@@ -53,8 +53,8 @@ final class CrossOsConnectivity: NSObject, ObservableObject {
         
         // Ignore the reponse handler.
         // And ignore the error handler either.
-        // If the companion doesn't reponse, we cannot do anything. 🤷🏻
-        // Inconsistent notification it is. 🤷🏻
+        // If the companion doesn't reponse, there is nothing we can do. 🤷‍♂️
+        // Inconsistent notification it is (because I don't want to buy a remote server just for this app). 🤷‍♂️
         WCSession.default.sendMessage(["msg": "Send Reminder"], replyHandler: nil)
     }
 }
@@ -84,7 +84,7 @@ public final class LocalNotificationHandler {
         content.body = NSString.localizedUserNotificationString(forKey: String(localized: "Log your water status in \(AppName)."), arguments: nil)
         content.sound = UNNotificationSound.default
         
-        // Deliver the notification in five seconds.
+        // Deliver the notification after 2 hours of each time the user log its water drinking.
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 7200, repeats: false) //  2 hours.
         let request = UNNotificationRequest(identifier: "YuLiang.SimpleWaterTracer.DeferredNotification", content: content, trigger: trigger) // Schedule the notification.
         let center = UNUserNotificationCenter.current()
@@ -112,6 +112,7 @@ extension CrossOsConnectivity: WCSessionDelegate {
         activationDidCompleteWith activationState: WCSessionActivationState,
         error: Error?
     ) {
+        /* Empty and not used. */
     }
     
     // This method is called when a message is sent with failable priority
@@ -120,10 +121,19 @@ extension CrossOsConnectivity: WCSessionDelegate {
         _ session: WCSession,
         didReceiveMessage message: [String: Any]
     ) {
-        // Just register the information.
+        // Just register the local notification to be in sync with the companion.
         // And that's it.
         LocalNotificationHandler.registerLocalNotification()
         DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            /* FIXME: widgets out of sync with HealthKit data.
+             * Try to refresh the widget after receiving the health data update.
+             * However, this is not working because iOS/watchOS is not updating
+             * its health data when locked.
+             * And it takes times to refresh the HealthKit data on device (in system).
+             * Directly refresh the widget asking for HealthKit data update in the
+             * background does not work for the time being.
+             * This is a bug that only Apple can fix.
+             */
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
