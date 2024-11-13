@@ -8,14 +8,18 @@
 import SwiftData
 import SwiftUI
 
+#if DEBUG_CloudKit
+import CoreData
+#endif
+
 let AppName = "Water Tracker"
 
 @Model
 class WaterTrackerConfiguration {
     // All optional to be compatible with iOS 16's SwiftData setting.
-    var waterUnit: WaterUnits?
-    var cupCapacity: Double?
-    var dailyGoal: Double?
+    var waterUnit: WaterUnits? = nil
+    var cupCapacity: Double? = nil
+    var dailyGoal: Double? = nil
     
     init(waterUnit: WaterUnits, cupCapacity: Double, dailyGoals: Double) {
         self.waterUnit = waterUnit
@@ -35,7 +39,38 @@ var sharedWaterTrackerModelContainer: ModelContainer = {
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
     
     do {
-        return try ModelContainer(for: schema, configurations: [modelConfiguration])
+
+        // If you haven't setup your CloudKit correctly, THIS WILL CRASH.
+        // Therefore, just comment them out using #if DEBUG_CloudKit for now.
+#if DEBUG_CloudKit
+//     Use an autorelease pool to make sure Swift deallocates the persistent
+//     container before setting up the SwiftData stack.
+    try autoreleasepool {
+        let desc = NSPersistentStoreDescription(url: modelConfiguration.url)
+        let opts = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.SimpleWaterTrackerCloudKit")
+        desc.cloudKitContainerOptions = opts
+        // Load the store synchronously so it completes before initializing the
+        // CloudKit schema.
+        desc.shouldAddStoreAsynchronously = false
+        if let mom = NSManagedObjectModel.makeManagedObjectModel(for: [WaterTrackerConfiguration.self]) {
+            let container = NSPersistentCloudKitContainer(name: "SimpleWaterTracker", managedObjectModel: mom)
+            container.persistentStoreDescriptions = [desc]
+            container.loadPersistentStores {_, err in
+                if let err {
+                    fatalError(err.localizedDescription)
+                }
+            }
+            // Initialize the CloudKit schema after the store finishes loading.
+            try container.initializeCloudKitSchema()
+            // Remove and unload the store from the persistent container.
+            if let store = container.persistentStoreCoordinator.persistentStores.first {
+                try container.persistentStoreCoordinator.remove(store)
+            }
+        }
+    }
+#endif
+    
+        return try ModelContainer(for: schema, configurations: modelConfiguration)
     } catch {
         fatalError("Could not create ModelContainer: \(error)")
     }
