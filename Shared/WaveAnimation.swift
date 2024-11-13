@@ -164,7 +164,7 @@ struct Wave: Shape {
     @Previewable @State var configManager = WaterTracerConfigManager()
     ZStack {
         WaveAnimation($waveOffset, true)
-        InvisibleSlider(waveOffset: $waveOffset)
+        InvisibleSlider()
     }
     .modelContainer(sharedWaterTracerModelContainer)
     .environment(healthKitManager)
