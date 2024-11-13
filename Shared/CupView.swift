@@ -91,7 +91,7 @@ struct CupView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: cupWidth, alignment: .center)
                                     .overlay(
-                                        InvisibleSlider(waveOffset: $waveOffset)
+                                        InvisibleSlider()
                                     )
                                 
                             }

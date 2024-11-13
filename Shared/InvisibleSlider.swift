@@ -12,8 +12,6 @@ struct InvisibleSlider: View {
     @Environment(HealthKitManager.self) private var healthKitManager
     @Environment(WaterTracerConfigManager.self) private var config
 
-    @Binding var waveOffset: Angle
-    
     @State var scroll: Double = 0.0
 
     var body: some View {
@@ -61,11 +59,10 @@ struct InvisibleSlider: View {
 }
 
 #Preview {
-    @Previewable @State var waveOffset: Angle = Angle(degrees: 0.0)
     @Previewable @State var healthKitManager = HealthKitManager()
     @Previewable @State var configManager = WaterTracerConfigManager()
     ZStack{
-        InvisibleSlider(waveOffset: $waveOffset)
+        InvisibleSlider()
         Text(String(format:"%.1f", healthKitManager.drinkNum))
             .font(.largeTitle)
     }
