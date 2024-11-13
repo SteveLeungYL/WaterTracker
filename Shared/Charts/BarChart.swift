@@ -4,12 +4,8 @@
 //
 //  Modified by Yu Liang on 10/31/24.
 //
-
-//
-//  WeightDiffBarChart.swift
-//  ahowCaseHealthKit
-//
-//  Created by Arthur Nsereko Kahwa on 5/28/24.
+//  Originally Created by Arthur Nsereko Kahwa on 5/28/24.
+//  Link: git@github.com:arthurkahwa/healthkit_showcase.git
 //
 
 import SwiftUI
@@ -22,11 +18,14 @@ struct WaterTracingBarChart: View {
     @State var subTitle: LocalizedStringKey
     
     #if WIDGET
+    // iOS widget.
     @State var hourGap: Int = 4
     #elseif WATCH_WIDGET || os(watchOS)
+    // watchOS or watchOS widget.
+    // the font is bigger because we skipped some titles.
     @State var hourGap: Int = 6
     #else
-    // in App.
+    // In App.
     @State var hourGap: Int = 4
     #endif
 
@@ -129,6 +128,8 @@ struct WaterTracingBarChart: View {
                         AxisValueLabel(format: .dateTime.weekday(), centered: true)
                     }
                     #else
+                    // Use .short formatting for weekday on watchOS.
+                    // The default formatting is too big for Apple Watch SE (40mm).
                     AxisMarks(values: .stride(by: .day)) {
                         AxisValueLabel(format: Date.FormatStyle().weekday(.short), centered: true)
                     }
@@ -187,6 +188,8 @@ struct WaterTracingBarChart: View {
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
     @Previewable @State var configManager = WaterTracerConfigManager()
+    
+    // Random week data for Preview. 
     @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
     
     ZStack {
