@@ -15,7 +15,7 @@ struct ContentView: View {
         #if os(iOS)
         if UIDevice.current.userInterfaceIdiom == .pad {
             // iPad
-            RingView()
+            SummaryView()
                 .onChange(of: scenePhase) { oldPhase, newPhase in
                     if newPhase == .inactive {
                         WidgetCenter.shared.reloadAllTimelines()
