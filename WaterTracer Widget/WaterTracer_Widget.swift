@@ -140,6 +140,6 @@ struct WaterTracer_Widget: Widget {
 #Preview(as: .systemMedium) {
     WaterTracer_Widget()
 } timeline: {
-    let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate: getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
+    let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate: getStartOfDate(date: Date()), gapUnit: .hour, isMock: true)
     SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 2500.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTracerConfigManager())
 }
