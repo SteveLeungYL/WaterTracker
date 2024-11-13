@@ -45,15 +45,18 @@ struct WaveWithCupHeight: View {
         GeometryReader { geometry in
             ZStack {
                 #if !os(watchOS)
-                Wave(offSet: Angle(degrees: waveOffset.degrees + 270))
-                    .fill(Color.blue.gradient)
-                    .opacity(0.3)
-                    .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
-                
-                Wave(offSet: Angle(degrees: waveOffset.degrees + 90))
-                    .fill(Color.blue.gradient)
-                    .opacity(0.4)
-                    .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
+                // This is only presented in iPhone.
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    Wave(offSet: Angle(degrees: waveOffset.degrees + 270))
+                        .fill(Color.blue.gradient)
+                        .opacity(0.3)
+                        .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
+                    
+                    Wave(offSet: Angle(degrees: waveOffset.degrees + 90))
+                        .fill(Color.blue.gradient)
+                        .opacity(0.4)
+                        .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
+                }
                 #endif
                 
                 Wave(offSet: Angle(degrees: waveOffset.degrees))
@@ -88,15 +91,20 @@ struct WaveWithBodyHeight: View {
         GeometryReader { geometry in
             ZStack {
                 #if !os(watchOS)
-                Wave(offSet: Angle(degrees: waveOffset.degrees + 270))
-                    .fill(Color.blue.gradient)
-                    .opacity(0.3)
-                    .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
-
-                Wave(offSet: Angle(degrees: waveOffset.degrees + 90))
-                    .fill(Color.blue.gradient)
-                    .opacity(0.4)
-                    .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
+                // Do not use multiple layers of waves in iPad (only iPhone).
+                // This is due to the performance issue with iPad Pro 12.9 inch (3rd generation) released in 2018.
+                // May reopen when this specific device goes out-of-support.
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    Wave(offSet: Angle(degrees: waveOffset.degrees + 270))
+                        .fill(Color.blue.gradient)
+                        .opacity(0.3)
+                        .animation(.linear(duration: 2.3).repeatForever(autoreverses: false), value: waveOffset)
+                    
+                    Wave(offSet: Angle(degrees: waveOffset.degrees + 90))
+                        .fill(Color.blue.gradient)
+                        .opacity(0.4)
+                        .animation(.linear(duration: 1.8).repeatForever(autoreverses: false), value: waveOffset)
+                }
                 #endif
 
                 Wave(offSet: Angle(degrees: waveOffset.degrees))
