@@ -40,8 +40,10 @@ var sharedWaterTrackerModelContainer: ModelContainer = {
     
     do {
 
-        // If you haven't setup your CloudKit correctly, THIS WILL CRASH.
-        // Therefore, just comment them out using #if DEBUG_CloudKit for now.
+        /*
+         * If you haven't setup your CloudKit correctly, THIS WILL CRASH.
+         * Therefore, just comment them out using #if DEBUG_CloudKit for now.
+         */
 #if DEBUG_CloudKit
 //     Use an autorelease pool to make sure Swift deallocates the persistent
 //     container before setting up the SwiftData stack.
