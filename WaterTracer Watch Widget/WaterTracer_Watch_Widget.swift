@@ -18,7 +18,7 @@ struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: false)
         let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
-        return SimpleEntry(date: getStartOfDate(date: Date()), configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 3100.0, dailyGoal: 3100.0, dayData: mockDayData, weekData: mockWeekData, waterConfig: config)
+        return SimpleEntry(date: getStartOfDate(date: Date()), configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 2400.0, dailyGoal: 3100.0, dayData: mockDayData, weekData: mockWeekData, waterConfig: config)
     }
     
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
@@ -28,7 +28,7 @@ struct Provider: AppIntentTimelineProvider {
             config.updateWaterTracerConfig(modelContext: context)
             _ = await healthKitManager.updateDrinkWaterOneDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
-            return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, todayTotalDrinkNum: 3100.0, dailyGoal: 3100.0, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
+            return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, todayTotalDrinkNum: 2400.0, dailyGoal: 3100.0, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
         } catch {
             fatalError("Cannot get model container for config. ")
         }
@@ -54,6 +54,7 @@ struct Provider: AppIntentTimelineProvider {
             let todayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: lastMidnight)!
             let nextdayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: todayMidnight)!
             
+            // Only valid for 2 hours.
             for hourOffset in 0 ..< 2 {
                 let entryDate = NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
                 if entryDate >= todayMidnight {

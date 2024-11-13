@@ -18,7 +18,7 @@ struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: false)
         let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
-        let todayTotalDrinkNum = 3100.0
+        let todayTotalDrinkNum = 2400.0
         let dailyGoal = 3100.0
         return SimpleEntry(date: getStartOfDate(date: Date()), configuration: ConfigurationAppIntent(), todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: dailyGoal, dayData: mockDayData, weekData: mockWeekData, waterConfig: config)
     }
@@ -28,8 +28,8 @@ struct Provider: AppIntentTimelineProvider {
             let container = try ModelContainer(for: WaterTracerConfiguration.self)
             let context = ModelContext(container)
             config.updateWaterTracerConfig(modelContext: context)
+            let todayTotalDrinkNum = 2400.0
             let dailyGoal = 3100.0
-            let todayTotalDrinkNum = 3100.0
             _ = await healthKitManager.updateDrinkWaterOneDay(waterUnitInput: config.waterUnit)
             return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: dailyGoal, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
         } catch {
@@ -58,6 +58,7 @@ struct Provider: AppIntentTimelineProvider {
                 let todayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: lastMidnight)!
                 let nextdayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: todayMidnight)!
                 
+                // Only valid for 2 hours.
                 for hourOffset in 0 ..< 2 {
                     let entryDate = NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
                     if entryDate >= todayMidnight {
@@ -71,6 +72,7 @@ struct Provider: AppIntentTimelineProvider {
                 }
             } else {
                 // week view
+                // Slightly longer cache time, 3 hours.
                 for hourOffset in 0 ..< 3 {
                     let entryDate = NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
                     let entry = SimpleEntry(date: entryDate, configuration: configuration, todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
@@ -83,10 +85,6 @@ struct Provider: AppIntentTimelineProvider {
             fatalError("Cannot get model container for config. ")
         }
     }
-    
-    //    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-    //        // Generate a list containing the contexts this widget is relevant in.
-    //    }
 }
 
 struct SimpleEntry: TimelineEntry {
@@ -126,6 +124,7 @@ struct WaterTracer_WidgetEntryView : View {
 }
 
 struct WaterTracer_Widget: Widget {
+    // FIXME:: TODO:: Present both 24 hour widget and week widget on the widget picker. 
     let kind: String = "WaterTracer_Widget"
     
     var body: some WidgetConfiguration {
