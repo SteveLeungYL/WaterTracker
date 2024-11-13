@@ -11,6 +11,7 @@ enum WaterUnits: Codable, Hashable {
     case ml
     
     var cupDefaultCapacity: Double {
+        // FIXME:: Changing cup size?
         switch self {
         case .oz:
             return 20.0
@@ -47,6 +48,7 @@ enum WaterUnits: Codable, Hashable {
     }
     
     var defaultDailyGoal: Double {
+        // As suggested by the citation. 
         switch self {
         case .oz:
             return 100.0
