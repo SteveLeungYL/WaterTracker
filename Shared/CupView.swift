@@ -157,7 +157,7 @@ struct CupView: View {
                                     Spacer(minLength: 0)
                                     VStack{
                                         Spacer(minLength: 0)
-                                        CircularProgressView(healthKitManager: self.healthKitManager, config: self.config, updateToggle: self.$updateToggle)
+                                        CircularProgressView(config: self.config, updateToggle: self.$updateToggle)
                                         Spacer(minLength: 0)
                                     }
                                     Spacer(minLength: 0)
@@ -194,6 +194,7 @@ struct CupView: View {
                         // circular progress bar.
                         oldPhase, newPhase in
                         if newPhase == .active {
+                            // Toggle circular bar updates. 
                             self.updateToggle.toggle()
                         }
                     }

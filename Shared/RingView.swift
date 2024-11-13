@@ -9,6 +9,7 @@ import SwiftUI
 import Charts
 
 struct RingView: View {
+    /* Not used in widgets, thus fine for environment variables. */
     
     @Environment(HealthKitManager.self) private var healthKitManager
     @Environment(WaterTracerConfigManager.self) private var config
