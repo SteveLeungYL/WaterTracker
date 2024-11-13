@@ -1,6 +1,6 @@
 //
 //  UnitPicker.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 10/31/24.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 struct UnitPickerView: View {
     /* Not used in widgets, thus fine to use environment variables. */
     @Environment(HealthKitManager.self) private var healthKitManager
-    @Environment(WaterTracerConfigManager.self) private var config
+    @Environment(WaterTrackerConfigManager.self) private var config
     @Environment(\.modelContext) var modelContext
     
     // Connect to the parent view to update the whole page when configurations are updated.
@@ -133,7 +133,7 @@ struct UnitPickerView: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
-    @Previewable @State var configManager = WaterTracerConfigManager()
+    @Previewable @State var configManager = WaterTrackerConfigManager()
     @Previewable @State var updateToggle = false
     
     UnitPickerView(updateToggle: $updateToggle)

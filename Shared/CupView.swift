@@ -1,6 +1,6 @@
 //
 //  MyIcon.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 10/27/24.
 //
@@ -27,7 +27,7 @@ struct CupView: View {
     
     private var crossOsConnectivity: CrossOsConnectivity = CrossOsConnectivity.shared
     
-    @Environment(WaterTracerConfigManager.self) private var config
+    @Environment(WaterTrackerConfigManager.self) private var config
     @Environment(\.modelContext) var modelContext
     
     @State private var textStr: LocalizedStringKey = "100 ml"
@@ -234,7 +234,7 @@ struct CupView: View {
                         
                     } // From the VStack. This should expand to the whole screen excluding the safe area
                     .onAppear() {
-                        config.updateWaterTracerConfig(modelContext: self.modelContext)
+                        config.updateWaterTrackerConfig(modelContext: self.modelContext)
                         setDefaultDrinkNum()
                         updateTextStr()
                         // HERE, make sure the animation plays correctly by reset the original value.
@@ -264,7 +264,7 @@ struct CupView: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
-    @Previewable @State var configManager = WaterTracerConfigManager()
+    @Previewable @State var configManager = WaterTrackerConfigManager()
     CupView()
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .environment(healthKitManager)

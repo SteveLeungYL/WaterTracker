@@ -1,6 +1,6 @@
 //
 //  Wave.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 11/12/24.
 //

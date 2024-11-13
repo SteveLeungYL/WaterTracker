@@ -1,6 +1,6 @@
 //
 //  RingView.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Created by Yu Liang on 10/30/24.
 //
@@ -12,7 +12,7 @@ struct SummaryView: View {
     /* Not used in widgets, thus fine for environment variables. */
     
     @Environment(HealthKitManager.self) private var healthKitManager
-    @Environment(WaterTracerConfigManager.self) private var config
+    @Environment(WaterTrackerConfigManager.self) private var config
     @Environment(\.scenePhase) var scenePhase
     
     // FIXME:: Animation glitches.
@@ -126,7 +126,7 @@ struct SummaryView: View {
                         }
                         Spacer()
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: LocalizedStringKey("Day Water Tracer"), subTitle: LocalizedStringKey("Showing 24 hours data"), config: self.config)
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: LocalizedStringKey("Day Water Tracker"), subTitle: LocalizedStringKey("Showing 24 hours data"), config: self.config)
                             .padding()
                             .onAppear() {
                                 Task{
@@ -134,7 +134,7 @@ struct SummaryView: View {
                                 }
                             }
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: LocalizedStringKey("Week Water Tracer"), subTitle: LocalizedStringKey("Showing last 7 days data"), config: self.config)
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: LocalizedStringKey("Week Water Tracker"), subTitle: LocalizedStringKey("Showing last 7 days data"), config: self.config)
                             .padding()
                             .onAppear() {
                                 Task{
@@ -196,7 +196,7 @@ struct SummaryView: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
-    @Previewable @State var configManager = WaterTracerConfigManager()
+    @Previewable @State var configManager = WaterTrackerConfigManager()
     SummaryView()
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .environment(healthKitManager)

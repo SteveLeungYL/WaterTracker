@@ -1,6 +1,6 @@
 //
 //  WeightDiffBarChart.swift
-//  WaterTracer
+//  WaterTracker
 //
 //  Modified by Yu Liang on 10/31/24.
 //
@@ -30,7 +30,7 @@ struct WaterTracingBarChart: View {
     #endif
 
     //    @State private var rawSelectedDate: Date?
-    @State var config: WaterTracerConfigManager
+    @State var config: WaterTrackerConfigManager
     
     //    var selectedData: HealthMetric? {
     //        guard let rawSelectedDate else { return nil }
@@ -102,16 +102,16 @@ struct WaterTracingBarChart: View {
                 //                        }
                 //                }
                 if self.dateComponents == .day {
-                    ForEach(chartData) { curDateTracer in
-                        BarMark(x: .value("Day", curDateTracer.date, unit: .day),
-                                y: .value("Water Drink", curDateTracer.value)
+                    ForEach(chartData) { curDateTracker in
+                        BarMark(x: .value("Day", curDateTracker.date, unit: .day),
+                                y: .value("Water Drink", curDateTracker.value)
                         )
-                        .foregroundStyle(curDateTracer.value >= self.config.getDailyGoal() ? Color.blue.gradient : Color.mint.gradient)
+                        .foregroundStyle(curDateTracker.value >= self.config.getDailyGoal() ? Color.blue.gradient : Color.mint.gradient)
                     }
                 } else if self.dateComponents == .hour {
-                    ForEach(chartData) { curDateTracer in
-                        BarMark(x: .value("Hour", curDateTracer.date, unit: .hour),
-                                y: .value("Water Drink", curDateTracer.value)
+                    ForEach(chartData) { curDateTracker in
+                        BarMark(x: .value("Hour", curDateTracker.date, unit: .hour),
+                                y: .value("Water Drink", curDateTracker.value)
                         )
                         .foregroundStyle(Color.blue.gradient)
                     }
@@ -187,14 +187,14 @@ struct WaterTracingBarChart: View {
 
 #Preview {
     @Previewable @State var healthKitManager = HealthKitManager()
-    @Previewable @State var configManager = WaterTracerConfigManager()
+    @Previewable @State var configManager = WaterTrackerConfigManager()
     
     // Random week data for Preview. 
     @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
     
     ZStack {
-        WaterTracingBarChart(chartData: mockChartData, dateComponents: .day, mainTitle: "Week Tracer", subTitle: "Showing last 7 days data", config: WaterTracerConfigManager())
-            .modelContainer(sharedWaterTracerModelContainer)
+        WaterTracingBarChart(chartData: mockChartData, dateComponents: .day, mainTitle: "Week Tracker", subTitle: "Showing last 7 days data", config: WaterTrackerConfigManager())
+            .modelContainer(sharedWaterTrackerModelContainer)
             .environment(healthKitManager)
             .environment(configManager)
     }
