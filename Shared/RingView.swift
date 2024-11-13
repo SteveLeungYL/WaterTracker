@@ -15,14 +15,20 @@ struct RingView: View {
     @Environment(WaterTracerConfigManager.self) private var config
     @Environment(\.scenePhase) var scenePhase
     
+    // FIXME:: Animation glitches.
+    // The waveOffset is necessary as a State here.
+    // If move the waveOffset into waveAnimation, the start
+    // position of the waveOffset will cause problem of the animation.
     @State private var waveOffset = Angle(degrees: 0)
     
     @State private var isShowAlert: Bool = false
     @State private var alertError: HealthKitError? = nil
     
+    // Placeholder for texts.
     @State private var textStr: LocalizedStringKey = "100 ml"
     @State private var unitStr: String = "ml"
     
+    // For updating all UIs when configuration changes.
     @State var updateToggle: Bool = false
     
     func updateTextStr() {
@@ -32,14 +38,20 @@ struct RingView: View {
             let suggestedNumStr = String(format: "%d", Int(self.config.getDailyGoal()))
             let leftNumStr = String(format: "%d", Int(max(0, Int(self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))))
             
-            self.textStr = LocalizedStringKey("Today you drink \(drinkNumStr)\(self.unitStr) out of the goal \(suggestedNumStr)\(self.unitStr), \(leftNumStr)\(self.unitStr) to go")
+            // Always use main thread to update UI.
+            DispatchQueue.main.async{
+                self.textStr = LocalizedStringKey("Today you drink \(drinkNumStr)\(self.unitStr) out of the goal \(suggestedNumStr)\(self.unitStr), \(leftNumStr)\(self.unitStr) to go")
+            }
         } else {
             
             let drinkNumStr = String(format: "%.1f", self.healthKitManager.todayTotalDrinkNum)
             let suggestedNumStr = String(format: "%.1f", self.config.getDailyGoal())
             let leftNumStr = String(format: "%.1f", max(0.0, self.config.getDailyGoal() - self.healthKitManager.todayTotalDrinkNum))
             
-            self.textStr = LocalizedStringKey("Today you drink \(drinkNumStr)\(self.unitStr) out of the goal \(suggestedNumStr)\(self.unitStr), \(leftNumStr)\(self.unitStr) to go")
+            // Always use main thread to update UI.
+            DispatchQueue.main.async{
+                self.textStr = LocalizedStringKey("Today you drink \(drinkNumStr)\(self.unitStr) out of the goal \(suggestedNumStr)\(self.unitStr), \(leftNumStr)\(self.unitStr) to go")
+            }
         }
     }
     
@@ -150,9 +162,12 @@ struct RingView: View {
                     }
                     // For reloading purpose
                     updateTextStr()
+                    // Reset the animation starting point.
+                    // If not set, could lead to animation glitches.
+                    self.waveOffset = .zero
                 }
                 .onChange(of: healthKitManager.todayTotalDrinkNum) {
-                    // For reloading purpose
+                    // Reloading text.
                     updateTextStr()
                 }
                 .onChange(of: self.updateToggle) {
