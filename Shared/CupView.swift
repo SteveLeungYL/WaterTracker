@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CupView: View {
+    /* Not used in widgets, fine for using environment variables. */
+    
+    // FIXME:: FAR TOO MANY CONTENTS FOR ONE VIEW!!!
     
     @Environment(HealthKitManager.self) private var healthKitManager
     @Environment(\.scenePhase) var scenePhase
@@ -18,6 +21,7 @@ struct CupView: View {
     // position of the waveOffset will cause problem of the animation.
     @State private var waveOffset: Angle = .zero
     
+    // HealthKit autherization alert.
     @State private var isShowAlert: Bool = false
     @State private var alertError: HealthKitError? = nil
     
@@ -29,9 +33,10 @@ struct CupView: View {
     @State private var textStr: LocalizedStringKey = "100 ml"
     @State private var unitStr: String = "ml"
     
-    @State var hapticTrigger = false
+    // Used for drink water button expand animation.
     @State var isDrinkButtonExpanded: Bool = false
     
+    // Used to notify update for the button circular progress bar.
     @State var updateToggle: Bool = false
     
     func setDefaultDrinkNum() {
@@ -50,6 +55,7 @@ struct CupView: View {
     }
     
     var body : some View {
+        // FIXME:: FAR TOO BIG.
         
         NavigationStack {
             ZStack{
@@ -140,11 +146,6 @@ struct CupView: View {
                                 .clipShape(.circle)
                                 .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
                                 .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
-                                // Well, sensoryFeedback is not working. :-(
-                                .sensoryFeedback(
-                                    .impact(weight: .medium, intensity: 0.9),
-                                    trigger: hapticTrigger
-                                )
                                 .alert(isPresented: $isShowAlert, error: alertError) { _ in
                                     Button("OK", role:.cancel) {}
                                 } message: { error in
@@ -188,17 +189,12 @@ struct CupView: View {
                                 .clipShape(.circle)
                                 .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
                                 .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
-                                // Well, sensoryFeedback is not working. :-(
-                                .sensoryFeedback(
-                                    .impact(weight: .medium, intensity: 0.9),
-                                    trigger: hapticTrigger
-                                )
                                 .alert(isPresented: $isShowAlert, error: alertError) { _ in
                                     Button("OK", role:.cancel) {}
                                 } message: { error in
                                     Text(error.recoverySuggestion ?? "Try again later.")
                                 }
-                            }
+                            } // watchOS 11.0 macro brace.
                             
                             Spacer()
                             
@@ -255,7 +251,7 @@ struct CupView: View {
                         // circular progress bar.
                         oldPhase, newPhase in
                         if newPhase == .active {
-                            // Toggle circular bar updates. 
+                            // Toggle circular bar updates.
                             self.updateToggle.toggle()
                         }
                     }
