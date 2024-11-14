@@ -128,13 +128,13 @@ Project Link: [WaterTracker](https://github.com/SteveLeungYL/WaterTracker)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/SteveLeungYL/WaterTracker.svg?style=for-the-badge
-[contributors-url]: https://github.com//SteveLeungYL/WaterTracker/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/SteveLeungYL/WaterTracker.svg?style=for-the-badge
-[forks-url]: https://github.com//SteveLeungYL/WaterTracker/network/members
-[stars-shield]: https://img.shields.io/github/stars/SteveLeungYL/WaterTracker.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/SteveLeungYL/WaterTracker?style=for-the-badge
+[contributors-url]: https://github.com/SteveLeungYL/WaterTracker/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/SteveLeungYL/WaterTracker?style=for-the-badge
+[forks-url]: https://github.com/SteveLeungYL/WaterTracker/network/members
+[stars-shield]: https://img.shields.io/github/stars/SteveLeungYL/WaterTracker?style=for-the-badge
 [stars-url]: https://github.com/SteveLeungYL/WaterTracker/stargazers
-[issues-shield]: https://img.shields.io/github/issues/SteveLeungYL/WaterTracker.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/SteveLeungYL/WaterTracker?style=for-the-badge
 [issues-url]: https://github.com/SteveLeungYL/WaterTracker/issues
-[license-shield]: https://img.shields.io/github/license/SteveLeungYL/WaterTracker.svg?style=for-the-badge
-[license-url]: https://github.com/SteveLeungYL/WaterTracker/blob/master/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/SteveLeungYL/WaterTracker?style=for-the-badge
+[license-url]: https://github.com/SteveLeungYL/WaterTracker/blob/main/LICENSE.txt
