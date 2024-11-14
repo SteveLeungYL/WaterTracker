@@ -21,10 +21,6 @@ struct CupView: View {
     // position of the waveOffset will cause problem of the animation.
     @State private var waveOffset: Angle = .zero
     
-    // HealthKit autherization alert.
-    @State private var isShowAlert: Bool = false
-    @State private var alertError: HealthKitError? = nil
-    
     private var crossOsConnectivity: CrossOsConnectivity = CrossOsConnectivity.shared
     
     @Environment(WaterTrackerConfigManager.self) private var config
@@ -115,10 +111,7 @@ struct CupView: View {
                                  */
                                 Button{
                                     Task {
-                                        if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
-                                            self.alertError = alertError
-                                            self.isShowAlert = true
-                                        }
+                                        _ = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit)
                                         LocalNotificationHandler.registerLocalNotification()
                                         CrossOsConnectivity.shared.sendNotificationReminder()
                                         self.isDrinkButtonExpanded = true
@@ -146,11 +139,6 @@ struct CupView: View {
                                 .clipShape(.circle)
                                 .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
                                 .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
-                                .alert(isPresented: $isShowAlert, error: alertError) { _ in
-                                    Button("OK", role:.cancel) {}
-                                } message: { error in
-                                    Text(error.recoverySuggestion ?? "Try again later.")
-                                }
                             } else {
                                 // Fallback on earlier versions
                                 /*
@@ -160,10 +148,7 @@ struct CupView: View {
                                  */
                                 Button{
                                     Task {
-                                        if let alertError = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit) {
-                                            self.alertError = alertError
-                                            self.isShowAlert = true
-                                        }
+                                        _ = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit)
                                         LocalNotificationHandler.registerLocalNotification()
                                         CrossOsConnectivity.shared.sendNotificationReminder()
                                         self.isDrinkButtonExpanded = true
@@ -189,11 +174,6 @@ struct CupView: View {
                                 .clipShape(.circle)
                                 .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
                                 .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
-                                .alert(isPresented: $isShowAlert, error: alertError) { _ in
-                                    Button("OK", role:.cancel) {}
-                                } message: { error in
-                                    Text(error.recoverySuggestion ?? "Try again later.")
-                                }
                             } // watchOS 11.0 macro brace.
                             
                             Spacer()
