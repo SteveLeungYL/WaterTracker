@@ -22,7 +22,7 @@
     <img src="./Supplementary Materials/AppIcon/AppIcon.png" alt="Logo" width="200" height="200">
   </a>
 
-  <h3 align="center">Water Tracker for iOS & watchOS</h3>
+  <h3 align="center">Water Tracker for iOS, iPadOS & watchOS</h3>
 
   <p align="center">
     A simple Water Tracker application written in pure SwiftUI and SwiftData, syncs with HealthKit and CloudKit. 
