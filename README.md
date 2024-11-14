@@ -55,7 +55,18 @@ Features:
 <!-- Screenshots -->
 ## Screenshots
 
-![](Supplementary Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide3.png)
+### iOS
+<img src="Supplementary Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide3.png" width="200">
+<img src="Supplementary Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide5.png" width="200">
+<img src="Supplementary Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide7.png" width="200">
+<img src="Supplementary Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide9.png" width="200">
+<img src="Supplementary Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide11.png" width="200">
+<img src="Supplementary Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide13.png" width="200">
+
+### watchOS
+<img src="Supplementary Materials/ScreenShots and Previews/Apple_Watch_Series_9_English/1.PNG" width="200">
+<img src="Supplementary Materials/ScreenShots and Previews/Apple_Watch_Series_9_English/2.PNG" width="200">
+<img src="Supplementary Materials/ScreenShots and Previews/Apple_Watch_Series_9_English/3.PNG" width="200">
 
 <!-- ROADMAP -->
 ## Roadmap
