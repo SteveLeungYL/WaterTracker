@@ -352,9 +352,9 @@ enum HealthKitError: LocalizedError {
     var recoverySuggestion: String? {
         switch self {
         case .healthKitNotAvailable:
-            return "This app uses HealthKit from Apple to save data and synchronize between devices. If HealthKit is unavailable, the reminder still works, but no water tracking would be saved. "
+            return "This app uses HealthKit from Apple to save data and synchronize between devices. If HealthKit is unavailable, the reminder still works (on iPhone and Apple Watch), but no water tracking would be saved. "
         case .healthKitNotAuthorized:
-            return "This app uses HealthKit from Apple to save data and synchronize between devices. With HealthKit disabled or unauthorized, the reminder still works, but no water tracking would be saved. "
+            return "This app uses HealthKit from Apple to save data and synchronize between devices. With HealthKit disabled or unauthorized, the reminder still works (on iPhone and Apple Watch), but no water tracking would be saved. "
         }
     }
 }
