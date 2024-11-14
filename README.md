@@ -78,6 +78,7 @@ Features:
 - [x] Water Reminder Local Notification
 - [ ] App Store Publication. ⭐️ 
 - [ ] The HealthKit data is not presented correctly in the first launch of the app.
+- [ ] Introduce Daily Goal picker to watchOS, because the CloudKit that designed to sync the configs between devices are working so badly. :-(
 - [ ] A better `.accessoryCorner` widget, different than `.accessoryCircular`.  
 - [ ] Swipe to drink (swipe on the CupView to trigger drink button, better with animations).
 - [ ] App Intents.
