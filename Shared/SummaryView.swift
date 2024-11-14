@@ -154,7 +154,7 @@ struct SummaryView: View {
                         .foregroundStyle(.black)
                         .padding()
                         .allowsHitTesting(false)
-                    Text("[*] This application is open-sourced at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star!")
+                    Text("[*] This application is open-sourced at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star! ❤️")
                         .font(.system(size: 8))
                         .foregroundStyle(.black)
                         .padding()

@@ -11,12 +11,12 @@
         }
       }
     },
-    "[*] This application is open-sourced at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star!" : {
+    "[*] This application is open-sourced at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star! ❤️" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "[*] 这个软件在GitHub开源，网址是：https://github.com/SteveLeungYL/WaterTracker。如果你喜欢这个软件，请考虑在GitHub给我个Star！"
+            "value" : "[*] 这个软件在GitHub开源，网址是：https://github.com/SteveLeungYL/WaterTracker。如果你喜欢这个软件，请考虑在GitHub给我个Star! ❤️"
           }
         }
       }
