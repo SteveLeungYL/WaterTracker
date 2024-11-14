@@ -52,6 +52,11 @@ Features:
 + Widgets for Home Screen. 
 + Deep integration with Apple Watch. 
 
+<!-- Screenshots -->
+## Screenshots
+
+![](Supplementary Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide3.png)
+
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -105,6 +110,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 Yu Liang - [GitHub](https://github.com/SteveLeungYL) - [HomePage](https://steveleungyl.github.io) - yuliang@psu.edu
 
 Project Link: [WaterTracker](https://github.com/SteveLeungYL/WaterTracker)
+
+> Yu Liang. WaterTracer. *https://github.com/SteveLeungYL/WaterTracker*. 2024
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
