@@ -76,7 +76,8 @@ Features:
   - [x] weekly view
 - [x] WCSession (iOS & watchOS communication)
 - [x] Water Reminder Local Notification
-- [x] App Store Publication. ⭐️ 
+- [ ] App Store Publication. ⭐️ 
+- [ ] The HealthKit data is not presented correctly in the first launch of the app.
 - [ ] A better `.accessoryCorner` widget, different than `.accessoryCircular`.  
 - [ ] Swipe to drink (swipe on the CupView to trigger drink button, better with animations).
 - [ ] App Intents.
