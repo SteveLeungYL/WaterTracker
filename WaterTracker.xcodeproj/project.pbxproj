@@ -50,6 +50,14 @@
 		29C2FF2C2CD9B158008A4EC7 /* WaterTrackerConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489AB2CD2BD38005AA4A1 /* WaterTrackerConfigurations.swift */; };
 		29C2FF2D2CD9B158008A4EC7 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A489A82CD2B9D2005AA4A1 /* Units.swift */; };
 		29C2FF2E2CD9B158008A4EC7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
+		29CC0D122CE669A60016CA81 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29CC0D102CE669A60016CA81 /* LICENSE.txt */; };
+		29CC0D132CE669A60016CA81 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 29CC0D112CE669A60016CA81 /* README.md */; };
+		29CC0D142CE669A60016CA81 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29CC0D102CE669A60016CA81 /* LICENSE.txt */; };
+		29CC0D152CE669A60016CA81 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 29CC0D112CE669A60016CA81 /* README.md */; };
+		29CC0D162CE669A60016CA81 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29CC0D102CE669A60016CA81 /* LICENSE.txt */; };
+		29CC0D172CE669A60016CA81 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 29CC0D112CE669A60016CA81 /* README.md */; };
+		29CC0D182CE669A60016CA81 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29CC0D102CE669A60016CA81 /* LICENSE.txt */; };
+		29CC0D192CE669A60016CA81 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 29CC0D112CE669A60016CA81 /* README.md */; };
 		29D17B152CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B162CD43B3B0049B75C /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B142CD43B3B0049B75C /* BarChart.swift */; };
 		29D17B182CD446970049B75C /* UnitPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D17B172CD446930049B75C /* UnitPicker.swift */; };
@@ -179,6 +187,8 @@
 		29BC974A2CD9720B00E9F55F /* WaterTracker WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WaterTracker WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		29C2FEF12CD9ADBE008A4EC7 /* WaterTracker Watch WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WaterTracker Watch WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		29C2FF262CD9AEF9008A4EC7 /* CircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
+		29CC0D102CE669A60016CA81 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		29CC0D112CE669A60016CA81 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		29D17B142CD43B3B0049B75C /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		29D17B172CD446930049B75C /* UnitPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPicker.swift; sourceTree = "<group>"; };
 		29D8FE7D2CCECB9D00504B17 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
@@ -334,6 +344,8 @@
 		297759082CCD881B00D54F00 = {
 			isa = PBXGroup;
 			children = (
+				29CC0D102CE669A60016CA81 /* LICENSE.txt */,
+				29CC0D112CE669A60016CA81 /* README.md */,
 				29E22C552CDABE0B006D186E /* Localizable.xcstrings */,
 				29C2FEF12CD9ADBE008A4EC7 /* WaterTracker Watch WidgetExtension.entitlements */,
 				29BC974A2CD9720B00E9F55F /* WaterTracker WidgetExtension.entitlements */,
@@ -701,6 +713,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29CC0D142CE669A60016CA81 /* LICENSE.txt in Resources */,
+				29CC0D152CE669A60016CA81 /* README.md in Resources */,
 				29E22C592CDABE0B006D186E /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -709,6 +723,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29CC0D122CE669A60016CA81 /* LICENSE.txt in Resources */,
+				29CC0D132CE669A60016CA81 /* README.md in Resources */,
 				29E22C562CDABE0B006D186E /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -731,6 +747,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29CC0D182CE669A60016CA81 /* LICENSE.txt in Resources */,
+				29CC0D192CE669A60016CA81 /* README.md in Resources */,
 				29E22C572CDABE0B006D186E /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -753,6 +771,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29CC0D162CE669A60016CA81 /* LICENSE.txt in Resources */,
+				29CC0D172CE669A60016CA81 /* README.md in Resources */,
 				29E22C582CDABE0B006D186E /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
