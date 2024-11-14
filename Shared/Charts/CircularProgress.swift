@@ -94,8 +94,7 @@ struct CircularProgressView: View {
         }
         .onChange(of: updateToggle) {
             Task {
-                let container = try ModelContainer(for: WaterTrackerConfiguration.self)
-                let context = ModelContext(container)
+                let context = ModelContext(sharedWaterTrackerModelContainer)
                 config.updateWaterTrackerConfig(modelContext: context)
                 /* Get week data can retrieve the last date as today. */
                 _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
