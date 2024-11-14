@@ -16,12 +16,18 @@ let AppName = "Water Tracker"
 
 @Model
 class WaterTrackerConfiguration {
-    // All optional to be compatible with iOS 16's SwiftData setting.
+    /*
+     * Data Model Attention (as of iOS 17 and iOS 18):
+     * All values stored in the SwiftData MUST BE either optional or contains a default value,
+     * including the init function (where all parameters must contain default value).
+     * Otherwise, this SwiftData model would not sync with iCloud and could potentially crash
+     * in iOS 17 (unknown reason).
+     */
     var waterUnit: WaterUnits? = nil
     var cupCapacity: Double? = nil
     var dailyGoal: Double? = nil
     
-    init(waterUnit: WaterUnits, cupCapacity: Double, dailyGoals: Double) {
+    init(waterUnit: WaterUnits = .ml, cupCapacity: Double = 600.0, dailyGoals: Double = 3100.0) {
         self.waterUnit = waterUnit
         self.cupCapacity = cupCapacity
         self.dailyGoal = dailyGoals
