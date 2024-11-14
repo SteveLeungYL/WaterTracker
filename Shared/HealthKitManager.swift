@@ -100,7 +100,7 @@ class HealthKitManager {
         }
         
         // Check authroization after granted permission.
-        if healthStore.authorizationStatus(for: toReadAndWrite.first!) != .sharingAuthorized {
+        if healthStore.authorizationStatus(for: toReadAndWrite.first!) != .sharingAuthorized && healthStore.authorizationStatus(for: toReadAndWrite.first!) != .notDetermined {
             err = .healthKitNotAuthorized
         }
         
