@@ -19,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/SteveLeungYL/WaterTracker">
-    <img src="./Supplementary Materials/AppIcon/AppIcon.png" alt="Logo" width="80" height="80">
+    <img src="./Supplementary Materials/AppIcon/AppIcon.png" alt="Logo" width="200" height="200">
   </a>
 
   <h3 align="center">Water Tracker for iOS & watchOS</h3>
@@ -86,10 +86,9 @@ Features:
 - [ ] Wave animation glitches at the start of the application.
   - [x] Partially avoided by uplift `waveOffset` to parent view (not ideal). 
 - [ ] Fix the widget recommendation name being the same for all widgets. 
-- [ ] (Bug) Widget data out of sync if another device update the HealthKit data. Can HealthKit data correctly propagate between devices?
+- [ ] (Bug) Widget data out of sync if another device updates the HealthKit data. Can HealthKit data correctly propagate between devices?
 
-
-See the [open issues](https://github.com/SteveLeungYL/WaterTracker/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/SteveLeungYL/WaterTracker/issues) for a full list of proposed features and known issues.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -97,7 +96,7 @@ See the [open issues](https://github.com/SteveLeungYL/WaterTracker/issues) for a
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributing are welcomed but I might not have enough time to update this app frequently. Feel free to fork this repo and implement your own features. And give me a pull request if you like. 
+Contributing is welcome, but I might not have enough time to update this app frequently. Feel free to fork this repo and implement your own features. And give me a pull request if you like. 
 
 <!-- LICENSE -->
 ## License
@@ -105,8 +104,6 @@ Contributing are welcomed but I might not have enough time to update this app fr
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- CONTACT -->
 ## Contact
@@ -123,15 +120,11 @@ Project Link: [WaterTracker](https://github.com/SteveLeungYL/WaterTracker)
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 * [Wave Animation: RedDragonJ/Swift-Learning](https://github.com/RedDragonJ/Swift-Learning/tree/main/Animations/Animations/Animations)
 * [Cleveland Clinic. (2024, October 3). How much water you should drink every day.](https://health.clevelandclinic.org/how-much-water-do-you-need-daily)
 * [arthurkahwa/healthkit_showcase](https://github.com/arthurkahwa/healthkit_showcase)
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
