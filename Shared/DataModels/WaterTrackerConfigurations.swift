@@ -147,14 +147,29 @@ class WaterTrackerConfigManager {
     func getDailyGoalCustomRange() -> [Double] {
         return self.config?.waterUnit?.dailyGoalRange ?? WaterUnits.ml.dailyGoalRange
     }
+    
+//    func deleteAllWaterTrackerConfigIfExists(modelContext: ModelContext) {
+//        do {
+//            let fecthDescriptor = FetchDescriptor<WaterTrackerConfiguration>()
+//            let all_save = try modelContext.fetch(fecthDescriptor)
+//            
+//            if all_save.count != 0 {
+//                
+//            }
+//        } catch {
+//            fatalError("Fatal Error: Fail to get model. ")
+//        }
+//    }
 
-    func updateWaterTrackerConfig(modelContext: ModelContext) {
+    func receiveUpdatedWaterTrackerConfig(modelContext: ModelContext) {
+        print("Calling update. ")
         do {
             let fecthDescriptor = FetchDescriptor<WaterTrackerConfiguration>()
             let all_save = try modelContext.fetch(fecthDescriptor)
             
-            if let data = all_save.first {
-                self.config = data
+            print("Getting all_save: \(all_save.count)")
+            if let data = all_save.last {
+                self.config = WaterTrackerConfiguration(waterUnit: data.waterUnit ?? .ml, cupCapacity: data.cupCapacity ?? WaterUnits.ml.cupDefaultCapacity, dailyGoals: data.dailyGoal ?? WaterUnits.ml.defaultDailyGoal)
             } else {
                 // No custom value, use default.
                 self.config = WaterTrackerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal)
@@ -165,17 +180,20 @@ class WaterTrackerConfigManager {
     }
     
     func getWaterTrackerConfiguration(modelContext: ModelContext) -> WaterTrackerConfiguration {
-        self.updateWaterTrackerConfig(modelContext: modelContext)
+        self.receiveUpdatedWaterTrackerConfig(modelContext: modelContext)
         return self.config ?? WaterTrackerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal)
     }
     
     func setWaterUnit(_ waterUnit: WaterUnits, modelContext: ModelContext) {
+        print("Calling setWaterUnit")
         
         let waterTrackerConfiguration = self.getWaterTrackerConfiguration(modelContext: modelContext)
+//        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
         
+        // Reset other settings to match the unit change.
         waterTrackerConfiguration.waterUnit = waterUnit
-        waterTrackerConfiguration.cupCapacity = nil
-        waterTrackerConfiguration.dailyGoal = nil
+        waterTrackerConfiguration.cupCapacity = waterUnit.cupDefaultCapacity
+        waterTrackerConfiguration.dailyGoal = waterUnit.defaultDailyGoal
         
         self.config = waterTrackerConfiguration
         modelContext.insert(waterTrackerConfiguration)
@@ -188,9 +206,13 @@ class WaterTrackerConfigManager {
     }
     
     func setCupCapacity(_ newCupCapacity: Double, modelContext: ModelContext) {
+        print("Calling setCupCa")
+
         let waterTrackerConfiguration = getWaterTrackerConfiguration(modelContext: modelContext)
-        
+//        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
+
         waterTrackerConfiguration.cupCapacity = newCupCapacity
+
         self.config = waterTrackerConfiguration
         modelContext.insert(waterTrackerConfiguration)
         do {
@@ -202,28 +224,23 @@ class WaterTrackerConfigManager {
     }
     
     func setDailyGoal(_ newDailyGoal: Double, modelContext: ModelContext) {
+        print("Calling setDailyGoal")
+
         let waterTrackerConfiguration = getWaterTrackerConfiguration(modelContext: modelContext)
-        
+//        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
+
         waterTrackerConfiguration.dailyGoal = newDailyGoal
+        self.config = waterTrackerConfiguration
+        
         modelContext.insert(waterTrackerConfiguration)
         do {
             // This will override the original save, not append.
             try modelContext.save()
+            print("Saved")
         } catch {
             fatalError(error.localizedDescription)
         }
     }
 
-    
-    func setWaterTrackerConfiguration(_ newConfig: WaterTrackerConfiguration, modelContext: ModelContext) {
-        self.config = newConfig
-        modelContext.insert(newConfig)
-        do {
-            // This will override the original save, not append.
-            try modelContext.save()
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
 }
 
