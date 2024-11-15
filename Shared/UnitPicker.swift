@@ -54,8 +54,8 @@ struct UnitPickerView: View {
                     }
                 }
                 .pickerStyle(.wheel)
-                .foregroundStyle(.black) // FIXME: Does not have effect on the wheel text.
-                .accentColor(.black) // FIXME: Another failed attempt to change the wheel text to black.
+                .foregroundStyle(.black) // FIXME: Does not have effect on the wheel text (watchOS).
+                .accentColor(.black) // FIXME: Another failed attempt to change the wheel text to black (watchOS).
                 .multilineTextAlignment(.center)
                 .labelsHidden()
                 .onAppear {
