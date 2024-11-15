@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-#if DEBUG_CloudKit
+#if DEBUG_CLOUDKIT
 import CoreData
 #endif
 
@@ -47,10 +47,10 @@ var sharedWaterTrackerModelContainer: ModelContainer = {
     do {
 
         /*
-         * If you haven't setup your CloudKit correctly, THIS WILL CRASH.
-         * Therefore, just comment them out using #if DEBUG_CloudKit for now.
+         * If you haven't setup your CloudKit on your Apple Deverloper Account correctly, THIS WILL CRASH!
+         * Therefore, just comment them out using #if DEBUG_CLOUDKIT for now.
          */
-#if DEBUG_CloudKit
+#if DEBUG_CLOUDKIT
 //     Use an autorelease pool to make sure Swift deallocates the persistent
 //     container before setting up the SwiftData stack.
     try autoreleasepool {
@@ -90,6 +90,9 @@ class WaterTrackerConfigManager {
      * Manager for the WaterTracker Configurations (SwiftData),
      * provide an abstraction above the SwiftData @Model struct.
      * If no custom setting saved, return the default one.
+     * Updated for v1.3, the SwiftData main container should always
+     * contain data, except for the first launch, where new data will
+     * be inserted.
      */
     
     var cupMinimumNum: Double {
@@ -148,27 +151,27 @@ class WaterTrackerConfigManager {
         return self.config?.waterUnit?.dailyGoalRange ?? WaterUnits.ml.dailyGoalRange
     }
     
-//    func deleteAllWaterTrackerConfigIfExists(modelContext: ModelContext) {
-//        do {
-//            let fecthDescriptor = FetchDescriptor<WaterTrackerConfiguration>()
-//            let all_save = try modelContext.fetch(fecthDescriptor)
-//            
-//            if all_save.count != 0 {
-//                
-//            }
-//        } catch {
-//            fatalError("Fatal Error: Fail to get model. ")
-//        }
-//    }
-
-    func receiveUpdatedWaterTrackerConfig(modelContext: ModelContext) {
-        print("Calling update. ")
+    func deleteAllWaterTrackerConfigIfExists(modelContext: ModelContext) {
         do {
             let fecthDescriptor = FetchDescriptor<WaterTrackerConfiguration>()
             let all_save = try modelContext.fetch(fecthDescriptor)
             
-            print("Getting all_save: \(all_save.count)")
+            for cur_save in all_save {
+                modelContext.delete(cur_save)
+            }
+        } catch {
+            fatalError("Fatal Error: Fail to get model. ")
+        }
+    }
+
+    func receiveUpdatedWaterTrackerConfig(modelContext: ModelContext) {
+        do {
+            let fecthDescriptor = FetchDescriptor<WaterTrackerConfiguration>()
+            let all_save = try modelContext.fetch(fecthDescriptor)
+            
             if let data = all_save.last {
+                // It is important to DEEP COPY the config here.
+                // Otherwise, the original SwiftData won't be modified/deleted correctly.
                 self.config = WaterTrackerConfiguration(waterUnit: data.waterUnit ?? .ml, cupCapacity: data.cupCapacity ?? WaterUnits.ml.cupDefaultCapacity, dailyGoals: data.dailyGoal ?? WaterUnits.ml.defaultDailyGoal)
             } else {
                 // No custom value, use default.
@@ -185,10 +188,8 @@ class WaterTrackerConfigManager {
     }
     
     func setWaterUnit(_ waterUnit: WaterUnits, modelContext: ModelContext) {
-        print("Calling setWaterUnit")
-        
         let waterTrackerConfiguration = self.getWaterTrackerConfiguration(modelContext: modelContext)
-//        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
+        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
         
         // Reset other settings to match the unit change.
         waterTrackerConfiguration.waterUnit = waterUnit
@@ -206,10 +207,8 @@ class WaterTrackerConfigManager {
     }
     
     func setCupCapacity(_ newCupCapacity: Double, modelContext: ModelContext) {
-        print("Calling setCupCa")
-
         let waterTrackerConfiguration = getWaterTrackerConfiguration(modelContext: modelContext)
-//        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
+        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
 
         waterTrackerConfiguration.cupCapacity = newCupCapacity
 
@@ -224,19 +223,16 @@ class WaterTrackerConfigManager {
     }
     
     func setDailyGoal(_ newDailyGoal: Double, modelContext: ModelContext) {
-        print("Calling setDailyGoal")
-
         let waterTrackerConfiguration = getWaterTrackerConfiguration(modelContext: modelContext)
-//        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
+        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
 
         waterTrackerConfiguration.dailyGoal = newDailyGoal
-        self.config = waterTrackerConfiguration
         
+        self.config = waterTrackerConfiguration
         modelContext.insert(waterTrackerConfiguration)
         do {
             // This will override the original save, not append.
             try modelContext.save()
-            print("Saved")
         } catch {
             fatalError(error.localizedDescription)
         }
