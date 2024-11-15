@@ -113,7 +113,16 @@ Yu Liang - [GitHub](https://github.com/SteveLeungYL) - [HomePage](https://stevel
 
 Project Link: [WaterTracker](https://github.com/SteveLeungYL/WaterTracker)
 
-> Yu Liang. WaterTracer. *https://github.com/SteveLeungYL/WaterTracker*. 2024
+```
+@misc{LiangYuApple2024,
+  author = {Liang, Yu},
+  title = {WaterTracker},
+  year = {2024},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/SteveLeungYL/WaterTracker}},
+}
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
