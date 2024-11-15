@@ -214,7 +214,7 @@ struct CupView: View {
                         
                     } // From the VStack. This should expand to the whole screen excluding the safe area
                     .onAppear() {
-                        config.updateWaterTrackerConfig(modelContext: self.modelContext)
+                        config.receiveUpdatedWaterTrackerConfig(modelContext: self.modelContext)
                         setDefaultDrinkNum()
                         updateTextStr()
                         // HERE, make sure the animation plays correctly by reset the original value.

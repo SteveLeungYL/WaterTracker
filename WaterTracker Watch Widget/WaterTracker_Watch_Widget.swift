@@ -25,7 +25,7 @@ struct Provider: AppIntentTimelineProvider {
         do {
             let container = try ModelContainer(for: WaterTrackerConfiguration.self)
             let context = ModelContext(container)
-            config.updateWaterTrackerConfig(modelContext: context)
+            config.receiveUpdatedWaterTrackerConfig(modelContext: context)
             _ = await healthKitManager.updateDrinkWaterOneDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
             return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, todayTotalDrinkNum: 2400.0, dailyGoal: 3100.0, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
@@ -42,7 +42,7 @@ struct Provider: AppIntentTimelineProvider {
         do {
             let container = try ModelContainer(for: WaterTrackerConfiguration.self)
             let context = ModelContext(container)
-            config.updateWaterTrackerConfig(modelContext: context)
+            config.receiveUpdatedWaterTrackerConfig(modelContext: context)
 //            _ = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterOneDay(waterUnitInput: config.waterUnit)
             _ = await healthKitManager.updateDrinkWaterWeek(waterUnitInput: config.waterUnit)
