@@ -90,9 +90,6 @@ class WaterTrackerConfigManager {
      * Manager for the WaterTracker Configurations (SwiftData),
      * provide an abstraction above the SwiftData @Model struct.
      * If no custom setting saved, return the default one.
-     * Updated for v1.3, the SwiftData main container should always
-     * contain data, except for the first launch, where new data will
-     * be inserted.
      */
     
     var cupMinimumNum: Double {
@@ -199,7 +196,6 @@ class WaterTrackerConfigManager {
         self.config = waterTrackerConfiguration
         modelContext.insert(waterTrackerConfiguration)
         do {
-            // This will override the original save, not append.
             try modelContext.save()
         } catch {
             fatalError(error.localizedDescription)
@@ -215,7 +211,6 @@ class WaterTrackerConfigManager {
         self.config = waterTrackerConfiguration
         modelContext.insert(waterTrackerConfiguration)
         do {
-            // This will override the original save, not append.
             try modelContext.save()
         } catch {
             fatalError(error.localizedDescription)
@@ -231,7 +226,6 @@ class WaterTrackerConfigManager {
         self.config = waterTrackerConfiguration
         modelContext.insert(waterTrackerConfiguration)
         do {
-            // This will override the original save, not append.
             try modelContext.save()
         } catch {
             fatalError(error.localizedDescription)
