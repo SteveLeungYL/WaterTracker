@@ -167,18 +167,20 @@ struct SummaryView: View {
                     .padding()
 #if os(iOS)
                     
-                    Text("[1] Cleveland Clinic. (2024, October 3). How much water you should drink every day. https://health.clevelandclinic.org/how-much-water-do-you-need-daily")
-                        .font(.system(size: 8))
-                        .foregroundStyle(.black)
-                        .tint(.black)
-                        .padding()
-                        .allowsHitTesting(false)
-                    Text("[*] This application is open-sourced at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star! ❤️")
-                        .font(.system(size: 8))
-                        .foregroundStyle(.black)
-                        .tint(.black)
-                        .padding()
-                        .allowsHitTesting(false)
+                    VStack (alignment: .leading) {
+                        Text("[1] Cleveland Clinic. (2024, October 3). How much water you should drink every day. https://health.clevelandclinic.org/how-much-water-do-you-need-daily")
+                            .font(.system(size: 8))
+                            .foregroundStyle(.black)
+                            .tint(.black)
+                            .padding(.horizontal)
+                            .allowsHitTesting(false)
+                        Text("[*] This application is open-sourced at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star! ❤️")
+                            .font(.system(size: 8))
+                            .foregroundStyle(.black)
+                            .tint(.black)
+                            .padding(.horizontal)
+                            .allowsHitTesting(false)
+                    }
                     Spacer()
 #endif
                 } // scrollView
