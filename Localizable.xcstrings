@@ -247,6 +247,16 @@
         }
       }
     },
+    "Save and Sync with Apple Health" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "数据通过苹果健康保存和同步"
+          }
+        }
+      }
+    },
     "Showing 24 hour view or week view" : {
       "localizations" : {
         "zh-Hans" : {

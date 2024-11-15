@@ -148,7 +148,25 @@ struct SummaryView: View {
                             .padding()
                         
                     }
-                    #if os(iOS)
+                    HStack (alignment: .center) {
+                        Image("Icon - Apple Health")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                        Text("Save and Sync with Apple Health")
+                            .foregroundStyle(.primary)
+                            .foregroundStyle(.black)
+                            .tint(.black)
+#if !os(watchOS)
+                            .font(.subheadline)
+#else
+                        // watchOS
+                            .font(.caption)
+                            .padding(.horizontal)
+#endif
+                    }
+                    .padding()
+#if os(iOS)
+                    
                     Text("[1] Cleveland Clinic. (2024, October 3). How much water you should drink every day. https://health.clevelandclinic.org/how-much-water-do-you-need-daily")
                         .font(.system(size: 8))
                         .foregroundStyle(.black)
@@ -162,7 +180,7 @@ struct SummaryView: View {
                         .padding()
                         .allowsHitTesting(false)
                     Spacer()
-                    #endif
+#endif
                 } // scrollView
                 .onAppear {
                     if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
