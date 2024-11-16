@@ -29,101 +29,98 @@ struct UnitPickerView: View {
     
     var body : some View {
         
-        NavigationStack {
-            
 #if os(iOS)
-            HStack{
-                
-                Text("Daily Goal: ")
-                    .font(.title)
-                    .foregroundStyle(.black)
-                    .fontWeight(.bold)
-                    .allowsHitTesting(false)
-                    .multilineTextAlignment(.leading)
-                // Trick for citation.
-                Text("[1]")
-                    .font(.system(size: 8))
-                    .foregroundStyle(.black)
-                    .baselineOffset(6.0)
-                
-                
-                Picker("", selection: self.$dailyGoal) {
-                    ForEach(self.dailyGoalChoice, id: \.self) {
-                        let unitStr = self.config.waterUnit == .ml ? "ml" : "oz"
-                        Text(String("\($0) \(unitStr)"))
-                    }
-                }
-                .pickerStyle(.wheel)
-                .foregroundStyle(.black) // FIXME: Does not have effect on the wheel text (watchOS).
-                .accentColor(.black) // FIXME: Another failed attempt to change the wheel text to black (watchOS).
-                .multilineTextAlignment(.center)
-                .labelsHidden()
-                .onAppear {
-                    self.dailyGoal = self.config.getDailyGoal()
-                    self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
-                }
-                .onChange(of: self.dailyGoal) { oldValue, newValue in
-                    if oldValue != 0.0 {
-                        // onChange is triggered when changing values in onAppear.
-                        // But the placeholder is 0.0, thus won't run setDailyGoal on view onAppear.
-                        self.config.setDailyGoal(self.dailyGoal, modelContext: modelContext)
-                        updateToggle = !updateToggle
-                    }
+        HStack{
+            
+            Text("Daily Goal: ")
+                .font(.title)
+                .foregroundStyle(.black)
+                .fontWeight(.bold)
+                .allowsHitTesting(false)
+                .multilineTextAlignment(.leading)
+            // Trick for citation.
+            Text("[1]")
+                .font(.system(size: 8))
+                .foregroundStyle(.black)
+                .baselineOffset(6.0)
+            
+            
+            Picker("", selection: self.$dailyGoal) {
+                ForEach(self.dailyGoalChoice, id: \.self) {
+                    let unitStr = self.config.waterUnit == .ml ? "ml" : "oz"
+                    Text(String("\($0) \(unitStr)"))
                 }
             }
+            .pickerStyle(.wheel)
+            .foregroundStyle(.black) // FIXME: Does not have effect on the wheel text (watchOS).
+            .accentColor(.black) // FIXME: Another failed attempt to change the wheel text to black (watchOS).
+            .multilineTextAlignment(.center)
+            .labelsHidden()
+            .onAppear {
+                self.dailyGoal = self.config.getDailyGoal()
+                self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
+            }
+            .onChange(of: self.dailyGoal) { oldValue, newValue in
+                if oldValue != 0.0 {
+                    // onChange is triggered when changing values in onAppear.
+                    // But the placeholder is 0.0, thus won't run setDailyGoal on view onAppear.
+                    self.config.setDailyGoal(self.dailyGoal, modelContext: modelContext)
+                    updateToggle = !updateToggle
+                }
+            }
+        }
 #endif
+        
+        HStack{
             
-            HStack{
-                
-                Text("Choose Unit: ")
+            Text("Choose Unit: ")
 #if !os(watchOS)
-                    .font(.title)
+                .font(.title)
 #else
-                    .font(.body)
+                .font(.body)
 #endif
-                    .foregroundStyle(.black)
-                    .fontWeight(.bold)
-                    .allowsHitTesting(false)
-                    .multilineTextAlignment(.leading)
-                
-                Picker("", selection: self.$waterUnitSelection) {
-                    ForEach(self.waterUnitChoice, id: \.self) {
-                        Text(LocalizedStringKey($0))
-                    }
+                .foregroundStyle(.black)
+                .fontWeight(.bold)
+                .allowsHitTesting(false)
+                .multilineTextAlignment(.leading)
+            
+            Picker("", selection: self.$waterUnitSelection) {
+                ForEach(self.waterUnitChoice, id: \.self) {
+                    Text(LocalizedStringKey($0))
                 }
+            }
 #if os(watchOS)
-                // navigationLink looks terrible on iOS.
-                .pickerStyle(.navigationLink)
+            // navigationLink looks terrible on iOS.
+            .pickerStyle(.navigationLink)
 #else
-                .pickerStyle(SegmentedPickerStyle())
+            .pickerStyle(SegmentedPickerStyle())
 #endif
-                .foregroundStyle(.black) // FIXME: Same as above.
-                .accentColor(.black)
-                .multilineTextAlignment(.center)
-                .labelsHidden()
-                .onAppear {
-                    if self.config.waterUnit == .ml {
-                        self.waterUnitSelection = "Milliliter"
-                    } else {
-                        self.waterUnitSelection = "Ounce"
-                    }
-                    // Remove the empty choice.
-                    self.waterUnitChoice = ["Milliliter", "Ounce"]
+            .foregroundStyle(.black) // FIXME: Same as above.
+            .accentColor(.black)
+            .multilineTextAlignment(.center)
+            .labelsHidden()
+            .onAppear {
+                if self.config.waterUnit == .ml {
+                    self.waterUnitSelection = "Milliliter"
+                } else {
+                    self.waterUnitSelection = "Ounce"
                 }
-                .onChange(of: waterUnitSelection) { oldValue, newValue in
-                    // Same as above. Will trigger on onAppear() but avoided by "" placeholder.
-                    if newValue == "Milliliter" && oldValue != "" {
-                        self.config.setWaterUnit(.ml, modelContext: modelContext)
-                        self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
-                        self.dailyGoal = self.config.getDailyGoal()
-                        updateToggle = !updateToggle
-                    }
-                    else if newValue == "Ounce" && oldValue != "" {
-                        self.config.setWaterUnit(.oz, modelContext: modelContext)
-                        self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
-                        self.dailyGoal = self.config.getDailyGoal()
-                        updateToggle = !updateToggle
-                    }
+                // Remove the empty choice.
+                self.waterUnitChoice = ["Milliliter", "Ounce"]
+            }
+            .onChange(of: waterUnitSelection) { oldValue, newValue in
+                // Same as above. Will trigger on onAppear() but avoided by "" placeholder.
+                if newValue == "Milliliter" && oldValue != "" {
+                    self.config.setWaterUnit(.ml, modelContext: modelContext)
+                    self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
+                    self.dailyGoal = self.config.getDailyGoal()
+                    updateToggle = !updateToggle
+                }
+                else if newValue == "Ounce" && oldValue != "" {
+                    self.config.setWaterUnit(.oz, modelContext: modelContext)
+                    self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
+                    self.dailyGoal = self.config.getDailyGoal()
+                    updateToggle = !updateToggle
                 }
             }
         }
