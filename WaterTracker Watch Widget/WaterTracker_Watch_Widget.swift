@@ -75,7 +75,7 @@ struct Provider: AppIntentTimelineProvider {
     
     func recommendations() -> [AppIntentRecommendation<ConfigurationAppIntent>] {
         // Create an array with all the preconfigured widgets to show.
-        [AppIntentRecommendation(intent: ConfigurationAppIntent(), description: "Water Tracker Widget")]
+        [AppIntentRecommendation(intent: ConfigurationAppIntent(), description: "Pocket Water Tracker Widget")]
     }
 }
 
@@ -108,9 +108,9 @@ struct WaterTracker_Watch_WidgetEntryView : View {
     var body: some View {
         ZStack {
             if isDayView == false {
-                WaterTracingBarChart(chartData: entry.weekData, dateComponents: .day, mainTitle: LocalizedStringKey("Week Water Tracker"), subTitle: LocalizedStringKey("Showing week water tracker data"), config: entry.waterConfigMgr)
+                WaterTracingBarChart(chartData: entry.weekData, dateComponents: .day, mainTitle: LocalizedStringKey("Week Water Tracker"), subTitle: LocalizedStringKey("Showing 7 days data"), config: entry.waterConfigMgr)
             } else {
-                WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: LocalizedStringKey("Day Water Tracker"), subTitle: LocalizedStringKey("Showing 24 hours water tracker data"), config: entry.waterConfigMgr)
+                WaterTracingBarChart(chartData: entry.dayData, dateComponents: .hour, mainTitle: LocalizedStringKey("Day Water Tracker"), subTitle: LocalizedStringKey("Showing 24 hours data"), config: entry.waterConfigMgr)
             }
         }
     }

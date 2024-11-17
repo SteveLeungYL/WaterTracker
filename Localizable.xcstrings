@@ -11,7 +11,7 @@
         }
       }
     },
-    "[*] This application is open-sourced at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star! ❤️" : {
+    "[*] This application is open source at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star! ❤️" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -93,12 +93,12 @@
         }
       }
     },
-    "Choose view" : {
+    "Choose Water Tracker Summary View" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "选择视图"
+            "value" : "选择喝水概要视图"
           }
         }
       }
@@ -118,7 +118,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "数据时间范围"
+            "value" : "数据范围"
           }
         }
       }
@@ -133,12 +133,22 @@
         }
       }
     },
+    "Day View" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "天视图"
+          }
+        }
+      }
+    },
     "Day Water Tracker" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "天喝水追踪"
+            "value" : "一天喝水追踪"
           }
         }
       }
@@ -195,16 +205,6 @@
         }
       }
     },
-    "Hour View" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小时视图"
-          }
-        }
-      }
-    },
     "Log your water status in %@." : {
       "localizations" : {
         "zh-Hans" : {
@@ -247,6 +247,36 @@
         }
       }
     },
+    "Pocket Water Tracker" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "口袋喝水助手"
+          }
+        }
+      }
+    },
+    "Pocket Water Tracker Summary View" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "口袋喝水助手喝水概要视图"
+          }
+        }
+      }
+    },
+    "Pocket Water Tracker Widget" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "口袋喝水助手小组件"
+          }
+        }
+      }
+    },
     "Save and Sync with Apple Health" : {
       "localizations" : {
         "zh-Hans" : {
@@ -257,12 +287,12 @@
         }
       }
     },
-    "Showing 24 hour view or week view" : {
+    "Showing 7 days data" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "显示24小时或者周视图"
+            "value" : "显示7天数据"
           }
         }
       }
@@ -277,12 +307,12 @@
         }
       }
     },
-    "Showing 24 hours water tracker data" : {
+    "Showing 24 hours day view or week view" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "显示24小时喝水数据"
+            "value" : "显示24小时天视图或者周视图"
           }
         }
       }
@@ -293,26 +323,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "显示7天数据"
-          }
-        }
-      }
-    },
-    "Showing week data" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "显示一周数据"
-          }
-        }
-      }
-    },
-    "Showing week water tracker data" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "显示一周喝水数据"
           }
         }
       }
@@ -363,22 +373,12 @@
         }
       }
     },
-    "Water Tracker" : {
+    "Water Tracker Summary View" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Water Tracker"
-          }
-        }
-      }
-    },
-    "Water Tracker Widget" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Water Tracker 小组件"
+            "value" : "口袋喝水助手概要视图"
           }
         }
       }

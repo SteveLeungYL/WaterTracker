@@ -934,7 +934,7 @@
 				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker Watch Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracker Watch Widget";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker Watch Widget";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -968,7 +968,7 @@
 				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker Watch Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracker Watch Widget";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker Watch Widget";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -1123,7 +1123,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = WaterTracker;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
@@ -1158,7 +1158,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = WaterTracker;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
@@ -1195,7 +1195,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WaterTracker/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WaterTracker;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
@@ -1238,7 +1238,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WaterTracker/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WaterTracker;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
@@ -1439,7 +1439,7 @@
 				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracker Widget";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker Widget";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -1472,7 +1472,7 @@
 				DEVELOPMENT_TEAM = MYX8MBTL7S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "WaterTracker Widget";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker Widget";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

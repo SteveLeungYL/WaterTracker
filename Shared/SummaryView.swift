@@ -126,7 +126,7 @@ struct SummaryView: View {
                         }
                         Spacer()
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: LocalizedStringKey("Day Water Tracker"), subTitle: LocalizedStringKey("Showing 24 hours data"), config: self.config)
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkDayData, dateComponents: .hour, mainTitle: LocalizedStringKey("Day View"), subTitle: LocalizedStringKey("Showing 24 hours data"), config: self.config)
                             .padding()
                             .onAppear() {
                                 Task{
@@ -134,7 +134,7 @@ struct SummaryView: View {
                                 }
                             }
                         
-                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: LocalizedStringKey("Week Water Tracker"), subTitle: LocalizedStringKey("Showing last 7 days data"), config: self.config)
+                        WaterTracingBarChart(chartData: self.healthKitManager.drinkWeekData, dateComponents: .day, mainTitle: LocalizedStringKey("Week View"), subTitle: LocalizedStringKey("Showing last 7 days data"), config: self.config)
                             .padding()
                             .onAppear() {
                                 Task{
@@ -174,7 +174,7 @@ struct SummaryView: View {
                             .tint(.black)
                             .padding(.horizontal)
                             .allowsHitTesting(false)
-                        Text("[*] This application is open-sourced at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star! ❤️")
+                        Text("[*] This application is open source at the following link: https://github.com/SteveLeungYL/WaterTracker. If you find it useful, please consider giving it a star! ❤️")
                             .font(.system(size: 8))
                             .foregroundStyle(.black)
                             .tint(.black)

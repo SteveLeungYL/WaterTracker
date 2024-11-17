@@ -12,7 +12,7 @@ import SwiftUI
 import CoreData
 #endif
 
-let AppName = "Water Tracker"
+let AppName = String(localized: "Pocket Water Tracker")
 
 @Model
 class WaterTrackerConfiguration {

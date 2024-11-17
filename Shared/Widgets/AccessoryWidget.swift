@@ -53,7 +53,7 @@ struct WaterTracker_Accessory_WidgetEntryView : View {
                 ZStack {
                     let waterUnitStr = entry.waterConfigMgr.waterUnit == .ml ? "ml" : "oz"
                     VStack(alignment: .leading) {
-                      Text("Water Tracker")
+                      Text("Pocket Water Tracker")
                         .font(.headline)
                         .widgetAccentable()
                         

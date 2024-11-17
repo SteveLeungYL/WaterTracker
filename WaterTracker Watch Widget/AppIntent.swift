@@ -10,22 +10,22 @@ import AppIntents
 
 enum WidgetDataRange: String, AppEnum {
     
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Data Range"
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Pocket Water Tracker Summary View"
     
     static var caseDisplayRepresentations: [WidgetDataRange : DisplayRepresentation] = [
-        .hour: DisplayRepresentation(stringLiteral: "Hour View"),
+        .hour: DisplayRepresentation(stringLiteral: "Day View"),
         .week: DisplayRepresentation(stringLiteral: "Week View"),
     ]
     
-    case hour = "Hour View"
+    case hour = "Day View"
     case week = "Week View"
 }
 
 struct ConfigurationAppIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource { "Data Range" }
-    static var description: IntentDescription { "Showing 24 hour view or week view" }
+    static var description: IntentDescription { "Showing 24 hours day view or week view" }
 
     // An example configurable parameter.
-    @Parameter(title: "Choose view", default: .hour)
+    @Parameter(title: "Choose Water Tracker Summary View", default: .hour)
     var chosenView: WidgetDataRange
 }
