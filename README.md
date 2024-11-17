@@ -19,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/SteveLeungYL/WaterTracker">
-    <img src="./Supplementary_Materials/AppIcon/AppIcon.png" alt="Logo" width="200" height="200">
+    <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/AppIcon/AppIcon.png" alt="Logo" width="200" height="200">
   </a>
 
   <h3 align="center">Water Tracker for iOS, iPadOS & watchOS</h3>
@@ -55,13 +55,14 @@ Features:
 <!-- Screenshots -->
 ## Screenshots
 
-Coming later. 
+### iOS
+<img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide3.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide5.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide7.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide9.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide11.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide13.png" width="200">
 
-<!-- ### iOS
-<img src="Supplementary_Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide3.png" width="200"> <img src="Supplementary_Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide5.png" width="200"> <img src="Supplementary_Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide7.png" width="200"> <img src="Supplementary_Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide9.png" width="200"> <img src="Supplementary_Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide11.png" width="200"> <img src="Supplementary_Materials/ScreenShots and Previews/iPhone_6_9/ScreenShots and Previews/Slide13.png" width="200">
+### iPadOS
+<img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPad_13/ScreenShots%20and%20Previews/Slide5.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPad_13/ScreenShots%20and%20Previews/Slide9.png" width="200">
 
 ### watchOS
-<img src="Supplementary_Materials/ScreenShots and Previews/Apple_Watch_Series_9_English/1.PNG" width="200"> <img src="Supplementary_Materials/ScreenShots and Previews/Apple_Watch_Series_9_English/2.PNG" width="200"> <img src="Supplementary_Materials/ScreenShots and Previews/Apple_Watch_Series_9_English/3.PNG" width="200"> -->
+<img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/Apple_Watch_Series_9_English/1.PNG" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/Apple_Watch_Series_9_English/2.PNG" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/Apple_Watch_Series_9_English/3.PNG" width="200">
 
 <!-- ROADMAP -->
 ## Roadmap
