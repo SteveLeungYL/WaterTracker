@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		291A0F342CE4597100BD8B88 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A0F332CE4597100BD8B88 /* Wave.swift */; };
 		291A0F352CE4597100BD8B88 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A0F332CE4597100BD8B88 /* Wave.swift */; };
+		2956DDD42CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */; };
+		2956DDD52CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */; };
+		2956DDD62CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */; };
+		2956DDD72CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */; };
 		295CA1AD2CD9AA9E00FDFC2B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97342CD971E300E9F55F /* WidgetKit.framework */; };
 		295CA1AE2CD9AA9E00FDFC2B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BC97362CD971E300E9F55F /* SwiftUI.framework */; };
 		295CA1B92CD9AA9F00FDFC2B /* WaterTracker Watch WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 295CA1AC2CD9AA9E00FDFC2B /* WaterTracker Watch WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -164,6 +168,7 @@
 
 /* Begin PBXFileReference section */
 		291A0F332CE4597100BD8B88 /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
+		2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		295CA1AC2CD9AA9E00FDFC2B /* WaterTracker Watch WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WaterTracker Watch WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2964344E2CD9D6A4008429BC /* DateHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandling.swift; sourceTree = "<group>"; };
 		2965A2612CCF254500E75A0F /* CupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupView.swift; sourceTree = "<group>"; };
@@ -344,6 +349,7 @@
 		297759082CCD881B00D54F00 = {
 			isa = PBXGroup;
 			children = (
+				2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */,
 				29CC0D102CE669A60016CA81 /* LICENSE */,
 				29CC0D112CE669A60016CA81 /* README.md */,
 				29E22C552CDABE0B006D186E /* Localizable.xcstrings */,
@@ -714,6 +720,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29CC0D142CE669A60016CA81 /* LICENSE in Resources */,
+				2956DDD72CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */,
 				29CC0D152CE669A60016CA81 /* README.md in Resources */,
 				29E22C592CDABE0B006D186E /* Localizable.xcstrings in Resources */,
 			);
@@ -723,6 +730,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2956DDD52CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */,
 				29CC0D122CE669A60016CA81 /* LICENSE in Resources */,
 				29CC0D132CE669A60016CA81 /* README.md in Resources */,
 				29E22C562CDABE0B006D186E /* Localizable.xcstrings in Resources */,
@@ -747,6 +755,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2956DDD62CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */,
 				29CC0D182CE669A60016CA81 /* LICENSE in Resources */,
 				29CC0D192CE669A60016CA81 /* README.md in Resources */,
 				29E22C572CDABE0B006D186E /* Localizable.xcstrings in Resources */,
@@ -772,6 +781,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29CC0D162CE669A60016CA81 /* LICENSE in Resources */,
+				2956DDD42CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */,
 				29CC0D172CE669A60016CA81 /* README.md in Resources */,
 				29E22C582CDABE0B006D186E /* Localizable.xcstrings in Resources */,
 			);
@@ -935,8 +945,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker Watch Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker Watch Widget";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -969,8 +979,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker Watch Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker Watch Widget";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1125,8 +1135,8 @@
 				INFOPLIST_FILE = "WaterTracker-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = YuLiang.SimpleWaterTracker;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1160,8 +1170,8 @@
 				INFOPLIST_FILE = "WaterTracker-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = YuLiang.SimpleWaterTracker;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1197,8 +1207,8 @@
 				INFOPLIST_FILE = WaterTracker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1240,8 +1250,8 @@
 				INFOPLIST_FILE = WaterTracker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1440,8 +1450,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker Widget";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1473,8 +1483,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WaterTracker Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Water Tracker Widget";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Water Tracker uses HealthKit from Apple to save and sync data. ";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Pocket Water Tracker uses Apple Health to save and sync water tracking data. ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
