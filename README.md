@@ -30,11 +30,11 @@
     <a href="https://github.com/SteveLeungYL/WaterTracker/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
     <a href="https://github.com/SteveLeungYL/WaterTracker/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
-    ·
-    <a href="https://github.com/SteveLeungYL/WaterTracker">App Store Link (Arrive Later)</a>
+    <br />
+    <br />
+    <a href="https://apps.apple.com/us/app/pocket-water-tracker/id6738141744"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"></a>
   </p>
 </div>
-
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -54,6 +54,8 @@ Features:
 
 <!-- Screenshots -->
 ## Screenshots
+
+[Supplementary Materials repo](https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials)
 
 ### iOS
 <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide3.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide5.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide7.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide9.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide11.png" width="200"> <img src="https://github.com/SteveLeungYL/WaterTrackerSupplementaryMaterials/blob/main/ScreenShots%20and%20Previews/iPhone_6_9/ScreenShots%20and%20Previews/Slide13.png" width="200">
