@@ -103,78 +103,45 @@ struct CupView: View {
                         Spacer()
                         
                         HStack{
-                            if #available(watchOS 11.0, *) {
-                                /*
-                                 * FIXME:: HELP!!!!!!
-                                 * This is super ugly but I don't know another way around it.
-                                 * THE ONLY DIFFERENCE IS THE .handGestureShortcut(.primaryAction) in watchOS.
-                                 */
-                                Button{
-                                    Task {
-                                        _ = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit)
-                                        LocalNotificationHandler.registerLocalNotification()
-                                        CrossOsConnectivity.shared.sendNotificationReminder()
-                                        self.isDrinkButtonExpanded = true
-                                        self.textStr = "Water + "
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                            self.isDrinkButtonExpanded = false
-                                        }
-                                        updateToggle.toggle()
+                            /*
+                             * FIXME:: HELP!!!!!!
+                             * This is super ugly but I don't know another way around it.
+                             * THE ONLY DIFFERENCE IS THE .handGestureShortcut(.primaryAction) in watchOS.
+                             */
+                            Button{
+                                Task {
+                                    _ = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit)
+                                    LocalNotificationHandler.registerLocalNotification()
+                                    CrossOsConnectivity.shared.sendNotificationReminder()
+                                    self.isDrinkButtonExpanded = true
+                                    self.textStr = "Water + "
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                        self.isDrinkButtonExpanded = false
                                     }
-#if os(watchOS)
-                                    WKInterfaceDevice.current().play(.success)
-#endif
-                                } label: {
-                                    Image(systemName: "mouth.fill")
-                                        .foregroundStyle(.red)
-                                        .font(.body)
+                                    updateToggle.toggle()
                                 }
+#if os(watchOS)
+                                WKInterfaceDevice.current().play(.success)
+#endif
+                            } label: {
+                                Image(systemName: "mouth.fill")
+                                    .foregroundStyle(.red)
+                                    .font(.body)
+                            }
 #if !os(watchOS)
-                                .padding()
-                                .frame(width: 70, height: 70, alignment: .center)
+                            .padding()
+                            .frame(width: 70, height: 70, alignment: .center)
 #else
-                                .handGestureShortcut(.primaryAction)
-#endif
-                                .background(.regularMaterial)
-                                .clipShape(.circle)
-                                .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
-                                .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
-                            } else {
-                                // Fallback on earlier versions
-                                /*
-                                 * FIXME:: HELP!!!!!!
-                                 * The whole thing repeats again without .handGestureShortcut(.primaryAction)
-                                 * That's the only difference.
-                                 */
-                                Button{
-                                    Task {
-                                        _ = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit)
-                                        LocalNotificationHandler.registerLocalNotification()
-                                        CrossOsConnectivity.shared.sendNotificationReminder()
-                                        self.isDrinkButtonExpanded = true
-                                        self.textStr = "Water + "
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                            self.isDrinkButtonExpanded = false
-                                        }
-                                        updateToggle.toggle()
-                                    }
-#if os(watchOS)
-                                    WKInterfaceDevice.current().play(.success)
-#endif
-                                } label: {
-                                    Image(systemName: "mouth.fill")
-                                        .foregroundStyle(.red)
-                                        .font(.body)
+                            .apply {
+                                if #available(watchOS 11.0, *) {
+                                    $0.handGestureShortcut(.primaryAction)
                                 }
-#if !os(watchOS)
-                                .padding()
-                                .frame(width: 70, height: 70, alignment: .center)
+                            }
 #endif
-                                .background(.regularMaterial)
-                                .clipShape(.circle)
-                                .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
-                                .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
-                            } // watchOS 11.0 macro brace.
+                            .background(.regularMaterial)
+                            .clipShape(.circle)
+                            .scaleEffect(isDrinkButtonExpanded ? 2.5 : 1)
+                            .animation(Animation.easeOut(duration: 0.3), value: self.isDrinkButtonExpanded)
                             
                             Spacer()
                             
@@ -240,6 +207,11 @@ struct CupView: View {
         }
         .accentColor(.black)
     }
+}
+
+extension View {
+    /* For conditional watchOS 11.0's Double Tap gesture. */
+    func apply<V: View>(@ViewBuilder _ block: (Self) -> V) -> V { block(self) }
 }
 
 #Preview {
