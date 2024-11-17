@@ -94,7 +94,7 @@ Features:
 - [ ] Wave animation glitches at the start of the application.
   - [x] Partially avoided by uplift `waveOffset` to parent view (not ideal). 
 - [ ] Fix the widget recommendation name being the same for all widgets. 
-- [ ] (Bug) Widget data out of sync if another device updates the HealthKit data. Can HealthKit data correctly propagate between devices?
+- [ ] (Bug) Widget data is out of sync if another device updates the HealthKit data. How do I correctly propagate HealthKit data when the app is not active, or even worse, when the device is locked?
 
 See the [open issues](https://github.com/SteveLeungYL/WaterTracker/issues) for a full list of proposed features and known issues.
 
