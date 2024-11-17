@@ -122,6 +122,10 @@ struct CupView: View {
                                 }
 #if os(watchOS)
                                 WKInterfaceDevice.current().play(.success)
+#elseif os(iOS)
+                                // Vibrate on iOS when drink logging succeed.
+                                let impactMed = UIImpactFeedbackGenerator(style: .heavy)
+                                impactMed.impactOccurred()
 #endif
                             } label: {
                                 Image(systemName: "mouth.fill")
