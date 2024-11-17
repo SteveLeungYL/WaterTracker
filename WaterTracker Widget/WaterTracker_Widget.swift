@@ -58,7 +58,7 @@ struct Provider: AppIntentTimelineProvider {
                 let todayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: lastMidnight)!
                 let nextdayMidnight = NSCalendar.current.date(byAdding: .day, value: 1, to: todayMidnight)!
                 
-                // Only valid for 2 hours.
+                // Only valid for 1 hours.
                 for hourOffset in 0 ..< 2 {
                     let entryDate = NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
                     if entryDate >= todayMidnight {
