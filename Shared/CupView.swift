@@ -135,6 +135,8 @@ struct CupView: View {
                             .apply {
                                 if #available(watchOS 11.0, *) {
                                     $0.handGestureShortcut(.primaryAction)
+                                } else {
+                                    $0
                                 }
                             }
 #endif
