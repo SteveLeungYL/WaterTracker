@@ -84,6 +84,7 @@ Features:
 - [x] Double Tap on watchOS to trigger drink water. 
 - [x] App Store Released. ⭐️ 
 - [ ] The HealthKit data is not presented correctly in the first launch of the app.
+- [ ] The current CupView and SummaryView are a bit too complex. Divide them into smaller subviews.
 - [ ] A better `.accessoryCorner` widget, different than `.accessoryCircular`.  
 - [ ] Swipe to drink (swipe on the CupView to trigger drink button, better with animations).
 - [ ] App Intents.
