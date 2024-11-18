@@ -76,6 +76,8 @@ public final class LocalNotificationHandler {
         
         Task {
             await LocalNotificationHandler.askForNotificationAuthorization()
+            // Rerun the registration after the authorization is finished (no matter the permission is granted or not).
+            registerLocalNotification()
         }
         
         // Configure the notification's payload.
