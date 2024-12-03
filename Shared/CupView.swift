@@ -128,9 +128,15 @@ struct CupView: View {
                                 impactMed.impactOccurred()
 #endif
                             } label: {
-                                Image(systemName: "mouth.fill")
-                                    .foregroundStyle(.red)
-                                    .font(.body)
+                                ZStack{
+                                    Image(systemName: "plus")
+                                        .foregroundStyle(.blue)
+#if os(watchOS)
+                                        .font(.system(size: 25))
+#else
+                                        .font(.system(size: 40))
+#endif
+                                }
                             }
 #if !os(watchOS)
                             .padding()
