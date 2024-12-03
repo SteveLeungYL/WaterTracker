@@ -12,7 +12,7 @@ import SwiftUI
 import Charts
 
 struct WaterTracingBarChart: View {
-    @State var chartData: [HealthMetric]
+    var chartData: [HealthMetric] // It is better to use @State or @Binding here. However, could cause data not init correctly problem from Summary View.
     @State var isEmptyData: Bool = false
     @State var dateComponents: Calendar.Component
     @State var mainTitle: LocalizedStringKey
@@ -142,16 +142,19 @@ struct WaterTracingBarChart: View {
                         AxisValueLabel()
                     }
                 }
+#if WIDGET || WATCH_WIDGET
                 .onAppear {
                     if self.chartData.isEmpty {
-                        if self.dateComponents == .day {
-                            self.chartData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
-                        } else if self.dateComponents == .hour {
-                            self.chartData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: false)
-                        }
+                        // FIXME:: Fill in data for placeholder if chartData is empty. 
+//                        if self.dateComponents == .day {
+//                            self.chartData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
+//                        } else if self.dateComponents == .hour {
+//                            self.chartData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: false)
+//                        }
                         self.isEmptyData = true
                     }
                 }
+#endif
                 
                 Text("Empty Data\nPlease open the app again to \nrefresh the chart")
                     .multilineTextAlignment(.center)
