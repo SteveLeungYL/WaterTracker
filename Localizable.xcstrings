@@ -185,6 +185,9 @@
         }
       }
     },
+    "Empty Data\nPlease open the app again to \nrefresh the chart" : {
+
+    },
     "For Digital Crown" : {
       "localizations" : {
         "zh-Hans" : {
