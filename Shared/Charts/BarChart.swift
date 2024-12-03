@@ -12,29 +12,30 @@ import SwiftUI
 import Charts
 
 struct WaterTracingBarChart: View {
-    var chartData: [HealthMetric]
+    @State var chartData: [HealthMetric]
+    @State var isEmptyData: Bool = false
     @State var dateComponents: Calendar.Component
     @State var mainTitle: LocalizedStringKey
     @State var subTitle: LocalizedStringKey
     
-    #if WIDGET
+#if WIDGET
     // iOS widget.
     @State var hourGap: Int = 4
-    #elseif WATCH_WIDGET || os(watchOS)
+#elseif WATCH_WIDGET || os(watchOS)
     // watchOS or watchOS widget.
     // the font is bigger because we skipped some titles.
     @State var hourGap: Int = 6
-    #else
+#else
     // In App.
     @State var hourGap: Int = 4
-    #endif
-
+#endif
+    
     //    @State private var rawSelectedDate: Date?
     @State var config: WaterTrackerConfigManager
     
     var body: some View {
         VStack { // Overall chart card
-            #if !WIDGET && !WATCH_WIDGET
+#if !WIDGET && !WATCH_WIDGET
             HStack {
                 VStack(alignment: .leading) {
                     Text(mainTitle)
@@ -49,7 +50,7 @@ struct WaterTracingBarChart: View {
             }
             .foregroundStyle(.secondary)
             .padding(.bottom, 12)
-            #elseif WIDGET
+#elseif WIDGET
             // This is widget rending mode.
             VStack{
                 HStack{
@@ -68,7 +69,7 @@ struct WaterTracingBarChart: View {
                     Spacer()
                 }
             }
-            #elseif WATCH_WIDGET
+#elseif WATCH_WIDGET
             // This is watch widget rending mode.
             VStack{
                 HStack{
@@ -80,71 +81,96 @@ struct WaterTracingBarChart: View {
                     Spacer()
                 }
             }
-            #endif
+#endif
             
-            Chart {
-                if self.dateComponents == .day {
-                    ForEach(chartData) { curDateTracker in
-                        BarMark(x: .value("Day", curDateTracker.date, unit: .day),
-                                y: .value("Water Drink", curDateTracker.value)
-                        )
-                        .foregroundStyle(curDateTracker.value >= self.config.getDailyGoal() ? Color.blue.gradient : Color.mint.gradient)
-                    }
-                } else if self.dateComponents == .hour {
-                    ForEach(chartData) { curDateTracker in
-                        BarMark(x: .value("Hour", curDateTracker.date, unit: .hour),
-                                y: .value("Water Drink", curDateTracker.value)
-                        )
-                        .foregroundStyle(Color.blue.gradient)
-                    }
-                }
-            }
-            #if !WIDGET && !WATCH_WIDGET
-            .frame(height: 150)
-            #endif
-            .chartXAxis {
-                if self.dateComponents == .day {
-                    #if !os(watchOS)
-                    AxisMarks(values: .stride(by: .day)) {
-                        AxisValueLabel(format: .dateTime.weekday(), centered: true)
-                    }
-                    #else
-                    // Use .short formatting for weekday on watchOS.
-                    // The default formatting is too big for Apple Watch SE (40mm).
-                    AxisMarks(values: .stride(by: .day)) {
-                        AxisValueLabel(format: Date.FormatStyle().weekday(.short), centered: true)
-                    }
-                    #endif
-                } else {
-                    AxisMarks(values: .stride(by: .hour, count: self.hourGap)) { value in
-                        if let date = value.as(Date.self) {
-                            let hour = Calendar.current.component(.hour, from: date)
-                            switch hour {
-                            case 0, 12:
-                                AxisValueLabel(format: .dateTime.hour())
-                            default:
-                                AxisValueLabel(format: .dateTime.hour(.defaultDigits(amPM: .omitted)))
-                            }
-                            
-                            AxisGridLine()
-                            AxisTick()
+            ZStack{
+                Chart {
+                    if self.dateComponents == .day {
+                        ForEach(chartData) { curDateTracker in
+                            BarMark(x: .value("Day", curDateTracker.date, unit: .day),
+                                    y: .value("Water Drink", curDateTracker.value)
+                            )
+                            .foregroundStyle(curDateTracker.value >= self.config.getDailyGoal() ? Color.blue.gradient : Color.mint.gradient)
+                        }
+                    } else if self.dateComponents == .hour {
+                        ForEach(chartData) { curDateTracker in
+                            BarMark(x: .value("Hour", curDateTracker.date, unit: .hour),
+                                    y: .value("Water Drink", curDateTracker.value)
+                            )
+                            .foregroundStyle(Color.blue.gradient)
                         }
                     }
                 }
-            }
-            .chartYAxis {
-                AxisMarks { value in
-                    AxisGridLine()
-                        .foregroundStyle(Color.secondary.opacity(0.4))
-                    
-                    AxisValueLabel()
+#if !WIDGET && !WATCH_WIDGET
+                .frame(height: 150)
+#endif
+                .chartXAxis {
+                    if self.dateComponents == .day {
+#if !os(watchOS)
+                        AxisMarks(values: .stride(by: .day)) {
+                            AxisValueLabel(format: .dateTime.weekday(), centered: true)
+                        }
+#else
+                        // Use .short formatting for weekday on watchOS.
+                        // The default formatting is too big for Apple Watch SE (40mm).
+                        AxisMarks(values: .stride(by: .day)) {
+                            AxisValueLabel(format: Date.FormatStyle().weekday(.short), centered: true)
+                        }
+#endif
+                    } else {
+                        AxisMarks(values: .stride(by: .hour, count: self.hourGap)) { value in
+                            if let date = value.as(Date.self) {
+                                let hour = Calendar.current.component(.hour, from: date)
+                                switch hour {
+                                case 0, 12:
+                                    AxisValueLabel(format: .dateTime.hour())
+                                default:
+                                    AxisValueLabel(format: .dateTime.hour(.defaultDigits(amPM: .omitted)))
+                                }
+                                
+                                AxisGridLine()
+                                AxisTick()
+                            }
+                        }
+                    }
                 }
+                .chartYAxis {
+                    AxisMarks { value in
+                        AxisGridLine()
+                            .foregroundStyle(Color.secondary.opacity(0.4))
+                        
+                        AxisValueLabel()
+                    }
+                }
+                .onAppear {
+                    if self.chartData.isEmpty {
+                        if self.dateComponents == .day {
+                            self.chartData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
+                        } else if self.dateComponents == .hour {
+                            self.chartData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: false)
+                        }
+                        self.isEmptyData = true
+                    }
+                }
+                
+                Text("Empty Data\nPlease open the app again to \nrefresh the chart")
+                    .multilineTextAlignment(.center)
+#if !WIDGET && !WATCH_WIDGET
+                    .font(.title3.bold())
+#elseif WIDGET
+                    .font(.subheadline)
+#elseif WATCH_WIDGET
+                    .font(.caption)
+#endif
+                    .foregroundStyle(.gray)
+                    .opacity(self.isEmptyData ? 1.0 : 0)
+                    .padding()
             }
         }
-        #if !WIDGET && !WATCH_WIDGET
+#if !WIDGET && !WATCH_WIDGET
         .padding()
         .background(RoundedRectangle(cornerRadius: 12).fill(.regularMaterial))
-        #endif
+#endif
     }
 }
 
@@ -152,7 +178,7 @@ struct WaterTracingBarChart: View {
     @Previewable @State var healthKitManager = HealthKitManager()
     @Previewable @State var configManager = WaterTrackerConfigManager()
     
-    // Random week data for Preview. 
+    // Random week data for Preview.
     @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: true)
     
     ZStack {
@@ -169,10 +195,25 @@ struct WaterTracingBarChart: View {
     @Previewable @State var configManager = WaterTrackerConfigManager()
     
     // Random week data for Preview.
-    @Previewable @State var mockChartData: [HealthMetric] = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
+    @Previewable @State var mockChartData: [HealthMetric] = []
     
     ZStack {
         WaterTracingBarChart(chartData: mockChartData, dateComponents: .day, mainTitle: "Week Tracker", subTitle: "Showing last 7 days data", config: WaterTrackerConfigManager())
+            .modelContainer(sharedWaterTrackerModelContainer)
+            .environment(healthKitManager)
+            .environment(configManager)
+    }
+}
+
+#Preview {
+    @Previewable @State var healthKitManager = HealthKitManager()
+    @Previewable @State var configManager = WaterTrackerConfigManager()
+    
+    // Random week data for Preview.
+    @Previewable @State var mockChartData: [HealthMetric] = []
+    
+    ZStack {
+        WaterTracingBarChart(chartData: mockChartData, dateComponents: .hour, mainTitle: "24-hour Tracker", subTitle: "Showing 24 hours data", config: WaterTrackerConfigManager())
             .modelContainer(sharedWaterTrackerModelContainer)
             .environment(healthKitManager)
             .environment(configManager)
