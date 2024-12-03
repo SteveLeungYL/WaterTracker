@@ -72,8 +72,8 @@ struct Provider: AppIntentTimelineProvider {
                 }
             } else {
                 // week view
-                // Slightly longer cache time, 3 hours.
-                for hourOffset in 0 ..< 3 {
+                // Only valid for 1 hours.
+                for hourOffset in 0 ..< 2 {
                     let entryDate = NSCalendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
                     let entry = SimpleEntry(date: entryDate, configuration: configuration, todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: config.getDailyGoal(), dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
                     entries.append(entry)

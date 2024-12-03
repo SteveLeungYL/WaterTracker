@@ -83,6 +83,7 @@ Features:
 - [x] Water Reminder Local Notification
 - [x] Double Tap on watchOS to trigger drink water. 
 - [x] App Store Released. ⭐️ 
+- [x] Show Empty Data or need refresh if the widget gets empty input. 
 - [ ] The HealthKit data is not presented correctly in the first launch of the app.
 - [ ] The current CupView and SummaryView are a bit too complex. Divide them into smaller subviews.
 - [ ] A better `.accessoryCorner` widget, different than `.accessoryCircular`.  
