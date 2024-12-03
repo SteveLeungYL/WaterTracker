@@ -29,20 +29,25 @@ struct UnitPickerView: View {
     
     var body : some View {
         
-#if os(iOS)
         HStack{
             
             Text("Daily Goal: ")
+#if os(iOS)
                 .font(.title)
+#elseif os(watchOS)
+                .font(.body)
+#endif
                 .foregroundStyle(.black)
                 .fontWeight(.bold)
                 .allowsHitTesting(false)
                 .multilineTextAlignment(.leading)
+#if os(iOS)
             // Trick for citation.
             Text("[1]")
                 .font(.system(size: 8))
                 .foregroundStyle(.black)
                 .baselineOffset(6.0)
+#endif
             
             
             Picker("", selection: self.$dailyGoal) {
@@ -51,7 +56,11 @@ struct UnitPickerView: View {
                     Text(String("\($0) \(unitStr)"))
                 }
             }
+#if os(iOS)
             .pickerStyle(.wheel)
+#elseif os(watchOS)
+            .pickerStyle(.navigationLink)
+#endif
             .foregroundStyle(.black) // FIXME: Does not have effect on the wheel text (watchOS).
             .accentColor(.black) // FIXME: Another failed attempt to change the wheel text to black (watchOS).
             .multilineTextAlignment(.center)
@@ -69,7 +78,6 @@ struct UnitPickerView: View {
                 }
             }
         }
-#endif
         
         HStack{
             
