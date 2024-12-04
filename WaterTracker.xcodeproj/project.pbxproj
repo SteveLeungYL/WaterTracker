@@ -13,6 +13,10 @@
 		2932571A2D00F8ED008F4AEF /* ShortCutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257162D00E97D008F4AEF /* ShortCutIntent.swift */; };
 		2932571B2D00FA57008F4AEF /* ShortCutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257162D00E97D008F4AEF /* ShortCutIntent.swift */; };
 		2932571C2D00FA57008F4AEF /* ShortCutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257162D00E97D008F4AEF /* ShortCutIntent.swift */; };
+		293257732D01085C008F4AEF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257722D01085C008F4AEF /* ColorExtension.swift */; };
+		293257742D01085C008F4AEF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257722D01085C008F4AEF /* ColorExtension.swift */; };
+		293257752D01085C008F4AEF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257722D01085C008F4AEF /* ColorExtension.swift */; };
+		293257762D01085C008F4AEF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257722D01085C008F4AEF /* ColorExtension.swift */; };
 		2956DDD42CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */; };
 		2956DDD52CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */; };
 		2956DDD62CEA7FAA00D2BD4F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */; };
@@ -145,6 +149,7 @@
 /* Begin PBXFileReference section */
 		291A0F332CE4597100BD8B88 /* Wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		293257162D00E97D008F4AEF /* ShortCutIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortCutIntent.swift; sourceTree = "<group>"; };
+		293257722D01085C008F4AEF /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		2956DDD32CEA7FAA00D2BD4F /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		295CA1AC2CD9AA9E00FDFC2B /* WaterTracker Watch WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WaterTracker Watch WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2964344E2CD9D6A4008429BC /* DateHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandling.swift; sourceTree = "<group>"; };
@@ -279,6 +284,14 @@
 			path = ShortCutIntents;
 			sourceTree = "<group>";
 		};
+		293257712D010856008F4AEF /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				293257722D01085C008F4AEF /* ColorExtension.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
 		297759082CCD881B00D54F00 = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +372,7 @@
 		29D8FE7F2CCECD8200504B17 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				293257712D010856008F4AEF /* Colors */,
 				293257192D00F8DD008F4AEF /* ShortCutIntents */,
 				29E22C522CDAB790006D186E /* Widgets */,
 				29D17B172CD446930049B75C /* UnitPicker.swift */,
@@ -587,6 +601,7 @@
 				29C2FF2C2CD9B158008A4EC7 /* WaterTrackerConfigurations.swift in Sources */,
 				2932571A2D00F8ED008F4AEF /* ShortCutIntent.swift in Sources */,
 				29C2FF2D2CD9B158008A4EC7 /* Units.swift in Sources */,
+				293257732D01085C008F4AEF /* ColorExtension.swift in Sources */,
 				29C2FF2E2CD9B158008A4EC7 /* BarChart.swift in Sources */,
 				29C2FF2A2CD9B102008A4EC7 /* CircularProgress.swift in Sources */,
 			);
@@ -611,6 +626,7 @@
 				29A489AA2CD2B9D5005AA4A1 /* Units.swift in Sources */,
 				29A489D92CD309CC005AA4A1 /* BodyShape.swift in Sources */,
 				29D8FE7E2CCECB9D00504B17 /* WaveAnimation.swift in Sources */,
+				293257762D01085C008F4AEF /* ColorExtension.swift in Sources */,
 				29D17B192CD446970049B75C /* UnitPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,6 +650,7 @@
 				29A489A92CD2B9D5005AA4A1 /* Units.swift in Sources */,
 				29A489D82CD309CC005AA4A1 /* BodyShape.swift in Sources */,
 				29D8FE802CCECDD100504B17 /* WaveAnimation.swift in Sources */,
+				293257742D01085C008F4AEF /* ColorExtension.swift in Sources */,
 				29D17B182CD446970049B75C /* UnitPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,6 +666,7 @@
 				29BC97A52CD973E500E9F55F /* Units.swift in Sources */,
 				29BC97A62CD973E500E9F55F /* BarChart.swift in Sources */,
 				296434512CD9D6A7008429BC /* DateHandling.swift in Sources */,
+				293257752D01085C008F4AEF /* ColorExtension.swift in Sources */,
 				29E22C4B2CDAAECF006D186E /* AccessoryWidget.swift in Sources */,
 				29C2FF282CD9AEF9008A4EC7 /* CircularProgress.swift in Sources */,
 			);
