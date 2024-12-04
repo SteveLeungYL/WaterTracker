@@ -68,13 +68,17 @@ struct SummaryView: View {
         // No need to update config here, because it is binding
         // directly to the unit picker.
         if let err = healthKitManager.updateDrinkWaterToday(waterUnitInput: config.waterUnit) {
-            self.alertError = err
-            self.isShowAlert = true
+            DispatchQueue.main.async{
+                self.alertError = err
+                self.isShowAlert = true
+            }
         }
         _ = await self.healthKitManager.updateDrinkWaterOneDay(waterUnitInput: self.config.waterUnit)
         _ = await self.healthKitManager.updateDrinkWaterWeek(waterUnitInput: self.config.waterUnit)
         updateTextStr()
-        self.CircularBarUpdateToggle.toggle()
+        DispatchQueue.main.async{
+            self.CircularBarUpdateToggle.toggle()
+        }
     }
     
     var body : some View {
@@ -194,9 +198,12 @@ struct SummaryView: View {
                     // For reloading purpose
                     updateTextStr()
                     // Reset the animation starting point.
-                    // If not set, could lead to animation glitches.
-                    self.waveOffset = .zero
-                    self.CircularBarUpdateToggle.toggle()
+                    
+                    DispatchQueue.main.async{
+                        // If not set, could lead to animation glitches.
+                        self.waveOffset = .zero
+                        self.CircularBarUpdateToggle.toggle()
+                    }
                 }
                 .onChange(of: healthKitManager.todayTotalDrinkNum) {
                     // Reloading text.

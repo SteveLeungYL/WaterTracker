@@ -23,10 +23,6 @@ struct UnitPickerView: View {
     @State private var dailyGoal: Double = 0.0
     @State private var dailyGoalChoice: [Double] = [2500]
     
-    init(updateToggle: Binding<Bool>) {
-        self._updateToggle = updateToggle
-    }
-    
     var body : some View {
         
         HStack{
