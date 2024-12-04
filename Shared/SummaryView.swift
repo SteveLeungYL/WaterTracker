@@ -83,7 +83,7 @@ struct SummaryView: View {
     
     var body : some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.cyan, .mint]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.5), .mint]), startPoint: .top, endPoint: .bottom)
                 .clipped()
                 .ignoresSafeArea(.all) // As background.
             GeometryReader { geometry in
