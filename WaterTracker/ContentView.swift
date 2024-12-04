@@ -15,14 +15,21 @@ struct ContentView: View {
         #if os(iOS)
         if UIDevice.current.userInterfaceIdiom == .pad {
             // iPad
-            SummaryView()
-                .onChange(of: scenePhase) { oldPhase, newPhase in
-                    if newPhase == .inactive {
-                        WidgetCenter.shared.reloadAllTimelines()
-                    } else if newPhase == .background {
-                        WidgetCenter.shared.reloadAllTimelines()
-                    }
-                }
+            
+            NavigationSplitView(columnVisibility: .constant(.all)) {
+                    CupView()
+                        .onChange(of: scenePhase) { oldPhase, newPhase in
+                            if newPhase == .inactive {
+                                WidgetCenter.shared.reloadAllTimelines()
+                            } else if newPhase == .background {
+                                WidgetCenter.shared.reloadAllTimelines()
+                            }
+                        }
+            } detail: {
+                SummaryView()
+            }
+            .navigationSplitViewStyle(.balanced)
+            
         } else {
             // iPhone
             CupView()
