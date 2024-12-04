@@ -86,7 +86,9 @@ Features:
 - [x] Show Empty Data or need refresh if the widget gets empty input. 
 - [x] (Bug) Widget data is out of sync if another device updates the HealthKit data. How do I correctly propagate HealthKit data when the app is not active, or even worse, when the device is locked?
     - [x] (Partial Fix) Show data empty and prompt the user to enter the app for widget refresh. 
-- [ ] The HealthKit data is not presented correctly in the first launch of the app.
+- [ ] Custom reminder interval. 
+- [ ] Do not disturb within sleep time. 
+- [ ] (Bug) The HealthKit data is not presented correctly in the first launch of the app.
 - [ ] The current CupView and SummaryView are a bit too complex. Divide them into smaller subviews.
 - [ ] A better `.accessoryCorner` widget, different than `.accessoryCircular`.  
 - [ ] Swipe to drink (swipe on the CupView to trigger drink button, better with animations).
