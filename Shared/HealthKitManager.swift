@@ -91,17 +91,19 @@ class HealthKitManager {
         }
         
         
-        // Asking User's permission for their Health Data
-        healthStore.requestAuthorization(toShare: toReadAndWrite, read: toReadAndWrite) {
-            success, error in
-            if !success {
-                err = .healthKitNotAvailable
+        DispatchQueue.main.async{
+            // Asking User's permission for their Health Data
+            self.healthStore.requestAuthorization(toShare: self.toReadAndWrite, read: self.toReadAndWrite) {
+                success, error in
+                if !success {
+                    err = .healthKitNotAvailable
+                }
             }
-        }
-        
-        // Check authroization after granted permission.
-        if healthStore.authorizationStatus(for: toReadAndWrite.first!) != .sharingAuthorized && healthStore.authorizationStatus(for: toReadAndWrite.first!) != .notDetermined {
-            err = .healthKitNotAuthorized
+            
+            // Check authroization after granted permission.
+            if self.healthStore.authorizationStatus(for: self.toReadAndWrite.first!) != .sharingAuthorized && self.healthStore.authorizationStatus(for: self.toReadAndWrite.first!) != .notDetermined {
+                err = .healthKitNotAuthorized
+            }
         }
         
         
