@@ -185,6 +185,16 @@
         }
       }
     },
+    "Drink Num" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "喝水数量"
+          }
+        }
+      }
+    },
     "Empty Data\nPlease open the app again to \nrefresh the chart" : {
       "localizations" : {
         "zh-Hans" : {
@@ -211,6 +221,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "小时"
+          }
+        }
+      }
+    },
+    "Log a water drinking event" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记录一个喝水事件"
+          }
+        }
+      }
+    },
+    "Log Drinking" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记录喝水"
           }
         }
       }
