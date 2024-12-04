@@ -186,7 +186,14 @@
       }
     },
     "Empty Data\nPlease open the app again to \nrefresh the chart" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无数据\n请打开应用来 \n刷新数据"
+          }
+        }
+      }
     },
     "For Digital Crown" : {
       "localizations" : {
