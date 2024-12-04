@@ -84,6 +84,8 @@ Features:
 - [x] Double Tap on watchOS to trigger drink water. 
 - [x] App Store Released. ⭐️ 
 - [x] Show Empty Data or need refresh if the widget gets empty input. 
+- [x] (Bug) Widget data is out of sync if another device updates the HealthKit data. How do I correctly propagate HealthKit data when the app is not active, or even worse, when the device is locked?
+    - [x] (Partial Fix) Show data empty and prompt the user to enter the app for widget refresh. 
 - [ ] The HealthKit data is not presented correctly in the first launch of the app.
 - [ ] The current CupView and SummaryView are a bit too complex. Divide them into smaller subviews.
 - [ ] A better `.accessoryCorner` widget, different than `.accessoryCircular`.  
@@ -95,7 +97,6 @@ Features:
 - [ ] Wave animation glitches at the start of the application.
   - [x] Partially avoided by uplift `waveOffset` to parent view (not ideal). 
 - [ ] Fix the widget recommendation name being the same for all widgets. 
-- [ ] (Bug) Widget data is out of sync if another device updates the HealthKit data. How do I correctly propagate HealthKit data when the app is not active, or even worse, when the device is locked?
 
 See the [open issues](https://github.com/SteveLeungYL/WaterTracker/issues) for a full list of proposed features and known issues.
 
