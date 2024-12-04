@@ -103,11 +103,6 @@ struct CupView: View {
                         Spacer()
                         
                         HStack{
-                            /*
-                             * FIXME:: HELP!!!!!!
-                             * This is super ugly but I don't know another way around it.
-                             * THE ONLY DIFFERENCE IS THE .handGestureShortcut(.primaryAction) in watchOS.
-                             */
                             Button{
                                 Task {
                                     _ = await healthKitManager.saveDrinkWater(drink_num: self.healthKitManager.drinkNum, waterUnitInput: config.waterUnit)
