@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		291A0F342CE4597100BD8B88 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A0F332CE4597100BD8B88 /* Wave.swift */; };
 		291A0F352CE4597100BD8B88 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A0F332CE4597100BD8B88 /* Wave.swift */; };
-		293257172D00E985008F4AEF /* ShortCutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257162D00E97D008F4AEF /* ShortCutIntent.swift */; };
-		2932571A2D00F8ED008F4AEF /* ShortCutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257162D00E97D008F4AEF /* ShortCutIntent.swift */; };
 		2932571B2D00FA57008F4AEF /* ShortCutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257162D00E97D008F4AEF /* ShortCutIntent.swift */; };
 		2932571C2D00FA57008F4AEF /* ShortCutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257162D00E97D008F4AEF /* ShortCutIntent.swift */; };
 		293257732D01085C008F4AEF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293257722D01085C008F4AEF /* ColorExtension.swift */; };
@@ -599,7 +597,6 @@
 				296434522CD9D6A7008429BC /* DateHandling.swift in Sources */,
 				29C2FF2B2CD9B158008A4EC7 /* HealthKitManager.swift in Sources */,
 				29C2FF2C2CD9B158008A4EC7 /* WaterTrackerConfigurations.swift in Sources */,
-				2932571A2D00F8ED008F4AEF /* ShortCutIntent.swift in Sources */,
 				29C2FF2D2CD9B158008A4EC7 /* Units.swift in Sources */,
 				293257732D01085C008F4AEF /* ColorExtension.swift in Sources */,
 				29C2FF2E2CD9B158008A4EC7 /* BarChart.swift in Sources */,
@@ -661,7 +658,6 @@
 			files = (
 				29BC97A32CD973E500E9F55F /* HealthKitManager.swift in Sources */,
 				29BC97A42CD973E500E9F55F /* WaterTrackerConfigurations.swift in Sources */,
-				293257172D00E985008F4AEF /* ShortCutIntent.swift in Sources */,
 				29E22C4C2CDAB494006D186E /* CupShape.swift in Sources */,
 				29BC97A52CD973E500E9F55F /* Units.swift in Sources */,
 				29BC97A62CD973E500E9F55F /* BarChart.swift in Sources */,

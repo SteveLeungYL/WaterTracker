@@ -8,6 +8,7 @@
 import AppIntents
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct ShortCutIntent: AppIntent {
     
@@ -36,6 +37,9 @@ struct ShortCutIntent: AppIntent {
             res_str = String.LocalizationValue(stringLiteral: tmp_res_str)
         }
         
+        WidgetCenter.shared.reloadAllTimelines()
+        LocalNotificationHandler.registerLocalNotification()
+        CrossOsConnectivity.shared.sendNotificationReminder()
         return .result(dialog: IntentDialog(stringLiteral: String(localized:res_str)))
     }
     
