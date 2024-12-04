@@ -27,9 +27,11 @@ struct SummaryView: View {
     // Placeholder for texts.
     @State private var textStr: LocalizedStringKey = "100 ml"
     @State private var unitStr: String = "ml"
+    @State private var pctStr: String = "0%"
     
     // For updating all UIs when configuration changes.
     @State var updateToggle: Bool = false
+    @State var CircularBarUpdateToggle: Bool = false
     
     func updateTextStr() {
         self.unitStr = config.getUnitStr()
@@ -53,6 +55,12 @@ struct SummaryView: View {
                 self.textStr = LocalizedStringKey("Today you drink \(drinkNumStr)\(self.unitStr) out of the goal \(suggestedNumStr)\(self.unitStr), \(leftNumStr)\(self.unitStr) to go")
             }
         }
+        
+        DispatchQueue.main.async{
+            var pct: Double = self.healthKitManager.todayTotalDrinkNum / self.config.getDailyGoal() * 100.0
+            pct = min(100.0, max(pct, 0.0))
+            self.pctStr = String(format: "%.0f%%", pct)
+        }
     }
     
     func updateEverything() async {
@@ -66,6 +74,7 @@ struct SummaryView: View {
         _ = await self.healthKitManager.updateDrinkWaterOneDay(waterUnitInput: self.config.waterUnit)
         _ = await self.healthKitManager.updateDrinkWaterWeek(waterUnitInput: self.config.waterUnit)
         updateTextStr()
+        self.CircularBarUpdateToggle.toggle()
     }
     
     var body : some View {
@@ -74,38 +83,31 @@ struct SummaryView: View {
                 .clipped()
                 .ignoresSafeArea(.all) // As background.
             GeometryReader { geometry in
-                @State var bodyWidth = geometry.size.width * 0.8
+#if os(iOS)
+                @State var circularBarSize = geometry.size.width * 0.6
+#elseif os(watchOS)
+                @State var circularBarSize = geometry.size.width * 0.9
+#endif
                 ScrollView {
                     VStack{
-                        Spacer()
+//                        Spacer()
                         HStack{
                             Spacer()
                             ZStack{
-                                BodyShape()
-                                    .fill(Color.white)
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: bodyWidth, alignment: .center)
-                                    .overlay(
-                                        WaveAnimation($waveOffset, false)
-                                            .frame(width: bodyWidth, alignment: .center)
-                                            .aspectRatio( contentMode: .fill)
-                                            .mask(
-                                                BodyShape()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(width: bodyWidth, alignment: .center)
-                                            )
-                                    )
-                                
-                                
-                                BodyShape()
-#if !os(watchOS)
-                                    .stroke(Color.black, style: StrokeStyle(lineWidth: 8))
-#else
-                                    .stroke(Color.black, style: StrokeStyle(lineWidth: 3))
+#if os(iOS)
+                                CircularProgressView(config: config, lineWidth: 20, updateToggle: $CircularBarUpdateToggle)
+                                    .frame(width: circularBarSize, height: circularBarSize)
+#elseif os(watchOS)
+                                CircularProgressView(config: config, lineWidth: 8, updateToggle: $CircularBarUpdateToggle)
+                                    .frame(width: circularBarSize, height: circularBarSize)
 #endif
-                                
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: bodyWidth, alignment: .center)
+                                VStack{
+                                    Text(pctStr)
+                                        .font(.system(size: 400).bold())
+                                        .foregroundStyle(.black)
+                                        .minimumScaleFactor(0.01)
+                                        .frame(height: circularBarSize * 0.2)
+                                }
                             }
                             Spacer()
                         }
@@ -194,6 +196,7 @@ struct SummaryView: View {
                     // Reset the animation starting point.
                     // If not set, could lead to animation glitches.
                     self.waveOffset = .zero
+                    self.CircularBarUpdateToggle.toggle()
                 }
                 .onChange(of: healthKitManager.todayTotalDrinkNum) {
                     // Reloading text.
