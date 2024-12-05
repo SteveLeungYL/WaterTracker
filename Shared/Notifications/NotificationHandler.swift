@@ -66,18 +66,22 @@ public final class LocalNotificationHandler {
         let center = UNUserNotificationCenter.current()
         do {
             try await center.requestAuthorization(options: [.sound, .alert])
+            DispatchQueue.main.async{
+                registerLocalNotification(askForPermission: false)
+            }
         } catch {
             // Handle the error here.
             print("Notification Registration Error?")
         }
     }
     
-    static public func registerLocalNotification() {
+    static public func registerLocalNotification(askForPermission: Bool = true) {
         
-        Task {
-            await LocalNotificationHandler.askForNotificationAuthorization()
-            // Rerun the registration after the authorization is finished (no matter the permission is granted or not).
-            registerLocalNotification()
+        if askForPermission {
+            Task {
+                await LocalNotificationHandler.askForNotificationAuthorization()
+            }
+            return
         }
         
         // Configure the notification's payload.
