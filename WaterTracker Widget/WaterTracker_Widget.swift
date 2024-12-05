@@ -18,8 +18,8 @@ struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         let mockDayData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .hour, isMock: false)
         let mockWeekData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .day, value: -7, to: getStartOfDate(date: Date()))!, endDate:getStartOfDate(date: Date()), gapUnit: .day, isMock: false)
-        let todayTotalDrinkNum = 2400.0
-        let dailyGoal = 3100.0
+        let todayTotalDrinkNum = 2000.0
+        let dailyGoal = 2400.0
         return SimpleEntry(date: getStartOfDate(date: Date()), configuration: ConfigurationAppIntent(), todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: dailyGoal, dayData: mockDayData, weekData: mockWeekData, waterConfig: config)
     }
     
@@ -28,8 +28,8 @@ struct Provider: AppIntentTimelineProvider {
             let container = try ModelContainer(for: WaterTrackerConfiguration.self)
             let context = ModelContext(container)
             config.receiveUpdatedWaterTrackerConfig(modelContext: context)
-            let todayTotalDrinkNum = 2400.0
-            let dailyGoal = 3100.0
+            let todayTotalDrinkNum = 2000.0
+            let dailyGoal = 2400.0
             _ = await healthKitManager.updateDrinkWaterOneDay(waterUnitInput: config.waterUnit)
             return SimpleEntry(date: getStartOfDate(date: Date()), configuration: configuration, todayTotalDrinkNum: todayTotalDrinkNum, dailyGoal: dailyGoal, dayData: healthKitManager.drinkDayData, weekData: healthKitManager.drinkWeekData, waterConfig: config)
         } catch {
@@ -140,5 +140,5 @@ struct WaterTracker_Widget: Widget {
     WaterTracker_Widget()
 } timeline: {
     let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.date(byAdding: .hour, value: -24, to: getStartOfDate(date: Date()))!, endDate: getStartOfDate(date: Date()), gapUnit: .hour, isMock: true)
-    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 2500.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTrackerConfigManager())
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 2000.0, dailyGoal: 2400.0, dayData: mockingData, weekData: [], waterConfig: WaterTrackerConfigManager())
 }

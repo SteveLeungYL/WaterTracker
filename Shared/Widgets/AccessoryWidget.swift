@@ -103,13 +103,13 @@ let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.
 #Preview(as: .accessoryCircular) {
     WaterTracker_Accessory_Widget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTrackerConfigManager())
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 2400.0, dayData: mockingData, weekData: [], waterConfig: WaterTrackerConfigManager())
 }
 
 #Preview(as: .accessoryRectangular) {
     WaterTracker_Accessory_Widget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTrackerConfigManager())
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 2400.0, dayData: mockingData, weekData: [], waterConfig: WaterTrackerConfigManager())
 }
 
 #if os(iOS)
@@ -117,7 +117,7 @@ let mockingData = fillEmptyData(drinkDataRaw: [], startDate: NSCalendar.current.
 #Preview(as: .accessoryInline) {
     WaterTracker_Accessory_Widget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 3100.0, dayData: mockingData, weekData: [], waterConfig: WaterTrackerConfigManager())
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), todayTotalDrinkNum: 1600.0, dailyGoal: 2400.0, dayData: mockingData, weekData: [], waterConfig: WaterTrackerConfigManager())
 }
 
 #elseif os(watchOS)

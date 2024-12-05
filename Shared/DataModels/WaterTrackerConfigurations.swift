@@ -28,7 +28,7 @@ class WaterTrackerConfiguration {
     var dailyGoal: Double? = nil
     var reminderTimeInterval: TimeInterval? = nil
     
-    init(waterUnit: WaterUnits = .ml, cupCapacity: Double = 600.0, dailyGoals: Double = 3100.0, reminderTimeInterval: TimeInterval = 7200.0) {
+    init(waterUnit: WaterUnits = .ml, cupCapacity: Double = 600.0, dailyGoals: Double = 2400.0, reminderTimeInterval: TimeInterval = 7200.0) {
         self.waterUnit = waterUnit
         self.cupCapacity = cupCapacity
         self.dailyGoal = dailyGoals
