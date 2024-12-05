@@ -86,7 +86,8 @@ Features:
 - [x] Show Empty Data or need refresh if the widget gets empty input. 
 - [x] (Bug) Widget data is out of sync if another device updates the HealthKit data. How do I correctly propagate HealthKit data when the app is not active, or even worse, when the device is locked?
     - [x] (Partial Fix) Show data empty and prompt the user to enter the app for widget refresh. 
-- [ ] Custom reminder interval. 
+- [x] Custom reminder interval. 
+- [ ] (Bug) Non-main thread modifying SwiftUI contents in Summary View. Not sure how.  
 - [ ] Do not disturb within sleep time. 
 - [ ] (Bug) The HealthKit data is not presented correctly in the first launch of the app.
 - [ ] The current CupView and SummaryView are a bit too complex. Divide them into smaller subviews.
