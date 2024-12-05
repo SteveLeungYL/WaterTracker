@@ -50,6 +50,7 @@ Features:
 + Flexible daily goal setup. 
 + Support both Milliliter and Ounce. 
 + Widgets for Home Screen. 
++ Support inputs from Siri and Spotlight. (phases: "Log water drinking", "Use Pocket Water Tracker to log water drinking", or the simplest "Log Water Drinking")
 + Deep integration with Apple Watch. 
 
 <!-- Screenshots -->
@@ -87,19 +88,19 @@ Features:
 - [x] (Bug) Widget data is out of sync if another device updates the HealthKit data. How do I correctly propagate HealthKit data when the app is not active, or even worse, when the device is locked?
     - [x] (Partial Fix) Show data empty and prompt the user to enter the app for widget refresh. 
 - [x] Custom reminder interval. 
+- [x] App Intents.
+  - [x] Siri Integration.
+  - [x] Shortcuts Integration.
 - [ ] (Bug) Non-main thread modifying SwiftUI contents in Summary View. Not sure how.  
 - [ ] Do not disturb within sleep time. 
 - [ ] (Bug) The HealthKit data is not presented correctly in the first launch of the app.
 - [ ] The current CupView and SummaryView are a bit too complex. Divide them into smaller subviews.
-- [ ] A better `.accessoryCorner` widget, different than `.accessoryCircular`.  
+- [ ] A better `.accessoryCorner` widget, different with `.accessoryCircular`.  
 - [ ] Swipe to drink (swipe on the CupView to trigger drink button, better with animations).
-- [ ] App Intents.
-  - [ ] Siri Integration.
-  - [ ] Shortcuts Integration.
 - [ ] Unexpectedly high performance/power consumption on the wave animation (optimization).
 - [ ] Wave animation glitches at the start of the application.
   - [x] Partially avoided by uplift `waveOffset` to parent view (not ideal). 
-- [ ] Fix the widget recommendation name being the same for all widgets. 
+- [ ] Fix the widget recommendation name being the same for all widgets, especially on Apple Watch iOS app. 
 
 See the [open issues](https://github.com/SteveLeungYL/WaterTracker/issues) for a full list of proposed features and known issues.
 
