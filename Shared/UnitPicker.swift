@@ -23,6 +23,9 @@ struct UnitPickerView: View {
     @State private var dailyGoal: Double = 0.0
     @State private var dailyGoalChoice: [Double] = [2500]
     
+    @State private var reminderTimeInterval: Double = 0.0
+    @State private var reminderTimeIntervalChoice: [Double] = [1800.0, 3600.0, 5400.0 , 7200.0, 9000.0, 10800]
+    
     var body : some View {
         
         HStack{
@@ -69,8 +72,10 @@ struct UnitPickerView: View {
                 if oldValue != 0.0 {
                     // onChange is triggered when changing values in onAppear.
                     // But the placeholder is 0.0, thus won't run setDailyGoal on view onAppear.
-                    self.config.setDailyGoal(self.dailyGoal, modelContext: modelContext)
-                    updateToggle = !updateToggle
+                    DispatchQueue.main.async{
+                        self.config.setDailyGoal(self.dailyGoal, modelContext: modelContext)
+                        updateToggle = !updateToggle
+                    }
                 }
             }
         }
@@ -113,18 +118,83 @@ struct UnitPickerView: View {
                 self.waterUnitChoice = ["Milliliter", "Ounce"]
             }
             .onChange(of: waterUnitSelection) { oldValue, newValue in
-                // Same as above. Will trigger on onAppear() but avoided by "" placeholder.
-                if newValue == "Milliliter" && oldValue != "" {
-                    self.config.setWaterUnit(.ml, modelContext: modelContext)
-                    self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
-                    self.dailyGoal = self.config.getDailyGoal()
-                    updateToggle = !updateToggle
+                DispatchQueue.main.async{
+                    // Same as above. Will trigger on onAppear() but avoided by "" placeholder.
+                    if newValue == "Milliliter" && oldValue != "" {
+                        self.config.setWaterUnit(.ml, modelContext: modelContext)
+                        self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
+                        self.dailyGoal = self.config.getDailyGoal()
+                        updateToggle = !updateToggle
+                    }
+                    else if newValue == "Ounce" && oldValue != "" {
+                        self.config.setWaterUnit(.oz, modelContext: modelContext)
+                        self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
+                        self.dailyGoal = self.config.getDailyGoal()
+                        updateToggle = !updateToggle
+                    }
                 }
-                else if newValue == "Ounce" && oldValue != "" {
-                    self.config.setWaterUnit(.oz, modelContext: modelContext)
-                    self.dailyGoalChoice = self.config.getDailyGoalCustomRange()
-                    self.dailyGoal = self.config.getDailyGoal()
-                    updateToggle = !updateToggle
+            }
+        }
+        
+        HStack {
+            
+            Text("Reminder Time Interval: ")
+#if os(iOS)
+                .font(.title)
+#elseif os(watchOS)
+                .font(.body)
+#endif
+                .foregroundStyle(.black)
+                .fontWeight(.bold)
+                .allowsHitTesting(false)
+                .multilineTextAlignment(.leading)
+            
+            Spacer()
+            
+            Picker("", selection: self.$reminderTimeInterval) {
+                ForEach(self.reminderTimeIntervalChoice, id: \.self) {
+                    switch $0 {
+                    case 1800.0:
+                        let intervalStr: LocalizedStringKey = "30 mins"
+                        return Text(intervalStr)
+                    case 3600.0:
+                        let intervalStr: LocalizedStringKey = "1 hour"
+                        return Text(intervalStr)
+                    case 5400.0:
+                        let intervalStr: LocalizedStringKey = "1.5 hours"
+                        return Text(intervalStr)
+                    case 7200.0:
+                        let intervalStr: LocalizedStringKey = "2 hours"
+                        return Text(intervalStr)
+                    case 9000.0:
+                        let intervalStr: LocalizedStringKey = "2.5 hours"
+                        return Text(intervalStr)
+                    case 10800.0:
+                        let intervalStr: LocalizedStringKey = "3 hours"
+                        return Text(intervalStr)
+                    default:
+                        let intervalStr: LocalizedStringKey = "2 hours"
+                        return Text(intervalStr)
+                    }
+                }
+            }
+            #if os(iOS)
+            .pickerStyle(.wheel)
+            #elseif os(watchOS)
+            .pickerStyle(.navigationLink)
+            #endif
+            .foregroundStyle(.black) // FIXME: Does not have effect on the wheel text (watchOS).
+            .accentColor(.black) // FIXME: Another failed attempt to change the wheel text to black (watchOS).
+            .multilineTextAlignment(.center)
+            .labelsHidden()
+            .onAppear() {
+                self.reminderTimeInterval = self.config.reminderTimeInterval
+            }
+            .onChange(of: self.reminderTimeInterval) { oldValue, newValue in
+                if oldValue == 0.0 {
+                    return
+                } else {
+                    self.config.setReminderTimeInterval(self.reminderTimeInterval, modelContext: modelContext)
                 }
             }
         }

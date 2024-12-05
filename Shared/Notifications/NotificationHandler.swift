@@ -10,6 +10,7 @@ import WatchConnectivity
 import WidgetKit
 import Foundation
 import SwiftUICore
+import SwiftData
 
 final class CrossOsConnectivity: NSObject, ObservableObject {
     /*
@@ -84,6 +85,10 @@ public final class LocalNotificationHandler {
             return
         }
         
+        let config = WaterTrackerConfigManager()
+        let context = ModelContext(sharedWaterTrackerModelContainer)
+        config.receiveUpdatedWaterTrackerConfig(modelContext: context)
+        
         // Configure the notification's payload.
         let content = UNMutableNotificationContent()
         content.title = NSString.localizedUserNotificationString(forKey: String(localized: "Time to drink water!"), arguments: nil)
@@ -91,7 +96,7 @@ public final class LocalNotificationHandler {
         content.sound = UNNotificationSound.default
         
         // Deliver the notification after 2 hours of each time the user log its water drinking.
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 7200, repeats: false) //  2 hours.
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: config.reminderTimeInterval, repeats: false) //  2 hours.
         let request = UNNotificationRequest(identifier: "YuLiang.SimpleWaterTracker.DeferredNotification", content: content, trigger: trigger) // Schedule the notification.
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error : Error?) in

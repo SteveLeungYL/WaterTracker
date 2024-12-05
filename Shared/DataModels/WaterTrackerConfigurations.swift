@@ -26,11 +26,13 @@ class WaterTrackerConfiguration {
     var waterUnit: WaterUnits? = nil
     var cupCapacity: Double? = nil
     var dailyGoal: Double? = nil
+    var reminderTimeInterval: TimeInterval? = nil
     
-    init(waterUnit: WaterUnits = .ml, cupCapacity: Double = 600.0, dailyGoals: Double = 3100.0) {
+    init(waterUnit: WaterUnits = .ml, cupCapacity: Double = 600.0, dailyGoals: Double = 3100.0, reminderTimeInterval: TimeInterval = 7200.0) {
         self.waterUnit = waterUnit
         self.cupCapacity = cupCapacity
         self.dailyGoal = dailyGoals
+        self.reminderTimeInterval = reminderTimeInterval
     }
 }
 
@@ -108,6 +110,12 @@ class WaterTrackerConfigManager {
         }
     }
     
+    var reminderTimeInterval: TimeInterval {
+        get{
+            return self.getReminderTimeInterval()
+        }
+    }
+
     var waterUnit: WaterUnits {
         get {
             return self.config?.waterUnit ?? .ml
@@ -148,6 +156,10 @@ class WaterTrackerConfigManager {
         return self.config?.waterUnit?.dailyGoalRange ?? WaterUnits.ml.dailyGoalRange
     }
     
+    func getReminderTimeInterval() -> TimeInterval {
+        return self.config?.reminderTimeInterval ?? 7200.0
+    }
+    
     func deleteAllWaterTrackerConfigIfExists(modelContext: ModelContext) {
         do {
             let fecthDescriptor = FetchDescriptor<WaterTrackerConfiguration>()
@@ -169,10 +181,10 @@ class WaterTrackerConfigManager {
             if let data = all_save.last {
                 // It is important to DEEP COPY the config here.
                 // Otherwise, the original SwiftData won't be modified/deleted correctly.
-                self.config = WaterTrackerConfiguration(waterUnit: data.waterUnit ?? .ml, cupCapacity: data.cupCapacity ?? WaterUnits.ml.cupDefaultCapacity, dailyGoals: data.dailyGoal ?? WaterUnits.ml.defaultDailyGoal)
+                self.config = WaterTrackerConfiguration(waterUnit: data.waterUnit ?? .ml, cupCapacity: data.cupCapacity ?? WaterUnits.ml.cupDefaultCapacity, dailyGoals: data.dailyGoal ?? WaterUnits.ml.defaultDailyGoal, reminderTimeInterval: data.reminderTimeInterval ?? 7200.0)
             } else {
                 // No custom value, use default.
-                self.config = WaterTrackerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal)
+                self.config = WaterTrackerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal, reminderTimeInterval: 7200.0)
             }
         } catch {
             fatalError("Fatal Error: Fail to get model. ")
@@ -181,7 +193,7 @@ class WaterTrackerConfigManager {
     
     func getWaterTrackerConfiguration(modelContext: ModelContext) -> WaterTrackerConfiguration {
         self.receiveUpdatedWaterTrackerConfig(modelContext: modelContext)
-        return self.config ?? WaterTrackerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal)
+        return self.config ?? WaterTrackerConfiguration(waterUnit: .ml, cupCapacity: WaterUnits.ml.cupDefaultCapacity, dailyGoals: WaterUnits.ml.defaultDailyGoal, reminderTimeInterval: 7200.0)
     }
     
     func setWaterUnit(_ waterUnit: WaterUnits, modelContext: ModelContext) {
@@ -222,6 +234,21 @@ class WaterTrackerConfigManager {
         deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
 
         waterTrackerConfiguration.dailyGoal = newDailyGoal
+        
+        self.config = waterTrackerConfiguration
+        modelContext.insert(waterTrackerConfiguration)
+        do {
+            try modelContext.save()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func setReminderTimeInterval(_ newInterval: TimeInterval, modelContext: ModelContext) {
+        let waterTrackerConfiguration = getWaterTrackerConfiguration(modelContext: modelContext)
+        deleteAllWaterTrackerConfigIfExists(modelContext: modelContext)
+
+        waterTrackerConfiguration.reminderTimeInterval = newInterval
         
         self.config = waterTrackerConfiguration
         modelContext.insert(waterTrackerConfiguration)

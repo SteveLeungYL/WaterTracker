@@ -73,6 +73,66 @@
         }
       }
     },
+    "1 hour" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1小时"
+          }
+        }
+      }
+    },
+    "1.5 hours" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.5小时"
+          }
+        }
+      }
+    },
+    "2 hours" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2小时"
+          }
+        }
+      }
+    },
+    "2.5 hours" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2.5小时"
+          }
+        }
+      }
+    },
+    "3 hours" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3小时"
+          }
+        }
+      }
+    },
+    "30 mins" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30分钟"
+          }
+        }
+      }
+    },
     "100 ml" : {
       "localizations" : {
         "zh-Hans" : {
@@ -333,6 +393,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "口袋喝水助手小组件"
+          }
+        }
+      }
+    },
+    "Reminder Time Interval: " : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "喝水提醒间隔："
           }
         }
       }
