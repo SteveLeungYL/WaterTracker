@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WidgetKit
+import UserNotifications
 
 struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
@@ -18,6 +19,9 @@ struct ContentView: View {
                     WidgetCenter.shared.reloadAllTimelines()
                 } else if newPhase == .background {
                     WidgetCenter.shared.reloadAllTimelines()
+                } else if newPhase == .active {
+                    let center = UNUserNotificationCenter.current()
+                    center.removeAllDeliveredNotifications()
                 }
             }
     }

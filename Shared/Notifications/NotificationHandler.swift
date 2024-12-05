@@ -95,10 +95,14 @@ public final class LocalNotificationHandler {
         content.body = NSString.localizedUserNotificationString(forKey: String(localized: "Log your water status in \(AppName)."), arguments: nil)
         content.sound = UNNotificationSound.default
         
-        // Deliver the notification after 2 hours of each time the user log its water drinking.
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: config.reminderTimeInterval, repeats: false) //  2 hours.
+        // Deliver the notification after custom hours of each time the user log its water drinking.
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: config.reminderTimeInterval, repeats: false) //  user defined reminder interval, with repeating.
         let request = UNNotificationRequest(identifier: "YuLiang.SimpleWaterTracker.DeferredNotification", content: content, trigger: trigger) // Schedule the notification.
         let center = UNUserNotificationCenter.current()
+        
+        center.removeAllDeliveredNotifications()
+        center.removeAllPendingNotificationRequests()
+        
         center.add(request) { (error : Error?) in
             if let theError = error {
                 print(theError.localizedDescription)
