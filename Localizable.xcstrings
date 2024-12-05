@@ -233,6 +233,46 @@
         }
       }
     },
+    "Disabled" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭"
+          }
+        }
+      }
+    },
+    "Do Not Disturb" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "勿扰"
+          }
+        }
+      }
+    },
+    "Do Not Disturb From:" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "勿扰开始"
+          }
+        }
+      }
+    },
+    "Do Not Disturb Until:" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "勿扰结束"
+          }
+        }
+      }
+    },
     "Drink %@%@" : {
       "localizations" : {
         "en" : {

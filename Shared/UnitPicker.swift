@@ -26,6 +26,11 @@ struct UnitPickerView: View {
     @State private var reminderTimeInterval: Double = 0.0
     @State private var reminderTimeIntervalChoice: [Double] = [1800.0, 3600.0, 5400.0 , 7200.0, 9000.0, 10800]
     
+    @State private var doNotDisturbEnabled: Bool = false
+    @State private var doNotDisturbBeginTime: Date = Date()
+    @State private var doNotDisturbEndTime: Date = Date()
+    @State private var doNotDisturbDateOpacity: Double = 0.0
+    
     var body : some View {
         
         HStack{
@@ -178,11 +183,11 @@ struct UnitPickerView: View {
                     }
                 }
             }
-            #if os(iOS)
+#if os(iOS)
             .pickerStyle(.wheel)
-            #elseif os(watchOS)
+#elseif os(watchOS)
             .pickerStyle(.navigationLink)
-            #endif
+#endif
             .foregroundStyle(.black) // FIXME: Does not have effect on the wheel text (watchOS).
             .accentColor(.black) // FIXME: Another failed attempt to change the wheel text to black (watchOS).
             .multilineTextAlignment(.center)
@@ -197,6 +202,89 @@ struct UnitPickerView: View {
                     self.config.setReminderTimeInterval(self.reminderTimeInterval, modelContext: modelContext)
                 }
             }
+        }
+        
+        VStack {
+            HStack {
+                Text("Do Not Disturb")
+#if os(iOS)
+                    .font(.title)
+#elseif os(watchOS)
+                    .font(.body)
+#endif
+                    .foregroundStyle(.black)
+                    .fontWeight(.bold)
+                    .allowsHitTesting(false)
+                    .multilineTextAlignment(.leading)
+                
+                Spacer()
+                
+                Toggle("", isOn: $doNotDisturbEnabled)
+            }
+            
+            HStack {
+                Text("Do Not Disturb From:")
+#if os(iOS)
+                    .font(.title)
+#elseif os(watchOS)
+                    .font(.body)
+#endif
+                    .foregroundStyle(.black)
+                    .fontWeight(.bold)
+                    .allowsHitTesting(false)
+                    .multilineTextAlignment(.leading)
+                
+                Spacer()
+                
+                ZStack{
+                    Text("Disabled")
+#if os(iOS)
+                        .font(.title)
+#elseif os(watchOS)
+                        .font(.body)
+#endif
+                        .foregroundStyle(.gray)
+                        .fontWeight(.bold)
+                        .allowsHitTesting(false)
+                        .multilineTextAlignment(.trailing)
+                        .opacity(doNotDisturbEnabled ? 1 : 0)
+                    DatePicker("", selection: $doNotDisturbBeginTime, displayedComponents: .hourAndMinute)
+                        .opacity(doNotDisturbEnabled ? 0 : 1)
+                }
+            }
+            HStack {
+                Text("Do Not Disturb Until:")
+#if os(iOS)
+                    .font(.title)
+#elseif os(watchOS)
+                    .font(.body)
+#endif
+                    .foregroundStyle(.black)
+                    .fontWeight(.bold)
+                    .allowsHitTesting(false)
+                    .multilineTextAlignment(.leading)
+                
+                Spacer()
+                
+                ZStack{
+                    Text("Disabled")
+#if os(iOS)
+                        .font(.title)
+#elseif os(watchOS)
+                        .font(.body)
+#endif
+                        .foregroundStyle(.gray)
+                        .fontWeight(.bold)
+                        .allowsHitTesting(false)
+                        .multilineTextAlignment(.trailing)
+                        .opacity(doNotDisturbEnabled ? 1 : 0)
+                    DatePicker("", selection: $doNotDisturbEndTime, displayedComponents: .hourAndMinute)
+                        .opacity(doNotDisturbEnabled ? 0 : 1)
+                }
+                    
+            }
+            .animation(.easeInOut, value: doNotDisturbEnabled)
+            Spacer()
         }
     }
     
