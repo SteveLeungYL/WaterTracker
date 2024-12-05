@@ -103,6 +103,26 @@
         }
       }
     },
+    "Daily Goal\n%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每日目标\n%@"
+          }
+        }
+      }
+    },
+    "Daily Goal\n0%" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每日目标\n0%"
+          }
+        }
+      }
+    },
     "Daily Goal: " : {
       "localizations" : {
         "zh-Hans" : {

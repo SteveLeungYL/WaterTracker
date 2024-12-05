@@ -27,7 +27,7 @@ struct SummaryView: View {
     // Placeholder for texts.
     @State private var textStr: LocalizedStringKey = "100 ml"
     @State private var unitStr: String = "ml"
-    @State private var pctStr: String = "0%"
+    @State private var pctStr: LocalizedStringKey = "Daily Goal\n0%"
     
     // For updating all UIs when configuration changes.
     @State var updateToggle: Bool = false
@@ -59,7 +59,8 @@ struct SummaryView: View {
         DispatchQueue.main.async{
             var pct: Double = self.healthKitManager.todayTotalDrinkNum / self.config.getDailyGoal() * 100.0
             pct = min(100.0, max(pct, 0.0))
-            self.pctStr = String(format: "%.0f%%", pct)
+            let tmpPctStr = String(format: "%.0f%%", pct)
+            self.pctStr = LocalizedStringKey("Daily Goal\n\(tmpPctStr)")
         }
     }
     
@@ -94,7 +95,7 @@ struct SummaryView: View {
 #endif
                 ScrollView {
                     VStack{
-//                        Spacer()
+                        //                        Spacer()
                         HStack{
                             Spacer()
                             ZStack{
@@ -108,9 +109,14 @@ struct SummaryView: View {
                                 VStack{
                                     Text(pctStr)
                                         .font(.system(size: 400).bold())
+                                        .multilineTextAlignment(.center)
                                         .foregroundStyle(.black)
                                         .minimumScaleFactor(0.01)
+#if os(iOS)
+                                        .frame(height: circularBarSize * 0.3)
+#elseif os(watchOS)
                                         .frame(height: circularBarSize * 0.2)
+#endif
                                 }
                             }
                             Spacer()
